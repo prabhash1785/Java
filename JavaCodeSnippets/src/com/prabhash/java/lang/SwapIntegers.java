@@ -1,5 +1,19 @@
 package com.prabhash.java.lang;
 
+/**
+ * Java uses Pass by Value while passing parameters to function. What this essentially means is every time a function is called, Java sends
+ * parameter by value by copying the parameter values for function call.
+ * 
+ * Even objects are passed by value so if you try to swap two objects they wouldn't be swapped as when objects are passed as parameters, 
+ * the function gets a copy of the reference pointing to the same object. So when you swap objects, only thing gets swapped is their 
+ * references on those objects.  
+ * 
+ * The only way to swap values in Java is to send values as member variables of one object and then exchange the value of those member
+ * values for that one object.
+ * 
+ * @author prrathore
+ *
+ */
 public class SwapIntegers {
 	
 	SwapIntegers() {
