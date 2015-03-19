@@ -1,9 +1,12 @@
 package com.prabhash.java.interview.sample;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * This class will override equals and hashcode methods of Car class.
  * 
- * @author prrathore
+ * @author Prabhash Rathore
  *
  */
 public class Car {
@@ -54,6 +57,9 @@ public class Car {
 		System.out.println("Hashcode of c1: " + c1.hashCode());
 		System.out.println("Hashcode of c2: " + c2.hashCode());
 		System.out.println("Hashcode of c3: " + c3.hashCode());
+		
+		List<Integer> list = new ArrayList<Integer>();
+		System.out.println("Class of List is: " + list.getClass()); //getClass prints the class name from which this object is instantiated
 	
 	}
 
