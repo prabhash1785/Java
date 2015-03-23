@@ -14,6 +14,32 @@ public class Q1_1 {
 	private static String input = "abcdefghji";
 	
 	/**
+	 * Brute Force
+	 * 
+	 * Time Complexity: O(n ^ 2)
+	 * Space Complexity:O(1)
+	 *  
+	 */
+	public static boolean isUniuewithBruteForce(String s) {
+		
+		if(s == null) {
+			throw new IllegalArgumentException();
+		}
+		
+		char[] ch = s.toCharArray();
+		
+		for(int i = 0; i < ch.length; i++) {
+			for(int j = i + 1; j < ch.length; j++) {
+				if(ch[i] == ch[j]) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	/**
 	 * Method 1 using an Array.
 	 * 
 	 * Assumption: String only contains ASCII characters so that we can easily create an array to store all unique ASCII characters.
@@ -89,12 +115,22 @@ public class Q1_1 {
 		return result;
 		
 	}
+	
+	/**
+	 * Method 3 without using an additional data structure
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
 
 	public static void main(String[] args) {
 		
 		System.out.println("Has abcdeaf unique chars: " + hasUniqueCharacters(input));
 		
 		System.out.println(hasUniqueWithArray("abcderbzx"));
+		
+		System.out.println(isUniuewithBruteForce("servuiso"));
 		
 	}
 
