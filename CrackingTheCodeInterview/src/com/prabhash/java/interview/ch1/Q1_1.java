@@ -56,6 +56,11 @@ public class Q1_1 {
 			throw new IllegalArgumentException();
 		}
 		
+		//since ASCII character set can't have more than 256 characters so it's an easy optimization
+		if(s.length() > 256) {
+			return false;
+		}
+		
 		boolean result = true;
 		
 		int[] charTracker = new int[256]; //since ASCII has 2 ^ 8 = 256 characters
