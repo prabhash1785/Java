@@ -48,7 +48,7 @@ public class Q1_1 {
 	 * If String contains UTF characters then this method is not an efficient method as UTF contains = 2 ^ 32 = 4.3 billion characters.
 	 * 
 	 * Time Complexity: O(n)
-	 * Space Complexity: O(m) where m is the size of all ASCII characters  
+	 * Space Complexity: O(1) since ASCII character set has fixed length  
 	 *  
 	 */
 	public static boolean hasUniqueWithArray(String s) {
