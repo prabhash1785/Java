@@ -5,7 +5,7 @@ public class MutualExclusion {
 	//mutable primitive instance variable
 	private int a = 10;
 	
-	public int getValue() {
+	public synchronized int getValue() {
 		return a;
 	}
 	
@@ -19,7 +19,7 @@ public class MutualExclusion {
 		
 		Thread t1 = new Thread("Thread1") {
 			public void run() {
-				//m.setValue(20);
+				m.setValue(20);
 				System.out.println(Thread.currentThread().getName() + " has value: " + m.getValue());
 			}
 		};;
