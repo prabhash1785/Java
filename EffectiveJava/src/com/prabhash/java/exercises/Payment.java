@@ -58,7 +58,8 @@ public final class Payment {
 		
 		Date d1 = p2.getPaymentDate();
 		
-		System.out.println("Is d1 == p2.getPaymentDate: " + (d1 == p2.getPaymentDate())); //false
+		System.out.println("Is d1 == p2.getPaymentDate: " + (d1 == p2.getPaymentDate()) + "\n"); //false
+		// assert d1 == p2.getPaymentDate();
 		
 	}
 
