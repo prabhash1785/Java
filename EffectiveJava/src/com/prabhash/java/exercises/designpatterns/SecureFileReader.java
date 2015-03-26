@@ -43,8 +43,8 @@ public class SecureFileReader {
 	public static void main(String[] args) {
 		SecureFileReader reader = new SecureFileReader();
 		Rot13Encryption encryptor = new Rot13Encryption();
-		//InstrumentedRot13 encryptorDoc = new InstrumentedRot13(encryptor);
-		reader.readAndEncrypt("/Users/prrathore/MyGitRepo/Java/EffectiveJava/src/test.txt", encryptor);
+		InstrumentedRot13 encryptorDoc = new InstrumentedRot13(encryptor);
+		reader.readAndEncrypt("/Users/prrathore/MyGitRepo/Java/EffectiveJava/src/test.txt", encryptorDoc);
 	}
 
 }
