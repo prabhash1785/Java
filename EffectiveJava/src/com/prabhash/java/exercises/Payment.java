@@ -9,7 +9,7 @@ import java.util.Date;
  * Here are the properties of an Immutable Class:
  *  - Don’t provide any mutator methods
  *  - Ensure that the class can’t be extended
- *  - Generally accomplished by making the class final
+ *       - Generally accomplished by making the class final
  *  - Make all fields private final
  *  - Ensure exclusive access to any mutable components
  *     – If the class has any fields that refer to mutable objects, ensure that clients of the class cannot obtain references to these objects
