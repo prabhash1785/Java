@@ -47,7 +47,7 @@ public class SimpleRaceConditionDemo {
 		// in debug mode, this statement executes before other threads runs runnable tasks because this statement is being run by 
 		// main thread which could run in parallel with other threads
 		// Based on Thread Race Condition, the output could be -> 0, 10, 15
-		Thread.sleep(1000); //make main thread sleep for 1 second before printing final count
+		//Thread.sleep(1000); //make main thread sleep for 1 second before printing final count
 		System.out.println("Value of count is: " + obj.count); 
 
 	}
