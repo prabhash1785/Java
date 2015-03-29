@@ -11,4 +11,6 @@ So it's important to call start() to spawn an actual new thread and then run the
 Thread Safe Objects:
 - Local variables (primitive values) are Thread-Safe because every thread has their own stack of local variables.
 - Objects created locally in a method could be thread safe if these objects are not passed to other methods which could be accessed by different threads.
+- Immutable Objects are Thread-Safe or, objects which are read only are thread safe.
+- The reference is not thread safe.
 
