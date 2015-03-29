@@ -1,5 +1,7 @@
 package com.prabhash.java.concurrency.threads;
 
+import javax.faces.component.UINamingContainer;
+
 /**
  * Program to create Race Condition between two threads in a Critical Section which is not guarded by Synchronized keyword.
  * 
@@ -21,7 +23,7 @@ public class SimpleRaceConditionDemo {
 		this.count += n;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		
 		final SimpleRaceConditionDemo obj = new SimpleRaceConditionDemo();
 		
@@ -40,18 +42,12 @@ public class SimpleRaceConditionDemo {
 		}, "Thread2") ;
 		
 		t1.start();
-		
-//		try {
-//			Thread.sleep(1);
-//		} catch(InterruptedException i) {
-//			System.out.println("Interrupted!!");
-//		}
-		
 		t2.start();
 		
 		// in debug mode, this statement executes before other threads runs runnable tasks because this statement is being run by 
 		// main thread which could run in parallel with other threads
 		// Based on Thread Race Condition, the output could be -> 0, 10, 15
+		Thread.sleep(1000); //make main thread sleep for 1 second before printing final count
 		System.out.println("Value of count is: " + obj.count); 
 
 	}
