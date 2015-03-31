@@ -12,13 +12,17 @@ public class ThreadSignalingDemo {
 	
 	public void waitForSignal() throws InterruptedException {
 		synchronized(monitorObject) {
+			System.out.println(Thread.currentThread().getName() + " => Going in WAIT state!!");
 			monitorObject.wait();
+			System.out.println(Thread.currentThread().getName() + " => Going out of WAIT state!!");
 		}
 	}
 	
 	public void notifyThread() {
 		synchronized(monitorObject) {
+			System.out.println(Thread.currentThread().getName() + " => Going to NOTIFY other waiting threads!!");
 			monitorObject.notify();
+			System.out.println(Thread.currentThread().getName() + " => Notified one of the waiting threads!!");
 		}
 	}
 
