@@ -2,7 +2,7 @@ package com.prabhash.java.concurrency.threads;
 
 public class ThreadSignalingDemo {
 	
-	private final ThreadSignalingDemo monitorObject = new ThreadSignalingDemo(); //monitor object
+	private static final ThreadSignalingDemo monitorObject = new ThreadSignalingDemo(); //monitor object
 	
 	public void waitForSignal() throws InterruptedException {
 		synchronized(monitorObject) {
@@ -22,7 +22,7 @@ public class ThreadSignalingDemo {
 			@Override
 			public void run() {
 				try {
-					new ThreadSignalingDemo().waitForSignal();
+					monitorObject.waitForSignal();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -33,9 +33,20 @@ public class ThreadSignalingDemo {
 		Thread thread2 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				new ThreadSignalingDemo().notifyThread();
+				monitorObject.notifyThread();
 			}
 		}, "Thread2");
+		
+		thread1.start();
+		
+		try {
+			Thread.sleep(1);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		thread2.start();
 
 	}
 
