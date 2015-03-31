@@ -1,5 +1,11 @@
 package com.prabhash.java.concurrency.threads;
 
+/**
+ * A simple program to depict the Thread Signaling process using Java Wait and Notify constructs.
+ * 
+ * @author prrathore
+ *
+ */
 public class ThreadSignalingDemo {
 	
 	private static final ThreadSignalingDemo monitorObject = new ThreadSignalingDemo(); //monitor object
