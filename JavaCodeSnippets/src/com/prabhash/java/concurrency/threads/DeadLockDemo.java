@@ -8,23 +8,26 @@ package com.prabhash.java.concurrency.threads;
  */
 public class DeadLockDemo {
 	
-	public synchronized void method1() {
+	public synchronized void method1(DeadLockDemo d1) {
 		System.out.println(Thread.currentThread().getName() + " => Method 1");
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 		} catch(InterruptedException e) {
 			e.printStackTrace();
 		}
 		
+		d1.method3();
 	}
 	
-	public synchronized void method2() {
+	public synchronized void method2(DeadLockDemo d2) {
 		System.out.println(Thread.currentThread().getName() + " => Method 2");
 		try {
 			Thread.sleep(5000);
 		} catch(InterruptedException e) {
 			e.printStackTrace();
 		}
+		
+		d2.method4();
 	}
 	
 	public synchronized void method3() {
@@ -43,16 +46,14 @@ public class DeadLockDemo {
 		Thread thread1 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				monitorObj1.method1();
-				monitorObj2.method3();
+				monitorObj1.method1(monitorObj2);
 			}
 		});
 		
 		Thread thread2 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				monitorObj2.method2();
-				monitorObj1.method4();
+				monitorObj2.method2(monitorObj1);
 			}
 		});
 		
