@@ -38,7 +38,7 @@ public class DeadLockDemo {
 		System.out.println("Method4!!");
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		
 		final DeadLockDemo monitorObj1 = new DeadLockDemo();
 		final DeadLockDemo monitorObj2 = new DeadLockDemo();
@@ -57,8 +57,19 @@ public class DeadLockDemo {
 			}
 		});
 		
+		Thread thread3 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				monitorObj2.method3();
+			}
+		});
+		
 		thread1.start();
 		thread2.start();
+		
+		Thread.sleep(1);
+		
+		thread3.start();
 
 	}
 
