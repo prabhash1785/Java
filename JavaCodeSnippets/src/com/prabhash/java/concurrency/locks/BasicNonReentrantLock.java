@@ -1,7 +1,10 @@
 package com.prabhash.java.concurrency.locks;
 
 /**
- * Basic Non Reentrant Lock
+ * Basic Non Reentrant Lock. 
+ * 
+ * With Non-Reentrant Lock, if a threads holds the monitor object on one synchronized block then it can't
+ * enter other synchronized blocks with the same monitor object without releasing the lock and then acquiring lock on monitor object again. 
  * 
  * @author prrathore
  *
