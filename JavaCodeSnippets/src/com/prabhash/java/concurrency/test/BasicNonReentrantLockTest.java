@@ -21,10 +21,21 @@ private static class Counter {
 			try {
 				counter++;
 				System.out.println(Thread.currentThread().getName() + " updated counter to: " + counter);
+				//printMessage();
 			} finally {
 				lock.unLock();
 			}
 			
+		}
+		
+		// Since lock implementation in non-reentrant, calling this method from increment method will block this thread permanently.
+		public void printMessage() throws InterruptedException {
+			lock.lock();
+			try {
+				System.out.println("Testing if this lock is reentrant?");
+			} finally {
+				lock.unLock();
+			}
 		}
 		
 	}
