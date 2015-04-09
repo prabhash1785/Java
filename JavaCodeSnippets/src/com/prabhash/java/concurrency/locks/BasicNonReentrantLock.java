@@ -32,7 +32,7 @@ public class BasicNonReentrantLock {
 		
 	}
 	
-	public synchronized void unLock() {
+	public synchronized void unLock() throws IllegalMonitorStateException {
 		
 		System.out.println("Object unlocked. This thread will notify other waiting threads: " + Thread.currentThread().getName());
 		

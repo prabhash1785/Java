@@ -18,9 +18,12 @@ private static class Counter {
 		public void increment() throws InterruptedException {
 			
 			lock.lock();
-			counter++;
-			System.out.println(Thread.currentThread().getName() + " updated counter to: " + counter);
-			lock.unLock();
+			try {
+				counter++;
+				System.out.println(Thread.currentThread().getName() + " updated counter to: " + counter);
+			} finally {
+				lock.unLock();
+			}
 			
 		}
 		
