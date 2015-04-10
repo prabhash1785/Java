@@ -55,7 +55,7 @@ public class ReentrantLock {
 		if(isLocked && callingThread != lockedBy)
 			throw new IllegalMonitorStateException();
 		
-		lockCount -= lockCount;
+		lockCount -= 1;
 		
 		if(lockCount == 0) {
 			isLocked = false;
