@@ -21,7 +21,7 @@ public class ReentrantLockTest {
 
 	public void printCounter() throws InterruptedException {
 		lock.lock();
-		System.out.println("Counter: " + counter);
+		System.out.println(Thread.currentThread().getName() + " ===> Counter: " + counter);
 		lock.unlock();
 	}
 
@@ -77,10 +77,23 @@ public class ReentrantLockTest {
 			}
 		}, "Thread4");
 		
+		Thread thread5 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					obj.increment();
+				} catch(InterruptedException i) {
+					i.printStackTrace();
+				}
+				
+			}
+		}, "Thread5");
+		
 		thread1.start();
 		thread2.start();
 		thread3.start();
 		thread4.start();
+		thread5.start();
 		
 	}
 
