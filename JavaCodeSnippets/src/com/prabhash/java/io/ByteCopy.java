@@ -26,10 +26,14 @@ public class ByteCopy {
 			out = new FileOutputStream("./data/output.txt"); //this will create a file if file doesn't exist
 			
 			int c;
+			int count = 0;
 			
 			while((c = in.read()) != -1) {
 				out.write(c);
+				count++;
 			}
+			
+			System.out.println("Numnber of Bytes copied: " + count);
 			
 		} finally {
 			if(in != null) {
