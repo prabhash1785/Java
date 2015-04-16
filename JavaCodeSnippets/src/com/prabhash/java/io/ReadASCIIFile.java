@@ -26,7 +26,7 @@ public static void main(String[] args) throws Exception {
 	        
 	        String everything = sb.toString();
 	        
-	        System.out.println("Values:::: " + everything);
+	        System.out.println(everything);
 	        
 	    } finally {
 	        br.close();
