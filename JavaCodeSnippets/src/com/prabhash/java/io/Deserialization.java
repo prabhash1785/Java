@@ -31,6 +31,8 @@ public class Deserialization {
 			System.out.println("First Name: " + obj.getFirstName());
 			System.out.println("Last Name: " + obj.getLastName());
 			System.out.println("Emp Num: " + obj.getEmpNum());
+			System.out.println("City: " + obj.getCity());
+			System.out.println("SerialVersionUID of serialized object: " + ObjectStreams.getSerialversionuid()); //this is a static field
 			
 		} catch(IOException io) {
 			io.printStackTrace();

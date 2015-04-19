@@ -28,11 +28,13 @@ public class ObjectStreams implements Serializable {
 	private String firstName;
 	private String lastName;
 	private int empNum;
+	private transient String city; //do not serialize this so declared as transient
 	
-	public ObjectStreams(String firstName, String lastName, int empNum) {
+	public ObjectStreams(String firstName, String lastName, int empNum, String city) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.empNum = empNum;
+		this.city = city;
 	}
 	
 	public String getFirstName() {
@@ -62,7 +64,7 @@ public class ObjectStreams implements Serializable {
 	// Write instance of class ObjectStreams to a file stream and then read it back from the file stream. 
 	public static void main(String[] args) throws IOException {
 		
-		ObjectStreams obj = new ObjectStreams("Ricky", "Rathore", 100);
+		ObjectStreams obj = new ObjectStreams("Ricky", "Rathore", 100, "San Jose");
 		
 		//fileoutputstream to write to a file using byte stream
 		FileOutputStream fileOutputStream = new FileOutputStream("./data/SerializedContent.temp");
@@ -76,6 +78,18 @@ public class ObjectStreams implements Serializable {
 		objStream.close();
 		fileOutputStream.close();
 		
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }
