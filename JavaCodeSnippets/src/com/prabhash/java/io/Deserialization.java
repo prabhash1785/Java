@@ -32,7 +32,6 @@ public class Deserialization {
 			System.out.println("Last Name: " + obj.getLastName());
 			System.out.println("Emp Num: " + obj.getEmpNum());
 			
-			
 		} catch(IOException io) {
 			io.printStackTrace();
 		} catch(Exception e) {
