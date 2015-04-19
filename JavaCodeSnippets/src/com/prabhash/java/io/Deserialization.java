@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
+import com.prabhash.java.beans.Address;
+
 /**
  * Deserialization of an object using ObjectInputStream class.
  * 
@@ -33,6 +35,9 @@ public class Deserialization {
 			System.out.println("Emp Num: " + obj.getEmpNum());
 			System.out.println("City: " + obj.getCity());
 			System.out.println("SerialVersionUID of serialized object: " + ObjectStreams.getSerialversionuid()); //this is a static field
+			
+			Address address = obj.getAddress();
+			System.out.println("Address is: " + address);
 			
 		} catch(IOException io) {
 			io.printStackTrace();

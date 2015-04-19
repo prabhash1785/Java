@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import com.prabhash.java.beans.Address;
+
 /**
  * ObjectInputStream and ObjectOutputStream classes are used to read and write Java objects to input and output streams respectively.
  * 
@@ -17,24 +19,31 @@ import java.io.Serializable;
  * Serialization:
  *  - If a class to be serialized is not defined Serializable then this can't be serialized. While serializing, you will get 
  *  NotSerilizableException
+ *  - If a composed class is not Serializable then runtime Serialization will throw NotSerializableException.
+ *  - Composed object doesn't really need to have a SerialVersionUID for successful deserialization but adding a SerialVersionUID could
+ *  can prevent any runtine InValid class exception while deserialization.
  * 
  * @author prrathore
  *
  */
 public class ObjectStreams implements Serializable {
 	
-	private static final long serialVersionUID = 20L;
+	private static final long serialVersionUID = 30L;
 	
 	private String firstName;
 	private String lastName;
 	private int empNum;
 	private transient String city; //do not serialize this so declared as transient
 	
-	public ObjectStreams(String firstName, String lastName, int empNum, String city) {
+	//compose a object for Serialization
+	private Address address = null;
+	
+	public ObjectStreams(String firstName, String lastName, int empNum, String city, Address address) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.empNum = empNum;
 		this.city = city;
+		this.address = address;
 	}
 	
 	public String getFirstName() {
@@ -60,11 +69,39 @@ public class ObjectStreams implements Serializable {
 	public void setEmpNum(int empNum) {
 		this.empNum = empNum;
 	}
+	
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
 	// Write instance of class ObjectStreams to a file stream and then read it back from the file stream. 
 	public static void main(String[] args) throws IOException {
 		
-		ObjectStreams obj = new ObjectStreams("Ricky", "Rathore", 100, "San Jose");
+		Address address = new Address();
+		address.setAddressLine1("2020 Plaza St");
+		address.setAddressLine2("Apt 345");
+		address.setCity("SF");
+		address.setState("CA");
+		address.setZip(67845);
+		address.setCountry("US");
+		
+		ObjectStreams obj = new ObjectStreams("Ricky", "Rathore", 100, "San Jose", address);
 		
 		//fileoutputstream to write to a file using byte stream
 		FileOutputStream fileOutputStream = new FileOutputStream("./data/SerializedContent.temp");
@@ -79,17 +116,5 @@ public class ObjectStreams implements Serializable {
 		fileOutputStream.close();
 		
 	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
+	
 }

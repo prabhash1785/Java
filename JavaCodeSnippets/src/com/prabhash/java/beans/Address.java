@@ -1,6 +1,10 @@
 package com.prabhash.java.beans;
 
-public class Address {
+import java.io.Serializable;
+
+public class Address implements Serializable {
+	
+	private static final long serialVersionUID = 5L;
 	
 	private String addressLine1;
 	private String addressLine2;
@@ -8,68 +12,46 @@ public class Address {
 	private String state;
 	private String country;
 	private int zip;
-	
 	public String getAddressLine1() {
-		return this.addressLine1;
+		return addressLine1;
+	}
+	public void setAddressLine1(String addressLine1) {
+		this.addressLine1 = addressLine1;
+	}
+	public String getAddressLine2() {
+		return addressLine2;
 	}
 	public void setAddressLine2(String addressLine2) {
 		this.addressLine2 = addressLine2;
 	}
-	/**
-	 * @return the city
-	 */
 	public String getCity() {
 		return city;
 	}
-	/**
-	 * @param city the city to set
-	 */
 	public void setCity(String city) {
 		this.city = city;
 	}
-	/**
-	 * @return the state
-	 */
 	public String getState() {
 		return state;
 	}
-	/**
-	 * @param state the state to set
-	 */
 	public void setState(String state) {
 		this.state = state;
 	}
-	/**
-	 * @return the country
-	 */
 	public String getCountry() {
 		return country;
 	}
-	/**
-	 * @param country the country to set
-	 */
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	/**
-	 * @return the zip
-	 */
 	public int getZip() {
 		return zip;
 	}
-	/**
-	 * @param zip the zip to set
-	 */
 	public void setZip(int zip) {
 		this.zip = zip;
 	}
-	/**
-	 * @return the addressLine2
-	 */
-	public String getAddressLine2() {
-		return addressLine2;
+	
+	@Override
+	public String toString() {
+		return this.addressLine1 + ", " + this.addressLine2 + ", " + this.city + ", " + this.state + ", " + this.zip + ", " + this.country;
 	}
-	
-	
 
 }
