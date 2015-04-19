@@ -18,56 +18,44 @@ public class PipedStreams {
 		
 		final PipedOutputStream output = new PipedOutputStream();
 		final PipedInputStream input = new PipedInputStream(output);
+			
+		Thread thread1 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					output.write("Hello Piped Streams!! Used for Inter Thread Communication".getBytes());						
+					output.close();
+					
+				} catch(IOException io) {
+					io.printStackTrace();
+				} 					
+			}
+		});
 		
-		//try {
-			
-			Thread thread1 = new Thread(new Runnable() {
-				@Override
-				public void run() {
-					try {
-						output.write("Hello Piped Streams!! Used for Inter Thread Communication".getBytes());
-					} catch(IOException io) {
-						io.printStackTrace();
-					}
-					
-				}
-			});
-			
-			Thread thread2 = new Thread(new Runnable() {
-				@Override
-				public void run() {
-					
-					try {
-						int data = input.read();
-						
-						while(data != -1) {
-							System.out.println(data + " ===> " + (char)data);
-							data = input.read();
-						}
-						
-					} catch(IOException io) {
-						io.printStackTrace();
-					}
-					
-					
-				}
-			});
-			
-			thread1.start();
-			thread2.start();
-			
-//		} finally {
-//			
-//			if(input != null) {
-//				input.close();
-//			}
-//			
-//			if(output != null) {
-//				output.close();
-//			}
-//			
-//		}
+		Thread thread2 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				
+				try {
 
+					int data;
+					
+					while((data = input.read()) != -1) {
+						System.out.println(data + " ===> " + (char)data);
+					}
+					
+					input.close();
+					
+				} catch(IOException io) {
+					io.printStackTrace();
+				} 
+				
+			}
+		});
+		
+		thread1.start();
+		thread2.start();
+			
 	}
 
 }
