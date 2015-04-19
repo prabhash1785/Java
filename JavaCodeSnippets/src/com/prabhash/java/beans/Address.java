@@ -2,7 +2,7 @@ package com.prabhash.java.beans;
 
 import java.io.Serializable;
 
-public class Address implements Serializable {
+public class Address extends SuperAddress  implements Serializable {
 	
 	private static final long serialVersionUID = 5L;
 	
@@ -51,7 +51,8 @@ public class Address implements Serializable {
 	
 	@Override
 	public String toString() {
-		return this.addressLine1 + ", " + this.addressLine2 + ", " + this.city + ", " + this.state + ", " + this.zip + ", " + this.country;
+		return this.addressLine1 + ", " + this.addressLine2 + ", " + this.city + ", " + this.state + ", " + this.zip + ", " + this.country
+				+ ", " + this.getContinent();
 	}
 
 }

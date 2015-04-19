@@ -22,6 +22,8 @@ import com.prabhash.java.beans.Address;
  *  - If a composed class is not Serializable then runtime Serialization will throw NotSerializableException.
  *  - Composed object doesn't really need to have a SerialVersionUID for successful deserialization but adding a SerialVersionUID could
  *  can prevent any runtine InValid class exception while deserialization.
+ *  - Superclass of composed object gets Serialized as well without it being declared Serializable explicityly. Superclass of composed Serializable
+ *  class must have a No-Arg constructor.
  * 
  * @author prrathore
  *
