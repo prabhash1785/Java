@@ -39,6 +39,7 @@ public class ByteCopy {
 			if(in != null) {
 				in.close();
 			}
+			
 			if(out != null) {
 				out.close();
 			}
