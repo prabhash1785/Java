@@ -14,18 +14,21 @@ import java.nio.channels.FileChannel;
  */
 public class SampleByteBuffer {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 		RandomAccessFile file;
+		FileChannel fileChannel = null;
 		
 		try {
 			file = new RandomAccessFile("./data/data.txt", "rw");
 			
-			FileChannel fileChannel = file.getChannel();
+			fileChannel = file.getChannel();
 			
 			ByteBuffer byteBuffer = ByteBuffer.allocate(48);
 			
 			int bytesRead = fileChannel.read(byteBuffer);
+			
+			System.out.println("Size of file channel: " + fileChannel.size());
 			
 			while(bytesRead != -1) {
 				byteBuffer.flip(); //flip it for read from write
@@ -43,6 +46,10 @@ public class SampleByteBuffer {
 			f.printStackTrace();
 		} catch(IOException io) {
 			io.printStackTrace();
+		} finally {
+			if(fileChannel != null) {
+				fileChannel.close(); //always close the file channel
+			}
 		}
 		
 	}
