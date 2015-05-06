@@ -31,7 +31,7 @@ public class SampleByteBuffer {
 				byteBuffer.flip(); //flip it for read from write
 				
 				while(byteBuffer.hasRemaining()) {
-					System.out.println((char) byteBuffer.get());
+					System.out.print((char) byteBuffer.get() + " ");
 				}
 				
 				byteBuffer.clear();
