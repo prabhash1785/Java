@@ -10,7 +10,7 @@ import java.net.InetAddress;
  * @author prrathore
  *
  */
-public class UDPServerSocket {
+public class UDPClientSocket {
 
 	public static void main(String[] args) throws Exception {
 		
