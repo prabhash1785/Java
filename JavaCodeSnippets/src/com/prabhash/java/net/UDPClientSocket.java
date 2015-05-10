@@ -14,7 +14,7 @@ public class UDPClientSocket {
 
 	public static void main(String[] args) throws Exception {
 		
-		byte[] data = "123456789".getBytes();
+		byte[] data = "12345678912".getBytes();
 		
 		InetAddress address = InetAddress.getLocalHost();
 		
