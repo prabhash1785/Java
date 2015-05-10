@@ -43,8 +43,12 @@ public class ServerSocketChannelDemo {
 				
 				while(byteCount != -1) {
 					
+					byteBuffer.flip();
+					
 					while(byteBuffer.hasRemaining()) {
-						clientMessage += byteBuffer.getChar();
+						byte b = byteBuffer.get();
+						char c = (char) b;
+						clientMessage += c;
 					}
 					
 					byteBuffer.clear();

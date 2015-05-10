@@ -21,7 +21,7 @@ public class SocketChannelClient {
 			
 			socketChannel = SocketChannel.open();
 			
-			socketChannel.connect(new InetSocketAddress("http://localhost", 9999));
+			socketChannel.connect(new InetSocketAddress("localhost", 9999));
 			
 			String newData = "New String to write to file..." + System.currentTimeMillis();
 
