@@ -31,7 +31,7 @@ public class SampleByteBuffer {
 			System.out.println("Size of file channel: " + fileChannel.size());
 			
 			while(bytesRead != -1) {
-				byteBuffer.flip(); //flip it for read from write
+				byteBuffer.flip(); //flip it to read from write
 				
 				while(byteBuffer.hasRemaining()) {
 					System.out.print((char) byteBuffer.get() + " ");
