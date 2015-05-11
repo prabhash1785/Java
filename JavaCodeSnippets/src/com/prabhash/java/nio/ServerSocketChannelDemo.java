@@ -58,6 +58,13 @@ public class ServerSocketChannelDemo {
 				
 				System.out.println("Message from client number " + connectionCount + " is: " + clientMessage);
 				
+				//write back to client
+				String outputMessage = "Thanks for your connection client " + connectionCount;
+				ByteBuffer outputBytes = ByteBuffer.allocate(48);
+				outputBytes.put(outputMessage.getBytes());
+				
+				socketChannel.write(outputBytes);
+								
 				//close the socket
 				socketChannel.close();
 								
