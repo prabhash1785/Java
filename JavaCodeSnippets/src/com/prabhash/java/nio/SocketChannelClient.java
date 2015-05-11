@@ -35,30 +35,6 @@ public class SocketChannelClient {
 				socketChannel.write(buf);
 			}
 			
-			//read message received from server channel
-			ByteBuffer serverMessage = ByteBuffer.allocate(48);
-			
-			int byteCount = socketChannel.read(serverMessage); //data read into a byte buffer
-			
-			String message = "";
-			
-			while(byteCount != -1) {
-				
-				serverMessage.flip();
-				
-				while(serverMessage.hasRemaining()) {
-					byte b = serverMessage.get();
-					char c = (char) b;
-					message += c;
-				}
-				
-				serverMessage.clear();
-				
-				byteCount = socketChannel.read(serverMessage);
-			}
-			
-			System.out.println("Message from server is:: " + message);
-			
 		} catch(IOException io) {
 			io.printStackTrace();
 		} finally {
