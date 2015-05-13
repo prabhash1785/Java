@@ -49,5 +49,15 @@ public class SemaphoreImpl {
 		semaphore[currentPosition] = true;
 		
 	}
+	
+	/**
+	 * Release the permit back to Semaphore.
+	 * 
+	 */
+	public synchronized void release() {
+		
+		
+		
+	}
 
 }
