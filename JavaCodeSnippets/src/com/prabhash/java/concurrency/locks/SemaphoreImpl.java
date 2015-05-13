@@ -12,6 +12,7 @@ public class SemaphoreImpl {
 	
 	private final boolean[] semaphore;
 	private final int capacity;
+	private int currentPosition;
 	
 	public SemaphoreImpl() {
 		this(5);
@@ -24,8 +25,29 @@ public class SemaphoreImpl {
 		
 		this.capacity = capacity;
 		this.semaphore = new boolean[capacity];
+		this.currentPosition = -1;
+		
+		//initialize all the permits to false
+		for(int i = 0; i < this.capacity; i++) {
+			this.semaphore[i] = false;
+		}
+		
 	}
 	
-	
+	/**
+	 * This method will acquire a permit from Semaphore if there is an available lock or else it will block for the locks to become available.
+	 * 
+	 */
+	public synchronized void acquire() throws InterruptedException {
+		
+		//Check if all permits are taken, if yes then block
+		while(currentPosition == (capacity - 1)) {
+			wait();
+		}
+		
+		currentPosition = currentPosition + 1;
+		semaphore[currentPosition] = true;
+		
+	}
 
 }
