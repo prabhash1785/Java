@@ -3,7 +3,7 @@ package com.prabhash.java.concurrency.locks;
 import java.security.InvalidParameterException;
 
 /**
- * Counting Semaphore implementation.
+ * Bounded Counting Semaphore implementation.
  * 
  * @author prrathore
  *
