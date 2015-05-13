@@ -9,10 +9,9 @@ import java.security.InvalidParameterException;
  *
  */
 public class SemaphoreImpl {
-	
-	private final boolean[] semaphore;
-	private final int capacity;
-	private int currentPosition;
+
+	private final int capacity; //total number of available permits
+	private int acquiredPermit;
 	
 	public SemaphoreImpl() {
 		this(5);
@@ -24,13 +23,7 @@ public class SemaphoreImpl {
 		}
 		
 		this.capacity = capacity;
-		this.semaphore = new boolean[capacity];
-		this.currentPosition = -1;
-		
-		//initialize all the permits to false
-		for(int i = 0; i < this.capacity; i++) {
-			this.semaphore[i] = false;
-		}
+		this.acquiredPermit = 0;
 		
 	}
 	
@@ -41,23 +34,43 @@ public class SemaphoreImpl {
 	public synchronized void acquire() throws InterruptedException {
 		
 		//Check if all permits are taken, if yes then block
-		while(currentPosition == (capacity - 1)) {
+		while(acquiredPermit == (capacity)) {
 			wait();
 		}
 		
-		currentPosition = currentPosition + 1;
-		semaphore[currentPosition] = true;
+		acquiredPermit++;
 		
 	}
 	
 	/**
-	 * Release the permit back to Semaphore.
+	 * Release the permit back to Semaphore and notify all the blocking threads.
 	 * 
 	 */
 	public synchronized void release() {
 		
+		if(acquiredPermit == 0) {
+			throw new IllegalStateException("Can not release permits until at least one permit is acquired");
+		}
 		
+		acquiredPermit--;
+		notifyAll();
 		
+	}
+	
+	/**
+	 * Number of permits acquired
+	 * 
+	 */
+	public synchronized int getAcquiredPermitCount() {
+		return this.acquiredPermit;
+	}
+	
+	/**
+	 * Number of available Permits
+	 * 
+	 */
+	public synchronized int getAvailablePermitCount() {
+		return (this.capacity - this.acquiredPermit);
 	}
 
 }
