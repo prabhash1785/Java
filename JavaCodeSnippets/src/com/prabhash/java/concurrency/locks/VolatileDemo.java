@@ -1,11 +1,22 @@
 package com.prabhash.java.concurrency.locks;
 
+/**
+ * The below program is thread safe even though we are not using synchronized block or lock to control the critical blocks.
+ * 
+ * This program uses a Volatile data type to force every read and write from Main Memory which keeps the data state consistent.
+ * 
+ * For thread safety, in this case only one thread can mutate the state of volatile field but any number of threads can read the values.
+ * If more than one thread will try to write to count variable then this would lead to race conditions.
+ * 
+ * @author prrathore
+ *
+ */
 public class VolatileDemo {
 	
 	private volatile long count = 0;
 
     /**
-     * Only one thread may ever call this method,
+     * Only one thread may should call this method,
      * or it will lead to race conditions.
      */
     public void increment() {
@@ -14,7 +25,7 @@ public class VolatileDemo {
 
 
     /**
-     * Many reading threads may call this method
+     * Many reading threads can call this method
      * @return
      */
     public long getCount() {
