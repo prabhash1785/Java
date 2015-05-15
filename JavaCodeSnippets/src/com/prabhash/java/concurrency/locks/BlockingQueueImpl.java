@@ -46,7 +46,7 @@ public class BlockingQueueImpl {
 	 */
 	public synchronized String remove() throws InterruptedException {
 		
-		if(queue.size() == 0) {
+		while(queue.size() == 0) {
 			wait();
 		}
 		
