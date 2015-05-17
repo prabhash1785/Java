@@ -21,8 +21,10 @@ public class AtomicIntegerDemo {
 		boolean updated = false;
 		
 		while(!updated) {
+			
 			int currentVal = num.get();
 			updated = num.compareAndSet(currentVal, currentVal + 1); //Atomically sets the value to the given updated value if the current value == the expected value.
+			
 		}
 		
 	}
