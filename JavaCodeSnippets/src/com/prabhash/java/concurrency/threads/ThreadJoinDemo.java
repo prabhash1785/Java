@@ -1,5 +1,8 @@
 package com.prabhash.java.concurrency.threads;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * This program will use multiple threads to update state of an object concurrently. Once all the threads complete their execution, we will
  * send the final response to originator method.
@@ -13,9 +16,74 @@ package com.prabhash.java.concurrency.threads;
  *
  */
 public class ThreadJoinDemo {
+	
+	private List<String> list;
+	
+	public ThreadJoinDemo() {
+		list = new ArrayList<String>();
+	}
+	
+	public List<String> updateList() {
+		
+		Thread thread1 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				synchronized(list) {
+					list.add("Thread1 -> San Francisco");
+				}
+			}
+			
+		}, "Thread1");
+		
+		Thread thread2 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				synchronized(list) {
+					list.add("Thread2 -> Chicago");
+				}
+			}
+			
+		}, "Thread2");
+		
+		Thread thread3 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				synchronized(list) {
+					list.add("Thread3 -> Las Vegas");
+				}
+			}
+			
+		}, "Thread3");
+		
+		List<Thread> threadList = new ArrayList<Thread>();
+		threadList.add(thread1);
+		threadList.add(thread2);
+		threadList.add(thread3);
+		
+		for(Thread thread : threadList) {
+			thread.start();
+		}
+		
+		for(Thread thread : threadList) {
+			try {
+				thread.join(); //wait until all three threads complete execution
+			} catch(InterruptedException i) {
+				i.printStackTrace();
+			}
+		}
+		
+		return list;
+	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+		ThreadJoinDemo mainObject = new ThreadJoinDemo();
+		
+		List<String> outputList = mainObject.updateList();
+		
+		for(String s : outputList) {
+			System.out.println(s);
+		}
 
 	}
 
