@@ -88,17 +88,44 @@ public class ThreadJoinDemo {
 	 * 
 	 * @param args
 	 */
-	public List<Integer> updateListConcurrently() {
+	public List<String> updateListConcurrently() {
 		
-		List<Integer> list = new LinkedList<Integer>();
+		final List<String> list = new LinkedList<String>();
 		
 		ExecutorService executor = Executors.newCachedThreadPool();
 		
 		for(int i = 0; i < 6; i++) {
-			//executor.submit(task)
+			executor.submit(new Runnable() {
+				@Override
+				public void run() {
+					list.add("hello");
+				}
+			});
 		}
 		
+		executor.shutdown();
+		
 		return list;
+		
+	}
+	
+	/**
+	 * Parametrized Runnable Task
+	 * 
+	 * @param args
+	 */
+	private Runnable runnableTask(final String input) {
+		
+		Runnable r = new Runnable() {
+			@Override
+			public void run() {
+				synchronized(list) {
+					list.add(input);
+				}
+			}
+		};
+		
+		return r;
 		
 	}
 
@@ -106,7 +133,9 @@ public class ThreadJoinDemo {
 		
 		ThreadJoinDemo mainObject = new ThreadJoinDemo();
 		
-		List<String> outputList = mainObject.updateList();
+		//List<String> outputList = mainObject.updateList();
+		
+		List<String> outputList = mainObject.updateListConcurrently();
 		
 		for(String s : outputList) {
 			System.out.println(s);
