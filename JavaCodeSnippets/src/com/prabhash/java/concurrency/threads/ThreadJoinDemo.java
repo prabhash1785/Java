@@ -1,7 +1,10 @@
 package com.prabhash.java.concurrency.threads;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * This program will use multiple threads to update state of an object concurrently. Once all the threads complete their execution, we will
@@ -23,6 +26,11 @@ public class ThreadJoinDemo {
 		list = new ArrayList<String>();
 	}
 	
+	/**
+	 * Method 1 uses Thread.join()
+	 * 
+	 * @return List<String>
+	 */
 	public List<String> updateList() {
 		
 		Thread thread1 = new Thread(new Runnable() {
@@ -73,6 +81,25 @@ public class ThreadJoinDemo {
 		}
 		
 		return list;
+	}
+	
+	/**
+	 * Method 2 uses an Executor Service
+	 * 
+	 * @param args
+	 */
+	public List<Integer> updateListConcurrently() {
+		
+		List<Integer> list = new LinkedList<Integer>();
+		
+		ExecutorService executor = Executors.newCachedThreadPool();
+		
+		for(int i = 0; i < 6; i++) {
+			//executor.submit(task)
+		}
+		
+		return list;
+		
 	}
 
 	public static void main(String[] args) {
