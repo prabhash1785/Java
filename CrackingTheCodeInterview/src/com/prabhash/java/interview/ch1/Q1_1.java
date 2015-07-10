@@ -122,16 +122,45 @@ public class Q1_1 {
 	}
 	
 	/**
-	 * Method 3 without using an additional data structure
+	 * Same implementation as above method 2. This has a minor optimization where we don't have to initialize hashmap with String elements. 
+	 * Just use Map containsKey() method to check if map has a key before doing a get with key. This will prevent NullPointerException and saves us
+	 * an extra for loop of initializing HashMap.
 	 * 
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(n)
 	 * 
-	 * 
-	 * 
+	 * @param s
+	 * @return
 	 */
+	public static boolean hasUniqueCharactersWithHashTableV2(String s) {
+
+		if(s == null) {
+			throw new IllegalArgumentException();
+		}
+
+		Map<Character, Boolean> map = new HashMap<Character, Boolean>();
+
+		char[] charArray = s.toCharArray();
+
+		for(int i = 0; i < charArray.length; i++) {
+			
+			char c = charArray[i];
+			if(map.containsKey(c) && map.get(c) == true) {
+				return false;
+			}
+
+			map.put(charArray[i], true);
+		}
+
+		return true;
+
+	}
 
 	public static void main(String[] args) {
 		
 		System.out.println("Has abcdeaf unique chars: " + hasUniqueCharacters(input));
+		
+		System.out.println("Has abcdeaf unique chars: " + hasUniqueCharactersWithHashTableV2("abc"));
 		
 		System.out.println(hasUniqueWithArray("abcderbzx"));
 		
