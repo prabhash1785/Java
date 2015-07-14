@@ -26,6 +26,11 @@ public class Q1_1 {
 			throw new IllegalArgumentException();
 		}
 		
+		//Optimization. If String is ASCII string then it can't have more than 256 characters
+		if(s.length() > 256) {
+			return false;
+		}
+		
 		char[] ch = s.toCharArray();
 		
 		for(int i = 0; i < ch.length; i++) {
@@ -99,6 +104,11 @@ public class Q1_1 {
 			throw new IllegalArgumentException();
 		}
 		
+		//Optimization. If String is ASCII string then it can't have more than 256 characters
+		if(s.length() > 256) {
+			return false;
+		}
+		
 		boolean result = true;
 		
 		Map<Character, Boolean> map = new HashMap<Character, Boolean>();
@@ -136,6 +146,11 @@ public class Q1_1 {
 
 		if(s == null) {
 			throw new IllegalArgumentException();
+		}
+		
+		//Optimization. If String is ASCII string then it can't have more than 256 characters
+		if(s.length() > 256) {
+			return false;
 		}
 
 		Map<Character, Boolean> map = new HashMap<Character, Boolean>();
