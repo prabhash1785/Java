@@ -11,8 +11,6 @@ import java.util.Map;
  */
 public class Q1_1 {
 	
-	private static String input = "abcdefghji";
-	
 	/**
 	 * Brute Force
 	 * 
@@ -170,16 +168,64 @@ public class Q1_1 {
 		return true;
 
 	}
+	
+	/**
+	 * Use an array of boolean to check if a character is already available
+	 * 
+	 * @param args
+	 */
+	public static boolean hasUniqueCharsUsingBoolArray(String s) throws Exception {
+		
+		if(s == null) {
+			throw new IllegalArgumentException();
+		}
+		
+		// Assuming String has ASCII characters then it can not have more than 256 characters
+		if(s.length() > 256) {
+			return false;
+		}
+		
+		boolean[] charTracker = new boolean[256];
+		
+		char[] charArray = s.toCharArray();
+		
+		for(int i = 0; i < charArray.length; i++) {
+			
+			int charValue = (int) charArray[i];
+			
+			if(charValue > 256) {
+				throw new Exception("Provided String is not ASCII");
+			}
+			
+			if(charTracker[charValue]) {
+				return false;
+			}
+			
+			charTracker[charValue] = true;
+			
+		}
+		
+		return true;
+		
+	}
 
 	public static void main(String[] args) {
 		
+		String input = "$@^asdf!1";
+		
 		System.out.println("Has abcdeaf unique chars: " + hasUniqueCharacters(input));
 		
-		System.out.println("Has abcdeaf unique chars: " + hasUniqueCharactersWithHashTableV2("abc"));
+		System.out.println("Has abcdeaf unique chars: " + hasUniqueCharactersWithHashTableV2(input));
 		
-		System.out.println(hasUniqueWithArray("abcderbzx"));
+		System.out.println(hasUniqueWithArray(input));
 		
-		System.out.println(isUniuewithBruteForce("servuiso"));
+		System.out.println(isUniuewithBruteForce(input));
+		
+		try {
+			System.out.println(hasUniqueCharsUsingBoolArray(input));
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 
