@@ -36,6 +36,13 @@ public class BitwiseOperator {
 		//Bitwise OR
 		z = x | y;
 		System.out.println("z after Bitwise OR: " + z);
+		
+		//XOR
+		int s = 5;
+		int t = 7;
+		
+		int u = s ^ t;
+		System.out.println("s ^ t: " + u); //2
 
 	}
 
