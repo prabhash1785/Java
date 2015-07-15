@@ -245,6 +245,15 @@ public class Q1_1 {
 		return true;
 		
 	}
+	
+	/**
+	 * Find if String has unique characters using BitVector.
+	 * 
+	 * @param args
+	 */
+	public static boolean hasUniqueCharsUsingBitVector(String s) {
+		return true;
+	}
 
 	public static void main(String[] args) {
 		
