@@ -1,6 +1,7 @@
 package com.prabhash.java.interview.ch1;
 
 import java.util.Arrays;
+import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -247,12 +248,76 @@ public class Q1_1 {
 	}
 	
 	/**
-	 * Find if String has unique characters using BitVector.
+	 * Find if String has unique characters using BitVector. This reduces the space usage by a factor of 8.
+	 * 
+	 * This method uses a int to store bits which can store a max of 32 bits so thsi program can only hold bits correctly for either a - z or
+	 * A - Z. Mixing both upper and lower characters will error out.
+	 * 
+	 * Input can only be all upper case characters or lower case characters.
 	 * 
 	 * @param args
 	 */
 	public static boolean hasUniqueCharsUsingBitVector(String s) {
+		
+		if(s == null) {
+			throw new IllegalArgumentException();
+		}
+		
+		int checker = 0; //this field will track the bits set for already traversed characters in String
+		
+		for(int i = 0; i < s.length(); i++) {
+			
+			int charVal = s.charAt(i);
+			
+			if((checker & (1 << charVal)) > 0) { // check the Bitwise AND of checker and character. If it's > 0 then this character is already present
+				return false;
+			}
+			
+			checker = checker | ((1 << charVal)); //If it's a new character, set bit using Bitwise OR
+			
+		}
+		
 		return true;
+	}
+	
+	/**
+	 * This method will use Java BitSet class to be able to store all ASCII characters in String and track if those characters are already
+	 * available.
+	 * 
+	 * @param s
+	 * @return
+	 */
+	public static boolean isUniqueStringUsingBitVectorClass(String s) {
+		
+		final int ASCII_CHARACTER_SET_SIZE = 256;
+		
+		final BitSet tracker = new BitSet(ASCII_CHARACTER_SET_SIZE);
+		
+		// if more than  256 ASCII characters then there can't be unique characters
+		if(s.length() > 256) {
+			return false;
+		}
+		
+		//this will be used to keep the location of each character in String
+		final BitSet charBitLocation = new BitSet(ASCII_CHARACTER_SET_SIZE);
+		
+		for(int i = 0; i < s.length(); i++) {
+			
+			int charVal = s.charAt(i);
+			charBitLocation.set(charVal);
+			
+			if(tracker.intersects(charBitLocation)) {
+				return false;
+			}
+			
+			tracker.or(charBitLocation);
+			
+			charBitLocation.clear(); //clear the individual character tracker for next iteration in the loop
+						
+		}
+		
+		return true;
+		
 	}
 
 	public static void main(String[] args) {
@@ -274,6 +339,10 @@ public class Q1_1 {
 		}
 		
 		System.out.println(hasUniqueCharsUsingSorting("abcad"));
+		
+		System.out.println("Is String unique using Bitvector technique: " + hasUniqueCharsUsingBitVector("abwcuwo"));
+		
+		System.out.println("Is String unique using Java Bitvector class: " + isUniqueStringUsingBitVectorClass("123PQuv$#6aF2"));
 		
 	}
 
