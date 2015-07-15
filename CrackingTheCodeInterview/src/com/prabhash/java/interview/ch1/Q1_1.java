@@ -1,5 +1,6 @@
 package com.prabhash.java.interview.ch1;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -208,6 +209,42 @@ public class Q1_1 {
 		return true;
 		
 	}
+	
+	/**
+	 * Sort the given string and compare subsequent characters to see if they match. If any character match then that means there are
+	 * repeating characters.
+	 * 
+	 * Time Complexity: O(nlogn) - Sorting time
+	 * Space: O(1) assuming sorting used doesn't take extra memory
+	 * 
+	 * @param s
+	 * @return
+	 */
+	public static boolean hasUniqueCharsUsingSorting(String s) {
+		
+		if(s == null) {
+			throw new IllegalArgumentException();
+		}
+		
+		if(s.length() > 256) {
+			return false;
+		}
+		
+		char[] charArray = s.toCharArray();
+		
+		Arrays.sort(charArray);
+		
+		for(int i = 0; i < charArray.length - 1; i++) {
+			
+			if(charArray[i] == charArray[i+1]) {
+				return false;
+			}
+			
+		}
+		
+		return true;
+		
+	}
 
 	public static void main(String[] args) {
 		
@@ -226,6 +263,8 @@ public class Q1_1 {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+		System.out.println(hasUniqueCharsUsingSorting("abcad"));
 		
 	}
 
