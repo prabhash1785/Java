@@ -57,6 +57,29 @@ public class Q1_2 {
 		System.out.println("Revrsed String in place: " + new String(charArray));
 		
 	}
+	
+	/**
+	 * Recursively reverse a String. Not a recommended method.
+	 * 
+	 * @param input
+	 */
+	public static void recursiveReversal(String input) {
+		System.out.println("Recursive reversal of String: " + new String(recursiveReversalUtil(input.toCharArray(), 0, input.length() - 1)));
+	}
+	
+	private static char[] recursiveReversalUtil(char[] s, int start, int end) {
+		
+		if(start > end) {
+			return s;
+		}
+		
+		char temp = s[start];
+		s[start] = s[end];
+		s[end] = temp;
+		
+		return recursiveReversalUtil(s, ++start, --end);
+		
+	}
 
 	public static void main(String[] args) {
 		
@@ -65,6 +88,8 @@ public class Q1_2 {
 		reverseStringMethod1(input);
 		
 		reverseStringInPlace(input);
+		
+		recursiveReversal(input);
 
 	}
 
