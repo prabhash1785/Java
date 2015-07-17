@@ -40,6 +40,39 @@ public class Q1_3 {
 		return new String(c1).equals(new String(c2));
 		
 	}
+	
+	/**
+	 * Check permutation by matching character count.
+	 * 
+	 * @param s
+	 * @param t
+	 * @return
+	 */
+	public static boolean checkPermutationByCharCount(String s, String t) {
+		
+		if(s.length() != t.length()) {
+			return false;
+		}
+		
+		int[] letters = new int[256]; //array to keep track of characters count
+		
+		char[] sArray = s.toCharArray();
+		
+		for(char c : sArray) {
+			letters[c]++; //post increment the content of array
+		}
+		
+		for(int i = 0; i < t.length(); i++) {
+			int c = t.charAt(i);
+			
+			if(--letters[c] < 0) { //pre-decrement the content of array
+				return false;
+			}
+		}
+		
+		return true;
+		
+	}
 
 	public static void main(String[] args) {
 		
@@ -47,7 +80,9 @@ public class Q1_3 {
 		String b = "lhleo";
 		
 		System.out.println("Both string is permutation of each other: " + checkPermutationUsingSort(a, b));
-
+		
+		System.out.println("Is it permutation: " + checkPermutationByCharCount("xyyyz", "xxyyz"));
+		
 	}
 
 }
