@@ -81,7 +81,7 @@ public class Q1_3 {
 		
 		System.out.println("Both string is permutation of each other: " + checkPermutationUsingSort(a, b));
 		
-		System.out.println("Is it permutation: " + checkPermutationByCharCount("xyyyz", "xxyyz"));
+		System.out.println("Is it permutation: " + checkPermutationByCharCount(a, b));
 		
 	}
 
