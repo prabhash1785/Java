@@ -47,7 +47,7 @@ public class Q1_8 {
 			isSubstring = false;
 			s2CharIndex = 0;
 			
-			while(s2CharIndex < ch2.length) {
+			while(s2CharIndex < ch2.length && s1CharIndex < ch1.length) {
 				
 				if(ch2[s2CharIndex] != ch1[s1CharIndex]) {
 					s1CharIndex++; // increase the pointer on first string
@@ -70,13 +70,40 @@ public class Q1_8 {
 		return isSubstring;
 		
 	}
+	
+	/**
+	 * Check if s2 is rotation of s1 by making one call to isSubString method.
+	 * 
+	 * @param s1
+	 * @param s2
+	 * @return boolean
+	 */
+	public static boolean checkRotation(String s1, String s2) throws Exception {
+		
+		if(s1 == null || s2 == null) {
+			throw new Exception("String is null");
+		}
+		
+		if(s1.length() != s2.length()) {
+			return false;
+		}
+		
+		//if s2 is substring of s1 + s1 then it's a rotation
+		String s1s1 = s1 + s1;
+		
+		return isSubstring(s1s1, s2);
+		
+	}
 
 	public static void main(String[] args) throws Exception {
 		
 		String s1 = "mantango";
 		String s2 = "ang";
-		
 		System.out.println("Is substring: " + isSubstring(s1, s2));
+		
+		String t1 = "waterbottle";
+		String t2 = "erbottlewat";
+		System.out.println("Is rotation: " + checkRotation(t1, t2));
 
 	}
 
