@@ -111,6 +111,32 @@ public class LinkedListImpl {
 	}
 	
 	/**
+	 * Reverse a Linked List
+	 */
+	public Node reverseLinkedList(Node node) {
+		
+		Node prev = null; //keep track of prev set of nodes
+		Node current = node; //keep track of current node for operation
+		Node rem = node.next; //keep track of next set of nodes
+		
+		while(rem != null) {
+			
+			current.next = prev;
+			
+			prev = current;
+			current = rem;
+			rem = rem.next;
+			
+		}
+		
+		current.next = prev; //Make sure last node points to the prev linked list chain
+		
+		return current;
+		
+	}
+	
+	
+	/**
 	 * Print Singly Linked List in pretty format.
 	 * 
 	 * @param node
@@ -180,6 +206,11 @@ public class LinkedListImpl {
 		} else {
 			System.out.println("\n\nGiven key is not found in Linked List for deletion.");
 		}
+		
+		System.out.println("\n\nHere is Reverse Linked List: ");
+		Node newHead = ll.reverseLinkedList(ll.head);
+		ll.prettyPrintLinkedList(newHead);
+		
 
 		
 	}
