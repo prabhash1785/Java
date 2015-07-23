@@ -75,6 +75,46 @@ public class LinkedListImpl {
 		
 	}
 	
+	/**
+	 * Delete a node with given data from Linked List.
+	 * 
+	 * @param node head of the Linked List
+	 * @param data data key to be deleted
+	 * 
+	 * @return boolean
+	 */
+	public boolean deleteNode(Node node, int data) {
+		
+		if(node == null) {
+			throw new NullPointerException("Linked List is null!");
+		}
+		
+		Node prev = node; // keep track of previous nodes a
+		
+		while(node != null) {
+			
+			if(node.data == data) {
+				
+				prev.next = node.next;
+				node = null;
+				
+				return true;
+			}
+			
+			prev = node;
+			node = node.next;
+			
+		}
+		
+		return false;
+		
+	}
+	
+	/**
+	 * Print Singly Linked List in pretty format.
+	 * 
+	 * @param node
+	 */
 	public void prettyPrintLinkedList(Node node) {
 		
 		if(node == null) {
@@ -130,6 +170,15 @@ public class LinkedListImpl {
 			
 		} else {
 			System.out.println("\n\nOops! Did not find a matching key in ordre to insert a new key after that node!!");
+		}
+		
+		boolean isdeleted = ll.deleteNode(ll.head, 56);
+		
+		if(isdeleted) {
+			System.out.println("\n\nLL after deletion:: ");
+			ll.prettyPrintLinkedList(ll.head);
+		} else {
+			System.out.println("\n\nGiven key is not found in Linked List for deletion.");
 		}
 
 		
