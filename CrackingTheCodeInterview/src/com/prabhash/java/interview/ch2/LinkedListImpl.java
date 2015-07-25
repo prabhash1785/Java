@@ -76,6 +76,30 @@ public class LinkedListImpl {
 	}
 	
 	/**
+	 * Find if data is available in Linked List.
+	 * 
+	 * @param data
+	 * @return boolean
+	 */
+	public boolean isAvailable(int data) {
+		
+		Node node = this.head;
+		
+		while(node != null) {
+			
+			if(node.data == data) {
+				return true;
+			}
+			
+			node = node.next;
+			
+		}
+		
+		return false;
+		
+	}
+	
+	/**
 	 * Delete a node with given data from Linked List.
 	 * 
 	 * @param node head of the Linked List
@@ -130,6 +154,8 @@ public class LinkedListImpl {
 		}
 		
 		current.next = prev; //Make sure last node points to the prev linked list chain
+		
+		this.head = current; //update head reference to first node in reversed linked list
 		
 		return current;
 		
@@ -211,8 +237,9 @@ public class LinkedListImpl {
 		Node newHead = ll.reverseLinkedList(ll.head);
 		ll.prettyPrintLinkedList(newHead);
 		
-
-		
+		int input = 221;
+		System.out.println("\n\nIs " + input + " available in Linked List: " + ll.isAvailable(input));
+				
 	}
 
 }
