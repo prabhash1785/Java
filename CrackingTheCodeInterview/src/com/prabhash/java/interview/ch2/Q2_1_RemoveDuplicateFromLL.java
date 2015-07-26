@@ -59,6 +59,61 @@ public class Q2_1_RemoveDuplicateFromLL {
 		return hasDuplicates;
 		
 	}
+	
+	/**
+	 * Method 2 to remove duplicates from Linked List without using a buffer.
+	 * 
+	 * Keep two pointers to Linked List. For each first pointer, run the other pointer throughout the remaining Linked List and remove
+	 * anything which match first pointer data.
+	 * 
+	 *  Time Complexity: O(n ^ 2)
+	 *  Space: O(1)
+	 * 
+	 * @param args
+	 */
+	public static boolean removeDuplicatesWithoutBuffer(LinkedListImpl.Node node) {
+		
+		if(node == null) {
+			System.out.println("Cannot remove dupliacets from empty Linked List");
+			return false;
+		}
+		
+		boolean hasDuplicates = false;
+		
+		LinkedListImpl.Node runner = null; //this will run through remaining nodes in Linked List for each value of node
+		LinkedListImpl.Node prev = null; //prev reference used to delete nodes
+		
+		while(node.getNext() != null) {
+			
+			prev = node;
+			runner = node.getNext();
+			
+			while(runner != null) {
+				
+				if(runner.getData() == node.getData()) {
+					
+					hasDuplicates = true;
+					prev.setNext(runner.getNext());
+					
+				} else {
+					
+					prev = runner;
+					
+				}
+				
+				runner = runner.getNext(); 
+				
+			}
+			
+			node = node.getNext(); // move node to next node
+			
+			
+		}
+		
+		
+		return hasDuplicates;
+		
+	}
 
 	public static void main(String[] args) {
 		
@@ -71,6 +126,14 @@ public class Q2_1_RemoveDuplicateFromLL {
 		//Remove duplicate using buffer
 		boolean duplicatesFound = removeDuplicateDataUsingBuffer(head);
 		if(duplicatesFound) {
+			System.out.println("\n\nLinkedList after removing duplicates:");
+			ll.prettyPrintLinkedList(head);
+		} else {
+			System.out.println("\n\nNo duplicates found");
+		}
+		
+		boolean duplicatesFound2 = removeDuplicatesWithoutBuffer(head);
+		if(duplicatesFound2) {
 			System.out.println("\n\nLinkedList after removing duplicates:");
 			ll.prettyPrintLinkedList(head);
 		} else {
