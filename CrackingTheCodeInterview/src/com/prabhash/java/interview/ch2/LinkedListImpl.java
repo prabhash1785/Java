@@ -10,8 +10,37 @@ public class LinkedListImpl {
 	
 	private Node head;
 	
+	public LinkedListImpl() {
+		this(null);
+	}
+	
 	public LinkedListImpl(Node head) {
 		this.head = head;
+	}
+	
+	/**
+	 * Generate a Linked List with random numbers
+	 * 
+	 */
+	public void generateLinkedList() {
+		
+		this.addNode(13);
+		this.addNode(1);
+		this.addNode(56);
+		this.addNode(13);
+		this.addNode(33);
+		this.addNode(22);
+		this.addNode(22);
+		this.addNode(7);
+		this.addNode(85);
+		this.addNode(100);
+		this.addNode(56);
+		this.addNode(17);
+		this.addNode(100);
+		
+		System.out.println("\nHere is a generated LinkedList:\n");
+		this.prettyPrintLinkedList(this.head);
+			
 	}
 	
 	/**
@@ -179,7 +208,6 @@ public class LinkedListImpl {
 		}
 		
 	}
-	
 	
 	public static class Node {
 		
