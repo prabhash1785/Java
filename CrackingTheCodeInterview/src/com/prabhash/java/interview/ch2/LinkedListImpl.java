@@ -19,6 +19,17 @@ public class LinkedListImpl {
 	}
 	
 	/**
+	 * Getters and setters for head
+	 */
+	public Node getHead() {
+		return this.head;
+	}
+	
+	public void setHead(Node head) {
+		this.head = head;
+	}
+	
+	/**
 	 * Generate a Linked List with random numbers
 	 * 
 	 */
