@@ -42,6 +42,11 @@ public class FindNthToLastNode {
 			return -1;
 		}
 		
+		// boundary condition when prev becomes null at the end of Linked List traversal. 
+		if(prev == null) {
+			return -1;
+		}
+		
 		int data = prev.getData();
 		
 		return data;
@@ -58,7 +63,7 @@ public class FindNthToLastNode {
 		
 		ll.prettyPrintLinkedList(head);
 		
-		int data = findKthToLast(head, 2);
+		int data = findKthToLast(head, 0);
 		System.out.println("\n\nKth element from last: " + data);
 
 	}
