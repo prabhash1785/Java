@@ -46,7 +46,12 @@ public class Q2_4_PartitionLinkedList {
 		
 		LinkedListImpl.Node smalleLLTail = smallerValLL.getHead(); //tail of smaller Linked List
 		
-		// go to the end of smallerLL
+		//if there were no elements added in smalleValLinkedList then just return the head of biggerValLL
+		if(smalleLLTail == null) {
+			return biggerValLL.getHead();
+		}
+		
+		// go to the end of smallerLL if there were any nodes copied to it
 		while(smalleLLTail.getNext() != null) {
 			smalleLLTail = smalleLLTail.getNext();
 		}
@@ -63,7 +68,7 @@ public class Q2_4_PartitionLinkedList {
 		
 		ll.generateLinkedList();
 		
-		LinkedListImpl.Node newHead = partitionLinkedList(ll.getHead(), 20);
+		LinkedListImpl.Node newHead = partitionLinkedList(ll.getHead(), 0);
 		
 		System.out.println("\n\nHere is the partitioned Linked List:");
 		ll.prettyPrintLinkedList(newHead);
