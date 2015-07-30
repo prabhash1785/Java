@@ -207,7 +207,7 @@ public class LinkedListImpl {
 	 * 
 	 * @param node
 	 */
-	public void prettyPrintLinkedList(Node node) {
+	public static void prettyPrintLinkedList(Node node) {
 		
 		if(node == null) {
 			throw new NullPointerException("LinkedList does not exist!");
