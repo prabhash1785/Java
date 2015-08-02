@@ -212,9 +212,40 @@ public class Q2_5_SumLinkedListNodes {
 		System.out.println("\n\nLinked List b:");
 		LinkedListImpl.prettyPrintLinkedList(b);
 		
+		head = calculateSum(a, b, 0);
+		
 		
 		return head;
 	}
+	
+	/**
+	 * Recursively calculate sum of Linked List arranged from higher to lower place digits.
+	 * 
+	 * @param args
+	 */
+	private static LinkedListImpl.Node calculateSum(LinkedListImpl.Node a, LinkedListImpl.Node b, int carry) {
+		
+		LinkedListImpl.Node sum = null;
+		
+		if(a == null || b == null) {
+			return sum;
+		}
+		
+		sum = calculateSum(a.getNext(), b.getNext(), carry);
+		
+		int sumData = a.getData() + b.getData() + carry;
+		
+		if(sumData > 9) {
+			carry = sumData / 10;
+			sumData = sumData % 10;
+		}
+		
+		sum = new LinkedListImpl.Node(sumData);
+		
+		return sum;
+		
+	}
+	
 
 	public static void main(String[] args) {
 		
