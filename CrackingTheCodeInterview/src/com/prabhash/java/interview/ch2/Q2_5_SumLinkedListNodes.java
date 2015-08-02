@@ -8,6 +8,14 @@ package com.prabhash.java.interview.ch2;
  */
 public class Q2_5_SumLinkedListNodes {
 	
+	/**
+	 * Find sum of numbers represented as Linked List where numbers are arranged from ones place to next higher place going left to right.
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 * @throws Exception
+	 */
 	public static LinkedListImpl.Node sumOfNodesStartingLeftPosition(LinkedListImpl.Node a, LinkedListImpl.Node b) throws Exception {
 		
 		if(a == null && b == null) {
@@ -94,6 +102,21 @@ public class Q2_5_SumLinkedListNodes {
 		if(carry > 0) {
 			tail.setNext(new LinkedListImpl.Node(carry));
 		}
+		
+		return head;
+	}
+	
+	/**
+	 * Find sum of numbers represented as Linked List where higher place number is on left and lower on right.
+	 * 
+	 * @param args
+	 */
+	public static LinkedListImpl.Node sumOfNodesFromRightPosition(LinkedListImpl.Node a, LinkedListImpl.Node b) {
+		
+		LinkedListImpl.Node head = null;
+		LinkedListImpl.Node tail = null;
+		
+		
 		
 		return head;
 	}
