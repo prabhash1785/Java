@@ -1,5 +1,7 @@
 package com.prabhash.java.interview.ch2;
 
+import com.prabhash.java.interview.ch2.LinkedListImpl.Node;
+
 /**
  * This program will calculate sum of numbers represented as LinkedList of numbers where each node represents one digit.
  * 
@@ -11,7 +13,7 @@ public class Q2_5_SumLinkedListNodes {
 	/**
 	 * Find sum of numbers represented as Linked List where numbers are arranged from ones place to next higher place going left to right.
 	 * 
-	 * Since numbers are arranged from ones to higher place so it's easier to sum two Linked List starting left node and keep movinf right
+	 * Since numbers are arranged from ones to higher place so it's easier to sum two Linked List starting left node and keep moving right
 	 * until you reach last node. For sum of each nodes, we have to keep track of carry and add that to nodes on the next place.
 	 * 
 	 * @param a
@@ -137,7 +139,6 @@ public class Q2_5_SumLinkedListNodes {
 		}
 		
 		LinkedListImpl.Node head = null;
-		LinkedListImpl.Node tail = null;
 		
 		int l1 = 0;
 		LinkedListImpl.Node temp1 = a;
@@ -212,37 +213,79 @@ public class Q2_5_SumLinkedListNodes {
 		System.out.println("\n\nLinked List b:");
 		LinkedListImpl.prettyPrintLinkedList(b);
 		
-		head = calculateSum(a, b, 0);
+		//recursively calculate sum of Linked List starting from tail position
+		SumAndCarry sumAndCarry = calculateSum(a, b);
 		
+		//check if sumAndCarry has a higher than 0 carry. If yes then create a node out of carry and append on left of head.
+		if(sumAndCarry.carry > 0) {
+			
+			LinkedListImpl.Node node = new LinkedListImpl.Node(sumAndCarry.carry);
+			
+			node.setNext(sumAndCarry.sum);
+			
+			sumAndCarry.sum = node;
+			
+		}
+			
+		head = sumAndCarry.sum;
 		
 		return head;
 	}
 	
 	/**
-	 * Recursively calculate sum of Linked List arranged from higher to lower place digits.
+	 * Recursively calculate sum of Linked List arranged from higher to lower place digits. First reach the end of Linked List and then start adding Linked List nodes from rear
+	 * position and pass carry to left nodes. Also keep referencing these sum nodes to one another.
 	 * 
 	 * @param args
 	 */
-	private static LinkedListImpl.Node calculateSum(LinkedListImpl.Node a, LinkedListImpl.Node b, int carry) {
+	private static SumAndCarry calculateSum(LinkedListImpl.Node a, LinkedListImpl.Node b) {
 		
-		LinkedListImpl.Node sum = null;
+		SumAndCarry sumAndCarry = new SumAndCarry();
 		
 		if(a == null || b == null) {
-			return sum;
+			return sumAndCarry;
 		}
 		
-		sum = calculateSum(a.getNext(), b.getNext(), carry);
+		SumAndCarry sumAndCarry2 = calculateSum(a.getNext(), b.getNext());
 		
-		int sumData = a.getData() + b.getData() + carry;
+		int sum = a.getData() + b.getData() + sumAndCarry2.carry;
 		
-		if(sumData > 9) {
-			carry = sumData / 10;
-			sumData = sumData % 10;
+		int newCarry = 0;
+		
+		if(sum > 9) {
+			newCarry = sum / 10;
+			sum = sum % 10;
 		}
 		
-		sum = new LinkedListImpl.Node(sumData);
+		SumAndCarry sumAndCarry3 = new SumAndCarry();
 		
-		return sum;
+		sumAndCarry3.carry = newCarry;
+		sumAndCarry3.sum = new LinkedListImpl.Node(sum);
+		
+		sumAndCarry3.sum.setNext(sumAndCarry2.sum);
+		
+		return sumAndCarry3;
+		
+	}
+	
+	/**
+	 * Nested class to store carry and sum of nodes.
+	 * 
+	 * @author prrathore
+	 *
+	 */
+	private static class SumAndCarry {
+		private int carry;
+		private LinkedListImpl.Node sum;
+		
+		public SumAndCarry() {
+			this(0, null);
+		}
+		
+		public SumAndCarry(int carry, LinkedListImpl.Node sum) {
+			this.carry = carry;
+			this.sum = sum;
+		}
 		
 	}
 	
@@ -290,6 +333,7 @@ public class Q2_5_SumLinkedListNodes {
 		LinkedListImpl d = new LinkedListImpl();
 		d.addNode(3);
 		d.addNode(9);
+		d.addNode(8);
 		
 		System.out.println("\n\nNumber d staring from ones place:");
 		LinkedListImpl.prettyPrintLinkedList(d.getHead());
@@ -299,8 +343,11 @@ public class Q2_5_SumLinkedListNodes {
 		try {
 			sum2 = sumOfNodesFromRightPosition(c.getHead(), d.getHead());
 		} catch(Exception e) {
-			System.out.println("Exception occurred while calculating sum!!");
+			System.out.println("\n\nException occurred while calculating sum!!");
 		}
+		
+		System.out.println("\n\nHere is the sum of Linked List starting from left to right arranged from higher to lower place:");
+		LinkedListImpl.prettyPrintLinkedList(sum2);
 		
 	}
 
