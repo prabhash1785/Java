@@ -51,6 +51,51 @@ public class Q2_7_Palindrome {
 		 return true;
 		
 	}
+	
+	/**
+	 * Method 2
+	 * 
+	 * This is an optimization on first method. We don't have to push all Linked List Nodes in stack. We can push half of the nodes in Linked
+	 * List to stack and then compare nodes in stack with the remainign node in Linked List. If they are equal, it is a Linked List else not.
+	 * 
+	 * @param args
+	 * @throws Exception
+	 */
+	public static boolean isPalindromeUsingStackOptimized(LinkedListImpl.Node node) {
+		
+		if(node == null) {
+			throw new NullPointerException("Linked List is null");
+		}
+		
+		
+		
+		return true;
+	}
+	
+	/**
+	 * Find middle node of a Linked List
+	 * 
+	 * @param node
+	 * @return
+	 */
+	private static int findMiddleOfLinkedList(LinkedListImpl.Node node) {
+		
+		int middle = 1;
+		
+		LinkedListImpl.Node fast = node;
+		LinkedListImpl.Node slow = node;
+		
+		while(fast != null && fast.getNext() != null) {
+			middle++;
+			slow = slow.getNext();
+			fast = fast.getNext().getNext();
+		}
+		
+		System.out.println("\n\nMiddle node is at position " + middle + " and value is: " + slow.getData());
+		
+		return middle;
+		
+	}
 
 	public static void main(String[] args) throws Exception {
 		
@@ -60,6 +105,7 @@ public class Q2_7_Palindrome {
 		ll.addNode(8);
 		ll.addNode(23);
 		ll.addNode(7);
+		ll.addNode(7);
 		ll.addNode(23);
 		ll.addNode(8);
 		ll.addNode(4);
@@ -68,6 +114,8 @@ public class Q2_7_Palindrome {
 		
 		boolean isPalindrome = isPalindromeUsingStack(ll.getHead());
 		System.out.println("\n\nIs is palindrome: " + isPalindrome);
+		
+		findMiddleOfLinkedList(ll.getHead());
 
 	}
 
