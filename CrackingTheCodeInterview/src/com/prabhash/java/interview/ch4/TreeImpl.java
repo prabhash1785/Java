@@ -77,6 +77,24 @@ public class TreeImpl {
 	}
 	
 	/**
+	 * Generate a Binary Search Tree from a list of integer data.
+	 * 
+	 * @param list
+	 * @throws Exception
+	 */
+	public void generateTree(int[] list) throws Exception {
+		
+		if(list == null) {
+			throw new Exception("Cannot generate a tree from empty list");
+		}
+		
+		for(int i : list) {
+			addNode(new Node(i));
+		}
+		
+	}
+	
+	/**
 	 * Pre-order traversal of tree
 	 * 
 	 * @param node
@@ -252,6 +270,20 @@ public class TreeImpl {
 		
 		System.out.println("\n\nPost-order Travsersal:");
 		tree.postOrder(root);
+		
+		TreeImpl tree2 = new TreeImpl();
+		
+		int[] list = new int[] {12, 5, 4, 8, 76, 13, 56, 44, 17, 30, 99, 86, 23, 2};
+		
+		
+		try {
+			tree2.generateTree(list);
+		} catch(Exception e) {
+			System.out.println("\n\nOops provided an empty list!!");
+		}
+		
+		System.out.println("\n\nInorder traversal of second tree is:");
+		tree2.inOrder(tree2.getRoot());
 		
 	}
 
