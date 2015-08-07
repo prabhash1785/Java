@@ -1,7 +1,7 @@
 package com.prabhash.java.interview.ch4;
 
 /**
- * Implementation of Tree
+ * Implementation of Binary Search Tree
  * 
  * @author prrathore
  *
@@ -18,8 +18,113 @@ public class TreeImpl {
 		this.root = root;
 	}
 	
+	public Node getRoot() {
+		return this.root;
+	}
+	
+	public void setRoot(Node root) {
+		this.root = root;
+	}
+	
 	/**
-	 * Nested class which represents single node in a Binary Tree.
+	 * Add node to a Binary Search Tree
+	 * 
+	 * @param node
+	 */
+	public void addNode(Node node) {
+		
+		if(node == null) {
+			throw new NullPointerException("Cannot add a null node");
+		}
+		
+		if(root == null) {
+			root = node;
+			return;
+		}
+		
+		Node navigator = root;
+		Node backup = root;
+		
+		while(navigator != null) {
+			
+			backup = navigator;
+			
+			if(node.key < navigator.key) {
+				
+				navigator = navigator.left;
+				
+				if(navigator == null) {
+					navigator = node;
+					backup.left = navigator; //link top level tree to left child node
+					return;
+				}
+				
+			} else {
+				
+				navigator = navigator.right;
+				
+				if(navigator == null) {
+					navigator = node;
+					backup.right = navigator; //link top level tree to right child node 
+					return;
+				}
+				
+			}
+			
+		}
+		
+			
+	}
+	
+	/**
+	 * Pre-order traversal of tree
+	 * 
+	 * @param node
+	 */
+	public void preOrder(Node node) {
+		if(node == null) {
+			return;
+		}
+		
+		System.out.print(node.key + " ");
+		preOrder(node.left);
+		preOrder(node.right);
+	}
+	
+	/**
+	 * In-order traversal of a Tree
+	 * 
+	 * @param node
+	 */
+	public void inOrder(Node node) {
+		
+		if(node == null) {
+			return;
+		}
+		
+		inOrder(node.left);
+		System.out.print(node.key + " ");
+		inOrder(node.right);
+	
+	}
+	
+	/**
+	 * Post-order traversal of tree 
+	 * 
+	 * @param root
+	 */
+	public void postOrder(Node root) {
+		if(root == null) {
+			return;
+		}
+		
+		postOrder(root.left);
+		postOrder(root.right);
+		System.out.print(root.key + " ");
+	}
+	
+	/**
+	 * Nested class which represents single node in a Binary Tree
 	 * 
 	 * @author prrathore
 	 *
@@ -33,6 +138,10 @@ public class TreeImpl {
 		
 		public Node() {
 			this(0, "", null, null);
+		}
+		
+		public Node(int key) {
+			this(key, Integer.toString(key), null, null);
 		}
 		
 		public Node(int key, String data) {
@@ -122,8 +231,28 @@ public class TreeImpl {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
+		TreeImpl tree = new TreeImpl();
+		
+		tree.addNode(new Node(4));
+		tree.addNode(new Node(3));
+		tree.addNode(new Node(8));
+		tree.addNode(new Node(2));
+		tree.addNode(new Node(1));
+		tree.addNode(new Node(7));
+		tree.addNode(new Node(12));
+		
+		Node root = tree.getRoot();
+		
+		System.out.println("Pre-order Traversal:");
+		tree.preOrder(root);
+		
+		System.out.println("\n\nIn-order Traversal:");
+		tree.inOrder(root);
+		
+		System.out.println("\n\nPost-order Travsersal:");
+		tree.postOrder(root);
+		
 	}
 
 }
