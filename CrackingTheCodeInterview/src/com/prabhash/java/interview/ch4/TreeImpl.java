@@ -8,6 +8,16 @@ package com.prabhash.java.interview.ch4;
  */
 public class TreeImpl {
 	
+	private Node root;
+	
+	public TreeImpl() {
+		this(null);
+	}
+	
+	public TreeImpl(Node root) {
+		this.root = root;
+	}
+	
 	/**
 	 * Nested class which represents single node in a Binary Tree.
 	 * 
@@ -68,6 +78,47 @@ public class TreeImpl {
 			this.right = right;
 		}
 		
+		@Override
+		public String toString() {
+			return this.key + " :: " + this.data;
+		}
+		
+		@Override
+		public boolean equals(Object obj) {
+			
+			if(obj == null) {
+				return false;
+			}
+			
+			if(this == obj) {
+				return true;
+			}
+			
+			if(obj instanceof Node) {
+				
+				Node n = (Node) obj;
+				
+				if(this.key == n.key && this.data == n.data) {
+					return true;
+				}
+				
+			}
+			
+			return false;
+			
+		}
+		
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			
+			result = prime * result + ((data == null) ? 0 : data.hashCode());
+			result = prime * result + key;
+			
+			return result;
+		}
+			
 	}
 
 	public static void main(String[] args) {
