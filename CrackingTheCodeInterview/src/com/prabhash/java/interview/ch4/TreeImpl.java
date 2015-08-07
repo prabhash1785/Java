@@ -260,6 +260,12 @@ public class TreeImpl {
 		tree.addNode(new Node(7));
 		tree.addNode(new Node(12));
 		
+		try {
+			tree.generateTree(new int[]{64, 18, 75, 45, 34});
+		} catch(Exception e) {
+			System.out.println("Can't provide an empty list to generate tree method");
+		}
+		
 		Node root = tree.getRoot();
 		
 		System.out.println("Pre-order Traversal:");
