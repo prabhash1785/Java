@@ -50,7 +50,7 @@ public class LinkedListImpl {
 		this.addNode(100);
 		
 		System.out.println("\nHere is a generated LinkedList:\n");
-		this.prettyPrintLinkedList(this.head);
+		prettyPrintLinkedList(this.head);
 			
 	}
 	
@@ -138,6 +138,39 @@ public class LinkedListImpl {
 		return false;
 		
 	}
+	
+	/**
+	 * Find if a node is available recursively.
+	 * 
+	 */
+	public boolean isAvailableRecursive(int data) throws Exception {
+		
+		if(this.head == null) {
+			throw new Exception("Linked List is empty");
+		}
+		
+		return isAvailableHelper(this.head, data); 
+	}
+	
+	/**
+	 * Private helper method which will scan a Linked List for data recursively. Once it finds data, it will return off the stacj and return
+	 * the appropriate boolean value.
+	 * 
+	 * @param node
+	 * @param data
+	 * @return
+	 */
+	private boolean isAvailableHelper(Node node, int data) {
+		
+		if(node == null) {
+			return false;
+		}
+		
+		return ((node.data == data) || (isAvailableHelper(node.next, data)));
+			
+	}
+	
+	
 	
 	/**
 	 * Delete a node with given data from Linked List.
@@ -247,7 +280,7 @@ public class LinkedListImpl {
 		
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		
 		LinkedListImpl ll = new LinkedListImpl(new Node(10));
 		
@@ -259,21 +292,21 @@ public class LinkedListImpl {
 		ll.addNode(7);
 		ll.addNode(85);
 		
-		ll.prettyPrintLinkedList(ll.head);
+		LinkedListImpl.prettyPrintLinkedList(ll.head);
 		
 		ll.addNode(56);
 		ll.addNode(17);
 		ll.addNode(100);
 		
 		System.out.println("\n\nUpdated Linked List with new elements added at the tail::");
-		ll.prettyPrintLinkedList(ll.head);
+		LinkedListImpl.prettyPrintLinkedList(ll.head);
 		
 		//insert a new node
 		boolean inserted = ll.insertNode(66, 7);
 		
 		if(inserted) {
 			System.out.println("\n\nHere is updated Linked List with a new node inserted in the middle::");
-			ll.prettyPrintLinkedList(ll.head);
+			LinkedListImpl.prettyPrintLinkedList(ll.head);
 			
 		} else {
 			System.out.println("\n\nOops! Did not find a matching key in ordre to insert a new key after that node!!");
@@ -283,18 +316,21 @@ public class LinkedListImpl {
 		
 		if(isdeleted) {
 			System.out.println("\n\nLL after deletion:: ");
-			ll.prettyPrintLinkedList(ll.head);
+			LinkedListImpl.prettyPrintLinkedList(ll.head);
 		} else {
 			System.out.println("\n\nGiven key is not found in Linked List for deletion.");
 		}
 		
 		System.out.println("\n\nHere is Reverse Linked List: ");
 		Node newHead = ll.reverseLinkedList(ll.head);
-		ll.prettyPrintLinkedList(newHead);
+		LinkedListImpl.prettyPrintLinkedList(newHead);
 		
-		int input = 221;
+		int input = 56;
 		System.out.println("\n\nIs " + input + " available in Linked List: " + ll.isAvailable(input));
-				
+		
+		// test for recursive find node method
+		System.out.println("Is " + input + " available in Linked List with Recursive method: " + ll.isAvailableRecursive(input));
+			
 	}
 
 }
