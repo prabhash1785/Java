@@ -247,6 +247,40 @@ public class TreeImpl {
 		}
 			
 	}
+	
+	/**
+	 * Iterative way to find a node in a tree.
+	 * 
+	 * Time Complexity: Average O(log n)
+	 * 					Worst O(log n)
+	 * 
+	 * @param args
+	 */
+	public boolean findNodeIteratively(int data) throws Exception {
+		
+		Node node = this.root;
+		
+		if(node == null) {
+			throw new Exception("Tree is nul!!");
+		}
+		
+		while(node != null) {
+			
+			if(node.key == data) {
+				return true;
+			}
+			
+			if(data < node.key) {
+				node = node.left;
+			} else {
+				node = node.right;
+			}
+			
+		}
+		
+		return false;
+		
+	}
 
 	public static void main(String[] args) {
 		
@@ -290,6 +324,20 @@ public class TreeImpl {
 		
 		System.out.println("\n\nInorder traversal of second tree is:");
 		tree2.inOrder(tree2.getRoot());
+		
+		// find data in tree
+		int dataToFind = 45;
+		boolean isAvailable = false;
+		
+		try {
+			isAvailable = tree.findNodeIteratively(dataToFind);
+		} catch(Exception e) {
+			System.out.println("\n\nTree is null");
+		}
+		
+		System.out.println("\n\n" + dataToFind + " is present in tree: " + isAvailable);
+		
+		
 		
 	}
 
