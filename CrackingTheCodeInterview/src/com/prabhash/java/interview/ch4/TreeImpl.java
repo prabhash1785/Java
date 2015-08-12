@@ -318,15 +318,47 @@ public class TreeImpl {
 	}
 	
 	/**
-	 * Find height of Binary Search Tree.
+	 * Method 1:
+	 * Find height of Binary Search Tree by adding 1 to each note starting recursive backtracking.
 	 * 
 	 * Height of a tree is defined as the longest branch from root to leaf.
 	 * 
-	 * @return
+	 * @param node
+	 * @return maxHeight
 	 */
-	public int getHeight() {
+	public int getHeight(Node node) {
 		
-		return -1;
+		if(node == null) {
+			return 0;
+		}
+		
+		int leftHeight = getHeight(node.left);
+		int rightHeight = getHeight(node.right);
+		
+		return (Math.max(leftHeight, rightHeight)) + 1;
+		
+	}
+	
+	/**
+	 * Method 2: Find max height of tree.
+	 * 
+	 * For each child node, keep adding 1 as you go down the tree branches. At the end, for each node, return the maximum of leftHeight or,
+	 * rightHeight.
+	 * 
+	 * @param node
+	 * @return maxHeight
+	 */
+	public int getHeightMethod2(Node node) {
+		
+		if(node == null) {
+			return 0;
+		}
+		
+		int leftHeight = getHeightMethod2(node.left) + 1;
+		int rightHeight = getHeightMethod2(node.right) + 1;
+		
+		return Math.max(leftHeight, rightHeight);
+		
 	}
 
 	public static void main(String[] args) {
@@ -393,6 +425,13 @@ public class TreeImpl {
 		}
 		
 		System.out.println("\n\n" + dataToFind + " is available in tree: " + isAvailableRecursive);
+		
+		// max height of tree
+		int maxHeight = tree.getHeight(tree.root);
+		System.out.println("Max Height of tree is: " + maxHeight);
+		
+		int maxHeight2 = tree.getHeightMethod2(tree.root);
+		System.out.println("Max Height of tree is: " + maxHeight2);
 		
 		
 	}
