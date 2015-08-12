@@ -281,6 +281,53 @@ public class TreeImpl {
 		return false;
 		
 	}
+	
+	/**
+	 * Find node recursively.
+	 * 
+	 * @param data
+	 * @return
+	 */
+	public boolean findNodeRecursively(int data) throws Exception {
+		
+		Node node = this.root;
+		
+		if(root == null) {
+			throw new Exception("Tree is empty");
+		}
+		
+		return findNodeRecursivelyHelper(node, data);
+		
+	}
+	
+	/**
+	 * Private helper method which finds a node recursively.
+	 * 
+	 * @param node
+	 * @param data
+	 * @return
+	 */
+	private boolean findNodeRecursivelyHelper(Node node, int data) {
+		
+		if(node == null) {
+			return false;
+		}
+		
+		return (node.key == data) || findNodeRecursivelyHelper(node.left, data) || findNodeRecursivelyHelper(node.right, data);
+		
+	}
+	
+	/**
+	 * Find height of Binary Search Tree.
+	 * 
+	 * Height of a tree is defined as the longest branch from root to leaf.
+	 * 
+	 * @return
+	 */
+	public int getHeight() {
+		
+		return -1;
+	}
 
 	public static void main(String[] args) {
 		
@@ -326,7 +373,7 @@ public class TreeImpl {
 		tree2.inOrder(tree2.getRoot());
 		
 		// find data in tree
-		int dataToFind = 45;
+		int dataToFind = 12;
 		boolean isAvailable = false;
 		
 		try {
@@ -337,6 +384,15 @@ public class TreeImpl {
 		
 		System.out.println("\n\n" + dataToFind + " is present in tree: " + isAvailable);
 		
+		boolean isAvailableRecursive = false;
+		
+		try {
+			isAvailableRecursive = tree.findNodeRecursively(dataToFind);
+		} catch(Exception e) {
+			System.out.println("\n\nTree is null!");
+		}
+		
+		System.out.println("\n\n" + dataToFind + " is available in tree: " + isAvailableRecursive);
 		
 		
 	}
