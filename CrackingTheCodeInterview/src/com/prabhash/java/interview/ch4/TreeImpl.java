@@ -360,6 +360,33 @@ public class TreeImpl {
 		return Math.max(leftHeight, rightHeight);
 		
 	}
+	
+	/**
+	 * Find out if this tree is balanced.
+	 * 
+	 * A balanced tree is a tree for which each node's left and right sub trees depth difference cannot be more than 1.
+	 * 
+	 * To find if a tree is balanced, lets find the depth of left and right sub trees for each node. If left and right sub tree differ
+	 * by more than 1 then it's not a balanced tree.
+	 * 
+	 * @param node
+	 * @return
+	 */
+	public boolean isBalanced(Node node) {
+		
+		if(node == null) {
+			return true;
+		}
+		
+		int leftHeight = getHeight(node.left);
+		int rightHeight = getHeight(node.right);
+		
+		if(Math.abs(leftHeight - rightHeight) > 1) {
+			return false;
+		}
+		
+		return isBalanced(node.left) && isBalanced(node.right);
+	}
 
 	public static void main(String[] args) {
 		
@@ -432,6 +459,10 @@ public class TreeImpl {
 		
 		int maxHeight2 = tree.getHeightMethod2(tree.root);
 		System.out.println("Max Height of tree is: " + maxHeight2);
+		
+		// find if tree is balanced
+		boolean isBalanced = tree.isBalanced(tree.root);
+		System.out.println("Tree is balanced: " + isBalanced);
 		
 		
 	}
