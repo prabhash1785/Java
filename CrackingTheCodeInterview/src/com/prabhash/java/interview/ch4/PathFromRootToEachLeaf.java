@@ -1,7 +1,5 @@
 package com.prabhash.java.interview.ch4;
 
-import java.util.List;
-
 /**
  * Get Path from Root to each leaf in a tree.
  * 
