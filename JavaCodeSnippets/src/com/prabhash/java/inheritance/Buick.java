@@ -9,6 +9,10 @@ public class Buick extends Car {
 		return this.carType;
 	}
 	
+	/**
+	 * Static methods cannot be overridden
+	 * 
+	 */
 	public static void printNumberOfWheels() {
 		System.out.println("Buick has 4 wheels too!");
 	}
