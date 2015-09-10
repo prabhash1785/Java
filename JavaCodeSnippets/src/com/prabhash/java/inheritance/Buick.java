@@ -16,6 +16,14 @@ public class Buick extends Car {
 	public static void printNumberOfWheels() {
 		System.out.println("Buick has 4 wheels too!");
 	}
+	
+	/**
+	 * This method can only be accessed by a reference of type Buick class. It cannot be accessed by reference of type super class.
+	 * 
+	 */
+	public void showBuickDetails() {
+		System.out.println("Buick is awesome!!");
+	}
 
 	public static void main(String[] args) {
 		
@@ -38,6 +46,10 @@ public class Buick extends Car {
 		
 		Car.printNumberOfWheels();
 		Buick.printNumberOfWheels();
+		
+		// car.showBuickDetails(); // compilation error
+		// buick.showBuickDetails(); // compilation error
+		originalBuick.showBuickDetails();
 
 	}
 
