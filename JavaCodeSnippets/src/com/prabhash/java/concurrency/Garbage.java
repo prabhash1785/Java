@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * Gargage class, delete me after experimentation.
+ * Garbage class, delete me after experimentation.
  * 
  * @author Prabhash Rathore
  *
