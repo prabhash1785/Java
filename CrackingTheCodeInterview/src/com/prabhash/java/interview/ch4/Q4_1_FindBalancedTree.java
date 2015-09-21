@@ -55,6 +55,8 @@ public class Q4_1_FindBalancedTree {
 	/**
 	 * Find if a tree is balanced.
 	 * 
+	 * Time Complexity: O(n logn)
+	 * 
 	 * @param root
 	 * @return
 	 */
@@ -74,6 +76,64 @@ public class Q4_1_FindBalancedTree {
 		return isBalanced(root.getLeft()) && isBalanced(root.getRight()); 
 		
 	}
+	
+	/**
+	 * Method 2 to find if tree is balanced.
+	 * 
+	 * This is an optimized method as it will determine tree is balanced at the same while finding the height of tree cutting down the
+	 * algorithm time to O(n).
+	 * 
+	 * Time complexity: O(n)
+	 * 
+	 * @param args
+	 */
+	public static boolean isBalanced2(TreeImpl.Node root) {
+		
+		if(checkHeight(root) == -1) {
+			return false;
+		} else {
+			return true;
+		}
+		
+	}
+	
+	/**
+	 * This helper method finds the height of a node. At the same time, it also checks if tree is balanced by comparing height of left and 
+	 * right subtree for each node. If tree is not balanced then it returns -1.
+	 * 
+	 *  Time Complexity: O(n)
+	 *  Space Complexity: O(H) where H is the height of tree
+	 * 
+	 * @param root
+	 * @return
+	 */
+	private static int checkHeight(TreeImpl.Node root) {
+		
+		// Base condition
+		if(root == null) {
+			return 0;
+		}
+		
+		int leftHeight = checkHeight(root.getLeft());
+		if(leftHeight == -1) {
+			return -1;
+		}
+		
+		int rightHeight = checkHeight(root.getRight());
+		if(rightHeight == -1) {
+			return -1;
+		}
+		
+		int heightDiff = Math.abs(leftHeight - rightHeight);
+		
+		if(heightDiff > 1) {
+			return -1; // Not balanced
+		} else {
+			return Math.max(leftHeight, rightHeight) + 1; // return height if balanced
+		}
+		
+	}
+	
 
 	public static void main(String[] args) {
 		
@@ -92,6 +152,9 @@ public class Q4_1_FindBalancedTree {
 		
 		boolean isTreeBalanced = isBalanced(tree.getRoot());
 		System.out.println("Is tree balanced: " + isTreeBalanced);
+		
+		boolean isTreeBalanced2 = isBalanced2(tree.getRoot());
+		System.out.println("Is tree balanced with method 2: " + isTreeBalanced2);
 		
 
 	}
