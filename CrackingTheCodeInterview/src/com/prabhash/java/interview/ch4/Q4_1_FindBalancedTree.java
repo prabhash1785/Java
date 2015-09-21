@@ -2,6 +2,14 @@ package com.prabhash.java.interview.ch4;
 
 public class Q4_1_FindBalancedTree {
 	
+	/**
+	 * Method 1
+	 * 
+	 * Prefer Method 2 over method 1 as method 1 is cleaner.
+	 * 
+	 * @param root
+	 * @return
+	 */
 	private static int getHeight(TreeImpl.Node root) {
 		
 		if(root == null) {
@@ -24,6 +32,48 @@ public class Q4_1_FindBalancedTree {
 		return leftHeight > rightHeight ? leftHeight : rightHeight;
 		
 	}
+	
+	/**
+	 * Method 2 to get height of tree
+	 * 
+	 * @param root
+	 * @return
+	 */
+	private static int getHeight2(TreeImpl.Node root) {
+		
+		if(root == null) {
+			return 0;
+		}
+		
+		int leftHeight = getHeight2(root.getLeft());
+		int rightHeight = getHeight2(root.getRight());
+		
+		return Math.max(leftHeight, rightHeight) + 1;
+		
+	}
+	
+	/**
+	 * Find if a tree is balanced.
+	 * 
+	 * @param root
+	 * @return
+	 */
+	private static boolean isBalanced(TreeImpl.Node root) {
+		
+		if(root == null) {
+			return true;
+		}
+		
+		int leftHeight = getHeight2(root.getLeft());
+		int rightHeight = getHeight2(root.getRight());
+		
+		if(Math.abs(leftHeight - rightHeight) > 1) {
+			return false;
+		}
+		
+		return isBalanced(root.getLeft()) && isBalanced(root.getRight()); 
+		
+	}
 
 	public static void main(String[] args) {
 		
@@ -37,6 +87,11 @@ public class Q4_1_FindBalancedTree {
 		
 		int heightOfTree = getHeight(tree.getRoot());
 		System.out.println("Height of tree: " + heightOfTree);
+		
+		System.out.println("Height with method two: " + getHeight2(tree.getRoot()));
+		
+		boolean isTreeBalanced = isBalanced(tree.getRoot());
+		System.out.println("Is tree balanced: " + isTreeBalanced);
 		
 
 	}
