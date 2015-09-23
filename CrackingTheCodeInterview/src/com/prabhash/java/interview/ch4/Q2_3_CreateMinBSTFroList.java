@@ -104,7 +104,7 @@ public class Q2_3_CreateMinBSTFroList {
 	/**
 	 * Program to find if a tree is balanced or not. 
 	 * 
-	 * Balanced Tree is a tree where for any node in the tree, their left branch height and right branch height cannot differ by more than 1. 
+	 * Balanced Tree is a tree where for any node in the tree, their left sub-tree height and right sub-tree height cannot differ by more than 1. 
 	 * 
 	 * @param node
 	 * @return
@@ -122,8 +122,8 @@ public class Q2_3_CreateMinBSTFroList {
 	}
 	
 	/**
-	 * Private helper method which checks for height of both left and right branch of each node in the tree. In addition it checks for
-	 * for left and right branch height difference to determine if is balanced or not. If height diff is greater than  1, it quits by concluding it's
+	 * Private helper method which checks for height of both left and right sub-trees for each node in the tree. In addition it checks for
+	 * for left and right sub-trees height difference to determine if is balanced or not. If height diff is greater than  1, it quits by concluding it's
 	 * not a balanced tree. 
 	 * 
 	 * @param node
