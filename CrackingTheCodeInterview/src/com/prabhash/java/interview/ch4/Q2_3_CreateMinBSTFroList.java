@@ -46,6 +46,118 @@ public class Q2_3_CreateMinBSTFroList {
 	}
 	
 	/**
+	 * Get height of tree.
+	 * 
+	 * Height of Tree is the longest branch from root to one of it's leaves. So to find height, find the height of left sub tree, find
+	 * height of right sub tree and then the height must the max of left and right sub tree height. Recurse for each node in the tree.
+	 * 
+	 * Time Complexity: O(n)
+	 * 
+	 * @param root
+	 * @return
+	 */
+	public static int getHeight(TreeImpl.Node root) {
+		
+		if(root == null) { // Base condition
+			return 0;
+		}
+		
+		int leftTreeHeight = getHeight(root.getLeft()) + 1;
+		int rightTreeHeight = getHeight(root.getRight()) + 1;
+		
+		return Math.max(leftTreeHeight, rightTreeHeight);
+		
+	}
+	
+	/**
+	 * Determine if tree is BST.
+	 * 
+	 * For a tree to be BST, root >= left node and root < right node. Recurse for every node. If this is not true for any of the nodes then
+	 * it's not BST.
+	 * 
+	 */
+	public static boolean isBST(TreeImpl.Node root) {
+		
+		if(root == null) { // Base condition
+			return true;
+		}
+		
+		TreeImpl.Node left = root.getLeft();
+		TreeImpl.Node right = root.getRight();
+		
+		if(left != null) {
+			if(root.getKey() < left.getKey()) {
+				return false;
+			}
+		}
+		
+		if(right != null) {
+			if(root.getKey() > right.getKey()) {
+				return false;
+			}
+		}
+		
+		return isBST(root.getLeft()) && isBST(root.getRight());
+		
+	}
+	
+	/**
+	 * Program to find if a tree is balanced or not. 
+	 * 
+	 * Balanced Tree is a tree where for any node in the tree, their left branch height and right branch height cannot differ by more than 1. 
+	 * 
+	 * @param node
+	 * @return
+	 */
+	public static boolean isBalanced(TreeImpl.Node node) {
+		
+		int heightDiff = checkBranchHeightDiffForEachNode(node);
+		
+		if(heightDiff == -1) {
+			return false;
+		} else {
+			return true;
+		}
+		
+	}
+	
+	/**
+	 * Private helper method which checks for height of both left and right branch of each node in the tree. In addition it checks for
+	 * for left and right branch height difference to determine if is balanced or not. If height diff is greater than  1, it quits by concluding it's
+	 * not a balanced tree. 
+	 * 
+	 * @param node
+	 * @return
+	 */
+	private static int checkBranchHeightDiffForEachNode(TreeImpl.Node node) {
+		
+		if(node == null) {
+			return 0;
+		}
+		
+		int leftBranchHeight = checkBranchHeightDiffForEachNode(node.getLeft()) + 1;
+		
+		if(leftBranchHeight == -1) {
+			return -1;
+		}
+		
+		int rightBranchHeight = checkBranchHeightDiffForEachNode(node.getRight()) + 1;
+		
+		if(rightBranchHeight == -1) {
+			return -1;
+		}
+		
+		int heightDiff = Math.abs(leftBranchHeight - rightBranchHeight);
+		
+		if(heightDiff > 1) {
+			return -1;
+		} else {
+			return Math.max(leftBranchHeight, rightBranchHeight);
+		}
+		
+	}
+	
+	/**
 	 * Print in-order traversal of tree
 	 * 
 	 * @param args
@@ -73,6 +185,15 @@ public class Q2_3_CreateMinBSTFroList {
 		
 		System.out.println("\n\nInorder Traversal of BST: ");
 		inOrder(root);
+		
+		int height = getHeight(root);
+		System.out.println("\n\nMin Height of tree: " + height);
+		
+		boolean isBST = isBST(root);
+		System.out.println("\n\nThis tree is BST: " + isBST);
+		
+		boolean isTreeBalanced = isBalanced(root);
+		System.out.println("\n\nIs tree balanced: " + isTreeBalanced);
 		
 	}
 
