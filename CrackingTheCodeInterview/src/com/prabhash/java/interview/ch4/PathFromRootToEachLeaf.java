@@ -36,6 +36,15 @@ public class PathFromRootToEachLeaf {
 			
 	}
 	
+	/**
+	 * DFS Traversal of Tree iteratively using a Stack.
+	 * 
+	 * @param list
+	 * @param count
+	 */
+	
+	
+	
 	private static void printArray(int[] list, int count) {
 		
 		for(int i = 0; i < count; i++) {

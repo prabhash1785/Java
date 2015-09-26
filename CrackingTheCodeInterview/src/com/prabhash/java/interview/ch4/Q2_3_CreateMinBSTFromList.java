@@ -6,7 +6,7 @@ package com.prabhash.java.interview.ch4;
  * @author prrathore
  *
  */
-public class Q2_3_CreateMinBSTFroList {
+public class Q2_3_CreateMinBSTFromList {
 	
 	public static TreeImpl.Node createBST(int[] list) {
 		return helper(list, 0, list.length - 1); 
