@@ -70,38 +70,6 @@ public class Q2_3_CreateMinBSTFromList {
 	}
 	
 	/**
-	 * Determine if tree is BST.
-	 * 
-	 * For a tree to be BST, root >= left node and root < right node. Recurse for every node. If this is not true for any of the nodes then
-	 * it's not BST.
-	 * 
-	 */
-	public static boolean isBST(TreeImpl.Node root) {
-		
-		if(root == null) { // Base condition
-			return true;
-		}
-		
-		TreeImpl.Node left = root.getLeft();
-		TreeImpl.Node right = root.getRight();
-		
-		if(left != null) {
-			if(root.getKey() < left.getKey()) {
-				return false;
-			}
-		}
-		
-		if(right != null) {
-			if(root.getKey() > right.getKey()) {
-				return false;
-			}
-		}
-		
-		return isBST(root.getLeft()) && isBST(root.getRight());
-		
-	}
-	
-	/**
 	 * Program to find if a tree is balanced or not. 
 	 * 
 	 * Balanced Tree is a tree where for any node in the tree, their left sub-tree height and right sub-tree height cannot differ by more than 1. 
@@ -188,9 +156,6 @@ public class Q2_3_CreateMinBSTFromList {
 		
 		int height = getHeight(root);
 		System.out.println("\n\nMin Height of tree: " + height);
-		
-		boolean isBST = isBST(root);
-		System.out.println("\n\nThis tree is BST: " + isBST);
 		
 		boolean isTreeBalanced = isBalanced(root);
 		System.out.println("\n\nIs tree balanced: " + isTreeBalanced);
