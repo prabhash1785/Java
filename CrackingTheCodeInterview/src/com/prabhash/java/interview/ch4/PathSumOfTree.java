@@ -1,9 +1,5 @@
 package com.prabhash.java.interview.ch4;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
-
 public class PathSumOfTree {
 	
 	/**
@@ -15,67 +11,82 @@ public class PathSumOfTree {
 	 */
 	public static boolean hasPathSumFromRootToLeaf(TreeImpl.Node root, int sum) {
 		
+		int pathSum = 0;
+		return hasPathSumFromRootToLeafHelper(root, sum, pathSum);
+		
+	}
+	public static boolean hasPathSumFromRootToLeafHelper(TreeImpl.Node root, int sum, int pathSum) {
+		
 		if(root == null) {
 			return false;
 		}
 		
-		//check sum == 0 only at leaf nodes
-		if(sum == 0 && root.getLeft() == null && root.getRight() == null) {
+		pathSum = pathSum + root.getKey();
+		
+		//check sum == pathSum at leaf nodes
+		if(pathSum == sum && root.getLeft() == null && root.getRight() == null) {
 			return true;
 		}
 		
-		return hasPathSumFromRootToLeaf(root.getLeft(), sum - root.getKey()) || hasPathSumFromRootToLeaf(root.getRight(), sum - root.getKey());
-		
+		return hasPathSumFromRootToLeafHelper(root.getLeft(), sum, pathSum) || hasPathSumFromRootToLeafHelper(root.getRight(), sum, pathSum);
+
 	}
+	
+	
 	
 	/**
-	 * Method 1: Recursive
+	 * Using an array to store paths and keep track of current element index
 	 * 
-	 * Find all the paths in a tree whose sum from root to lead is equal to a given sum.
-	 * 
-	 * @param root
-	 * @return
+	 * @param args
 	 */
-	public static List<List<Integer>> findPathsWithGivenSum(TreeImpl.Node root, int sum) {
+	public static void printPathsWithSum(TreeImpl.Node root, int sum) {
 		
 		if(root == null) {
-			return null;
+			System.out.println("Root is null!");
+			return;
 		}
 		
-		List<List<Integer>> output = new ArrayList<List<Integer>>();
+		int[] path = new int[20]; //Max 20 nodes are allowed at one time
+		int index = 0;
 		
-		findPathWithSumHelper(root, new ArrayList<Integer>(), sum, output);
+		int pathSum = 0;
 		
-		return output;
-		
+		printPathsWithSumHelper(root, sum, path, index, pathSum);
 	}
-	
-	private static void findPathWithSumHelper(TreeImpl.Node root, List<Integer> list, int sum, List<List<Integer>> output) {
+
+	private static void printPathsWithSumHelper(TreeImpl.Node root, int sum, int[] path, int index, int pathSum) {
 		
 		if(root == null) {
 			return;
 		}
 		
-		if(sum == 0 && root.getLeft() == null && root.getRight() == null) {
-			List<Integer> temp = new ArrayList<Integer>();
-			temp.addAll(list);
-			output.add(temp);
+		path[index] = root.getKey();
+		index = index + 1;
+		
+		pathSum = pathSum + root.getKey();
+		
+		if(root.getLeft() == null && root.getRight() == null && pathSum == sum) {
+			
+			printPaths(path, index);
+			
 		}
 		
-		if(root.getLeft() != null) {
-			list.add(root.getKey());
-			findPathWithSumHelper(root.getLeft(), list, sum - root.getKey(), output);
-			list.remove(list.size() - 1);
-		}
-		
-		if(root.getRight() != null) {
-			list.add(root.getKey());
-			findPathWithSumHelper(root.getRight(), list, sum - root.getKey(), output);
-			list.remove(list.size() - 1);
-		}
+		// recurse over all nodes in the tree
+		printPathsWithSumHelper(root.getLeft(), sum, path, index, pathSum);
+		printPathsWithSumHelper(root.getRight(), sum, path, index, pathSum);
 				
 	}
-
+	
+	private static void printPaths(int[] array, int index) {
+		
+		for(int i = 0; i < index; i++) {
+			System.out.print(array[i] + " ");
+		}
+		
+		System.out.println("\n");
+		
+	}
+	
 	public static void main(String[] args) {
 		
 		TreeImpl tree = new TreeImpl();
@@ -86,17 +97,12 @@ public class PathSumOfTree {
 			e.printStackTrace();
 		}
 		
-		boolean hasSum = hasPathSumFromRootToLeaf(tree.getRoot(), 20);
-		System.out.println("Does tree have a branch with sum 20: " + hasSum);
+		int desiredSum = 51;
+		boolean hasSum = hasPathSumFromRootToLeaf(tree.getRoot(), desiredSum);
+		System.out.println("Does tree have a branch with sum " + desiredSum + ": " + hasSum);
 		
-		List<List<Integer>> list = findPathsWithGivenSum(tree.getRoot(), 20);
-		System.out.println("\n\nHere are the paths:\n");
-		for(List<Integer> l : list) {
-			for(Integer i : l) {
-				System.out.print(i + " ");
-			}
-			System.out.println("\n");
-		}
+		System.out.println("\n\nHere is the list of branches with path sum " + desiredSum + ": ");
+		printPathsWithSum(tree.getRoot(), desiredSum);
 		
 	}
 
