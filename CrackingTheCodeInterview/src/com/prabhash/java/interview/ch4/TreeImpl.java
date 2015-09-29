@@ -49,7 +49,7 @@ public class TreeImpl {
 			
 			backup = navigator;
 			
-			if(node.key < navigator.key) {
+			if(node.key <= navigator.key) {
 				
 				navigator = navigator.left;
 				
