@@ -16,8 +16,9 @@ public class IntegerDefinitions {
 		// int d = 1 2 3; //invalid integer, space is not allowed
 		int e = 123; //valid integer
 		int f = 1_2_3; //valid integer with underscore to represent large numbers
+		int g = 0b1010; //valid binary number
 		
-		System.out.println(a + " " + c + " " + e + " " + f);
+		System.out.println(a + " " + c + " " + e + " " + f + " " + g);
 
 	}
 
