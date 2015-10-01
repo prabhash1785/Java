@@ -18,7 +18,10 @@ public class IntegerDefinitions {
 		int f = 1_2_3; //valid integer with underscore to represent large numbers
 		int g = 0b1010; //valid binary number
 		
-		System.out.println(a + " " + c + " " + e + " " + f + " " + g);
+		// int h = 2345674238; //compilation error because this is over upper bound of integer 2 ^ 31
+		long i = 2345674238788599302L; //valid long time almost hitting 2 ^ 64 upper bound. If added one more digit, this will result in compilation error
+		
+		System.out.println(a + " " + c + " " + e + " " + f + " " + g + " " + 0_1_2);
 
 	}
 
