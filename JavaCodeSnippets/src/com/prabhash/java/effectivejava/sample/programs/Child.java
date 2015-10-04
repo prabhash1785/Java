@@ -39,7 +39,7 @@ public class Child extends Parent {
 		System.out.println(p.getA()); // get Parent method
 		
 		// System.out.println(parent.ch); // can't get ch because parent does not have ch defined in it even though child insance has it
-	
+		
 	}
 
 }
