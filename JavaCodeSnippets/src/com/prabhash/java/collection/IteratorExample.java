@@ -19,12 +19,19 @@ public class IteratorExample {
 		list.add("Bar");
 		list.add("Hello");
 		
+		System.out.println("List size: " + list.size());
+		
 		Iterator<String> iterator = list.iterator();
 		
 		while(iterator.hasNext()) {
-			list.add("World"); //this should throw Concurrent Modification Exception as list is modified while collection is iterating through it
+			// list.add("World"); //this should throw Concurrent Modification Exception as list is modified while collection is iterating through it
+			// list.remove(0); // throw ConcurrentModificationException			
 			System.out.println(iterator.next());
+			iterator.remove();
 		}
+		
+		// find size of list
+		System.out.println("List after removing elements: " + list.size());
 
 	}
 
