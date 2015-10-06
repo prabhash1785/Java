@@ -5,21 +5,21 @@ import com.prabhash.java.interview.ch2.LinkedListImpl.Node;
 
 public class ReverseLinkedList {
 	
-	public static Node reverseLL(Node node) { // a
+	public static Node reverseLL(Node node) {
 		
 		if(node == null) {
 			return null;
 		}
 
 		Node prev = null;
-		Node current = node; // a
-		Node next = current.getNext(); // a
+		Node current = node;
+		Node next = current.getNext();
 
-		while(next != null) { // a b c
-			current.setNext(prev); // null <- a <- b <- c
-			prev = current; // a b c
-			current = next; // a b c
-			next = next.getNext(); //b c null
+		while(next != null) {
+			current.setNext(prev);
+			prev = current;
+			current = next;
+			next = next.getNext();
 
 		}
 		
