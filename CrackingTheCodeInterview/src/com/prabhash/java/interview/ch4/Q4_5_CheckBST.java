@@ -54,7 +54,7 @@ public class Q4_5_CheckBST {
 		TreeImpl.Node root = tree.getRoot();
 		
 		root.setLeft(new TreeImpl.Node(4));
-		root.getLeft().setRight(new TreeImpl.Node(7));
+		root.getLeft().setRight(new TreeImpl.Node(17));
 		
 		root.setRight(new TreeImpl.Node(12));
 		
