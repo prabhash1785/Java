@@ -303,7 +303,7 @@ public class TreeImpl {
 	}
 	
 	/**
-	 * Private helper method which finds a node recursively.
+	 * Private helper method which finds a node recursively for a Binary Tree.
 	 * 
 	 * @param node
 	 * @param data
@@ -316,6 +316,31 @@ public class TreeImpl {
 		}
 		
 		return (node.key == data) || findNodeRecursivelyHelper(node.left, data) || findNodeRecursivelyHelper(node.right, data);
+		
+	}
+	
+	/**
+	 * Find a node in Binary Search Tree using Recursion.
+	 * 
+	 * Time Complexity: O(log n)
+	 * Space Complexity: O(log n) because of System Stack used in Recursion
+	 * 
+	 */
+	public boolean findNodeForBST(Node node, int data) {
+		
+		if(node == null) {
+			return false;
+		}
+		
+		if(node.key == data) {
+			return true;
+		}
+		
+		if(data < node.key) {
+			return findNodeForBST(node.left, data);
+		} else {
+			return findNodeForBST(node.right, data);
+		}
 		
 	}
 	
@@ -454,6 +479,10 @@ public class TreeImpl {
 		}
 		
 		System.out.println("\n\n" + dataToFind + " is available in tree: " + isAvailableRecursive);
+		
+		// find data from BST Recursively
+		boolean hasDataInBST = tree.findNodeForBST(root, dataToFind);
+		System.out.println(dataToFind + " is present in BST: " + hasDataInBST);
 		
 		// max height of tree
 		int maxHeight = tree.getHeight(tree.root);
