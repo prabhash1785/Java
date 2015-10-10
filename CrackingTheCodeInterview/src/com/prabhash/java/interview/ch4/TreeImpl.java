@@ -283,7 +283,9 @@ public class TreeImpl {
 	}
 	
 	/**
-	 * Find node recursively.
+	 * Find node recursively for Binary Tree.
+	 * 
+	 * Time Complexity: O(n) as you have to visit all the nodes
 	 * 
 	 * @param data
 	 * @return
