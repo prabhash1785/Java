@@ -5,7 +5,7 @@ import java.security.InvalidParameterException;
 /**
  * Bounded Counting Semaphore implementation.
  * 
- * A counting semaphore. Conceptually, a semaphore maintains a set of permits. Each acquire() blocks if necessary until a
+ * A counting semaphore. Conceptually, a semaphore maintains a set of permits. Each acquire() BLOCKS if necessary until a
  * permit is available, and then takes it. Each release() adds a permit, potentially releasing a blocking acquirer. However, 
  * no actual permit objects are used; the Semaphore just keeps a count of the number available and acts accordingly.
  * 
@@ -34,7 +34,7 @@ public class SemaphoreImpl {
 	}
 	
 	/**
-	 * This method will acquire a permit from Semaphore if there is an available lock or else it will block for the locks to become available.
+	 * This method will acquire a permit from Semaphore if there is an available lock or else it will BLOCK for the locks to become available.
 	 * 
 	 */
 	public synchronized void acquire() throws InterruptedException {

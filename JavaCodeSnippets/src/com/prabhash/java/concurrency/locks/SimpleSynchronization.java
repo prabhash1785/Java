@@ -8,7 +8,7 @@ public class SimpleSynchronization {
 		//critical section, apply a lock using using synchronized block
 		synchronized(this) {
 			count++;
-			System.out.println(Thread.currentThread().getName() + " increment count to ==> " + count);
+			System.out.println(Thread.currentThread().getName() + " incremented " + this.toString() + " object count to ==> " + count);
 		}
 	}
 
