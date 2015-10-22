@@ -14,7 +14,7 @@ public class SchedulerUsingExecutorApi {
 
 	public static void main(String[] args) {
 		
-		ScheduledExecutorService scheduledService = Executors.newScheduledThreadPool(3);
+		final ScheduledExecutorService scheduledService = Executors.newScheduledThreadPool(3);
 		
 		final Runnable printMessage = new Runnable() {
 			@Override
@@ -27,7 +27,12 @@ public class SchedulerUsingExecutorApi {
 		
 		scheduledService.schedule(new Runnable() {
 			public void run() {
-				messageHandler.cancel(true);
+				boolean outcome = messageHandler.cancel(true);
+				System.out.println("Message Handler task completed: " + outcome);
+				
+				System.out.println("Going to shut down the service!");
+				scheduledService.shutdown(); // shut down the Executor Service
+				
 			}
 		}, 20, TimeUnit.SECONDS);
 
