@@ -20,6 +20,7 @@ public class DetermineBracketNesting {
 	 * - If everything is right then return maxBracketNesting
 	 * 
 	 * Time Complexity: O(n)
+	 * Space Complexity: O(1)
 	 * 
 	 * @param input
 	 * @return
