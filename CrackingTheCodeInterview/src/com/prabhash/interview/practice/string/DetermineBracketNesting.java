@@ -1,5 +1,7 @@
 package com.prabhash.interview.practice.string;
 
+import java.util.Stack;
+
 /**
  * Find if a string has valid set of parentheses and if parentheses are valid then determine the nesting level of parentheses.
  * 
@@ -63,6 +65,84 @@ public class DetermineBracketNesting {
 		return maxBracketNesting;
 		
 	}
+	
+	/**
+	 * Find bracket nesting level in a string when brackets are heterogeneous.
+	 * 
+	 * This is done using a Stack because Stack has a nice property called LIFO which will help us in validating the bracekts are closed
+	 * in right order.
+	 * 
+	 * @param s
+	 * @return int
+	 * @throws IllegalArgumentException, Exception
+	 */
+	public static int findBracketNestingForHeterogeneousBraces(String s) throws IllegalArgumentException, Exception {
+		
+		if(s == null) {
+			throw new IllegalArgumentException();
+		}
+
+		Stack<Character> stack = new Stack<Character>();
+
+		int currentBracketCount = 0;
+		int maxBraceNesting = 0;
+
+		for(int i = 0; i < s.length(); i++) {
+
+			if(s.charAt(i) == '(' || s.charAt(i) == '{' || s.charAt(i) == '[') {
+				stack.push(s.charAt(i));
+				currentBracketCount++;
+			}
+
+			if(s.charAt(i) == ')' || s.charAt(i) == '}' || s.charAt(i) == ']') {
+
+				if(stack.isEmpty()) {
+					throw new Exception("Illegally tried to close bracket");
+				}
+
+				char c = stack.peek();
+				char currentBracket = s.charAt(i);
+				
+				if(c == '[') {
+					
+					if(currentBracket == '}' || currentBracket == ')') {
+						throw new Exception("Invalid closing bracket type");
+					}
+							
+				} else if(c == '{') {
+					
+					if(currentBracket == ']' || currentBracket == ')') {
+						throw new Exception("Invalid closing bracket type");
+					}
+							
+				} else if(c == '(') {
+					
+					if(currentBracket == '}' || currentBracket == ']') {
+						throw new Exception("Invalid closing bracket type");
+					}
+						
+				}
+					
+				// Pop the last bracket in Stack as we just received one of the valid closing bracket
+				stack.pop();
+				currentBracketCount--;
+						
+			}
+
+			if(currentBracketCount > maxBraceNesting) {
+				maxBraceNesting = currentBracketCount;
+			}
+
+		}
+
+		// at the end of string scan, stack should be empty otherwise some of the braces were never closed
+		if(currentBracketCount > 0) {
+			throw new Exception("Some of the braces were never closed");
+		}
+
+		return maxBraceNesting;
+
+	}
 
 	public static void main(String[] args) throws Exception {
 		
@@ -89,6 +169,11 @@ public class DetermineBracketNesting {
 		String s4 = "(((What a beautiful day!!))) this is ((crazy)). ha( ha) ((LOL)) ";
 		int bracketNesting4 = findBraceNesting(s4);
 		System.out.println("Bracket count for " + s4 + " is: " + bracketNesting4);
+		
+		// assert test for heterogeneous braces in string
+		String a = "[{ { } { { [ hey there!! ] }}}]";
+		int braceCount = findBracketNestingForHeterogeneousBraces(a);
+		System.out.println("Brace count for " + a + " is: " + braceCount);
 		
 
 	}
