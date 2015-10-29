@@ -1,4 +1,4 @@
-package com.prabhash.interview.practice.string;
+package com.prabhash.java.interview.practice.string;
 
 /**
  * Find if a String is Palindrome
