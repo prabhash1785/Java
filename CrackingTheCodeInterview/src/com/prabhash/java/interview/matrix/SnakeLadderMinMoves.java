@@ -24,6 +24,7 @@ public class SnakeLadderMinMoves {
 	public static int getMinDistance(int[] move, int n) {
 
 		boolean[] visited = new boolean[n];
+		
 		for(int i = 0; i < n; i++) {
 			visited[i] = false;
 		}
