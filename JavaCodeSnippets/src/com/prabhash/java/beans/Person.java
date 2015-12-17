@@ -1,5 +1,9 @@
 package com.prabhash.java.beans;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 public class Person {
 	
 	private String firstName;
@@ -80,7 +84,31 @@ public class Person {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-    
+	
+	public static void main(String[] args) {
+		
+		final InputStream stream = new ByteArrayInputStream("Hello World".getBytes());
+		
+		byte[] b  = new byte[5];
+		try {
+			int n = stream.read(b);
+			
+			while(n != -1) {
+				
+				System.out.println(b);
+				System.out.println(b.toString());
+				System.out.println(new String(b));
+				
+				n = stream.read(b);
+				
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
     
 
 }
