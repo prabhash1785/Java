@@ -17,11 +17,11 @@ public class TypeCastNull {
 	public static void main(String[] args) {
 
 		// In this case without type casting null parameter, compiler will complain about ambiguity as it cannot distinguish
-		// between the overloaded methods
+		// between the two overloaded methods
 		new TypeCastNull().foo((Long) null);
 		new TypeCastNull().foo((String) null);
 		
-		// this is find because compiler knows which method to call explicitly as there is no overloading
+		// this is fine because compiler knows which method to call explicitly as there is no overloading
 		new TypeCastNull().sayHello(null); 
 
 	}
