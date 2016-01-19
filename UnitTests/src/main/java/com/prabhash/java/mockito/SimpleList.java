@@ -8,7 +8,11 @@ public class SimpleList {
 	private final List<String> list;
 	
 	public SimpleList() {
-		this.list = new ArrayList<>();
+		this(new ArrayList<>());
+	}
+	
+	public SimpleList(final List<String> list) {
+		this.list = list;
 	}
 	
 	public void addName(String name) throws NullPointerException {
