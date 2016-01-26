@@ -30,7 +30,7 @@ public class Q4_5_CheckBST {
 			return true;
 		}
 		
-		if(min > root.getKey() || max <= root.getKey()) {
+		if(root.getKey() > max || root.getKey() <= min) {
 			return false;
 		}
 		
@@ -54,7 +54,7 @@ public class Q4_5_CheckBST {
 		TreeImpl.Node root = tree.getRoot();
 		
 		root.setLeft(new TreeImpl.Node(4));
-		root.getLeft().setRight(new TreeImpl.Node(17));
+		root.getLeft().setRight(new TreeImpl.Node(6));
 		
 		root.setRight(new TreeImpl.Node(12));
 		
