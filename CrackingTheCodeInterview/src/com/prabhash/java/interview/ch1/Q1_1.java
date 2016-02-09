@@ -250,7 +250,7 @@ public class Q1_1 {
 	/**
 	 * Find if String has unique characters using BitVector. This reduces the space usage by a factor of 8.
 	 * 
-	 * This method uses a int to store bits which can store a max of 32 bits so thsi program can only hold bits correctly for either a - z or
+	 * This method uses a int to store bits which can store a max of 32 bits so this program can only hold bits correctly for either a - z or
 	 * A - Z. Mixing both upper and lower characters will error out.
 	 * 
 	 * Input can only be all upper case characters or lower case characters.
