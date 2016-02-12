@@ -1,45 +1,45 @@
 This is a high level object oriented design for an Elevator System. It also includes some of the main pseudocode on how different components will work. This represents simple working structure, it's by no means optimized for a real elevator system.
 
 Classes needed for Elevator System:
+<br>
+<b>ElevatorManager</b> [Singleton - This is the main elevator program which will manage n elevators in the building]<br>
+	Members:<br>
+		List<Elevator><br>
+		Queue<Floor.Request> // This maintains request for both directions. One improvement could be to keep two queues, one for each direction but it would increase complexity<br>
+		MIN_FLOOR<br>
+		MAX_FLOOR<br>
+	Operations:<br>
+		delgate()<br>
+		halt() // set whole elevator system in maintenance mode or halt operation<br>
+<br><br>
+<b>Elevator</b> [Represents individual elevators. There could be n elevators in a building]<br>
+	Members:<br>
+		Queue<Floor><br>
+		Direction : Enum [Enum of direction - up, down, wait, idle, maintenance]<br>
+		CurrentFloor : Floor<br>
+	Operations:<br>
+		operate()<br>
+		moveUp()<br>
+		moveDown()<br>
+		openDoor()<br>
+		closeDoor()<br>
+		callEmergencyLine()<br>
+		getDirection()<br>
+		getCurrentFloor()<br>
+		setInMaintenanceMode()<br>
+<br><br>
+Floor [Represents individual floors]<br>
+	Members:<br>
+		eNum of Floors<br>
+		class Request<br>
+			currentFloor<br>
+			destinationFloor<br>
+			Direction [Up, Down]<br>
+	Operation:<br>
+		goUp()<br>
+		goDown()<br>
 
-ElevatorManager [Singleton - This is the main elevator program which will manage n elevators in the building]
-	Members:
-		List<Elevator>
-		Queue<Floor.Request> // This maintains request for both directions. One improvement could be to keep two queues, one for each direction but it would increase complexity
-		MIN_FLOOR
-		MAX_FLOOR
-	Operations:
-		delgate()
-		halt() // set whole elevator system in maintenance mode or halt operation
-
-Elevator [Represents individual elevators. There could be n elevators in a building]
-	Members:
-		Queue<Floor>
-		Direction : Enum [Enum of direction - up, down, wait, idle, maintenance]
-		CurrentFloor : Floor
-	Operations:
-		operate()
-		moveUp()
-		moveDown()
-		openDoor()
-		closeDoor()
-		callEmergencyLine()
-		getDirection()
-		getCurrentFloor()
-		setInMaintenanceMode()
-
-Floor [Represents individual floors]
-	Members:
-		eNum of Floors
-		class Request
-			currentFloor
-			destinationFloor
-			Direction [Up, Down]
-	Operation:
-		goUp()
-		goDown()
-
-
+<br><br><br>
 
 Some of the main pseudocode for above components:
 
