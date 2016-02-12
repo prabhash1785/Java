@@ -4,13 +4,17 @@ This is a high level object oriented design for an Elevator System. It also incl
 <br><br>
 <b>ElevatorManager</b> [Singleton - This is the main elevator program which will manage n elevators in the building]<br>
 	Members:<br>
-		List<Elevator><br>
-		Queue<Floor.Request> // This maintains request for both directions. One improvement could be to keep two queues, one for each direction but it would increase complexity<br>
-		MIN_FLOOR<br>
-		MAX_FLOOR<br>
+		```
+		List<Elevator>
+		Queue<Floor.Request> // This maintains request for both directions. One improvement could be to keep two queues, one for each direction but it would increase complexity
+		MIN_FLOOR
+		MAX_FLOOR
+		```
 	Operations:<br>
-		delgate()<br>
-		halt() // set whole elevator system in maintenance mode or halt operation<br>
+		```
+		delgate()
+		halt() // set whole elevator system in maintenance mode or halt operation
+		```
 <br><br>
 <b>Elevator</b> [Represents individual elevators. There could be n elevators in a building]<br>
 	Members:<br>
