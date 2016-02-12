@@ -3,25 +3,21 @@ This is a high level object oriented design for an Elevator System. It also incl
 <b><u>Classes needed for Elevator System:</u></b>
 <br><br>
 <b>ElevatorManager</b> [Singleton - This is the main elevator program which will manage n elevators in the building]<br>
-	Members:<br>
-		```
-		List<Elevator>
-		Queue<Floor.Request> // This maintains request for both directions. One improvement could be to keep two queues, one for each direction but it would increase complexity
-		MIN_FLOOR
-		MAX_FLOOR
-		```
-	Operations:<br>
-		```
-		delgate()
-		halt() // set whole elevator system in maintenance mode or halt operation
-		```
+	<b>Members:</b><br>
+		List<Elevator><br>
+		Queue<Floor.Request> // This maintains request for both directions. One improvement could be to keep two queues, one for each direction but it would increase complexity<br>
+		MIN_FLOOR<br>
+		MAX_FLOOR<br>
+	<b>Operations:</b><br>
+		delgate()<br>
+		halt() // set whole elevator system in maintenance mode or halt operation<br>
 <br><br>
 <b>Elevator</b> [Represents individual elevators. There could be n elevators in a building]<br>
-	Members:<br>
+	<b>Members:</b><br>
 		Queue<Floor><br>
 		Direction : Enum [Enum of direction - up, down, wait, idle, maintenance]<br>
 		CurrentFloor : Floor<br>
-	Operations:<br>
+	<b>Operations:</b><br>
 		operate()<br>
 		moveUp()<br>
 		moveDown()<br>
@@ -33,13 +29,13 @@ This is a high level object oriented design for an Elevator System. It also incl
 		setInMaintenanceMode()<br>
 <br><br>
 Floor [Represents individual floors]<br>
-	Members:<br>
+	<b>Members:</b><br>
 		eNum of Floors<br>
 		class Request<br>
 			currentFloor<br>
 			destinationFloor<br>
 			Direction [Up, Down]<br>
-	Operation:<br>
+	<b>Operation:</b><br>
 		goUp()<br>
 		goDown()<br>
 
