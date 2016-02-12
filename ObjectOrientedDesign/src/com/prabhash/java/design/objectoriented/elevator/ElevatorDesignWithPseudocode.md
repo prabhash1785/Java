@@ -1,7 +1,7 @@
 This is a high level object oriented design for an Elevator System. It also includes some of the main pseudocode on how different components will work. This represents simple working structure, it's by no means optimized for a real elevator system.
-
-Classes needed for Elevator System:
-<br>
+<br><br>
+<b><u>Classes needed for Elevator System:</u></b>
+<br><br>
 <b>ElevatorManager</b> [Singleton - This is the main elevator program which will manage n elevators in the building]<br>
 	Members:<br>
 		List<Elevator><br>
@@ -41,8 +41,9 @@ Floor [Represents individual floors]<br>
 
 <br><br><br>
 
-Some of the main pseudocode for above components:
+<b>Some of the main pseudocode for above components:</br><br><br>
 
+```
 class Floor {
 	goUp() {
 		ElevatorManager.queue.offer(new Request(currentFloor, destinationFloor, up));
@@ -159,3 +160,4 @@ Elevator {
 		this.direction = "idle"; // once queue is empty set the direction to idle
 	}
 }
+```
