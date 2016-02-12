@@ -28,7 +28,7 @@ This is a high level object oriented design for an Elevator System. It also incl
 		getCurrentFloor()<br>
 		setInMaintenanceMode()<br>
 <br><br>
-Floor [Represents individual floors]<br>
+<b>Floor</b> [Represents individual floors]<br>
 	<b>Members:</b><br>
 		eNum of Floors<br>
 		class Request {<br>
