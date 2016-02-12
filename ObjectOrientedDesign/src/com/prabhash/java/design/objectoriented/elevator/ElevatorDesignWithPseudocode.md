@@ -14,7 +14,7 @@ This is a high level object oriented design for an Elevator System. It also incl
 <br><br>
 <b>Elevator</b> [Represents individual elevators. There could be n elevators in a building]<br>
 	<b>Members:</b><br>
-		Queue of Floor<br>
+		Queue of Floor // this needs to be sorted so may be a PriorityQueue could be used<br>
 		Direction : Enum [Enum of direction - up, down, wait, idle, maintenance]<br>
 		CurrentFloor : Floor<br>
 	<b>Operations:</b><br>
