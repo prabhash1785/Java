@@ -42,7 +42,7 @@ This is a high level object oriented design for an Elevator System. It also incl
 
 <br><br><br>
 
-<b>Some of the main pseudocode for above components:</br><br><br>
+<b>Some of the main pseudocode for above components:</b></br><br><br>
 
 ```
 class Floor {
