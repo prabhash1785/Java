@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Find all subsets of a given string.
+ * Find all subsets or power-set of a given string.
  * 
  * Number of subsets for a given string for of size n = 2^n
  * 
@@ -71,7 +71,7 @@ public class SubSets {
 	/**
 	 * Method 2: Find powerset using Combinatorics method.
 	 * 
-	 * Use binary string from 0 to 1 << n to represent subsets of a string. 
+	 * Use binary string from 0 to (1 << n) or (2 ^ n) to represent subsets of a string. 
 	 * 
 	 * @param args
 	 */
