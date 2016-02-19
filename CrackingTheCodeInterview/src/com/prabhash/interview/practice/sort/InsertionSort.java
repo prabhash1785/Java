@@ -11,7 +11,7 @@ package com.prabhash.interview.practice.sort;
  */
 public class InsertionSort {
 	
-	public static void insertionSort(int[] a) {
+	public static void sort(int[] a) {
 		
 		if(a == null) {
 			throw new NullPointerException("Array is null");
@@ -48,7 +48,7 @@ public class InsertionSort {
 		
 		System.out.println("\n\nSorted array");
 		
-		insertionSort(array);
+		sort(array);
 		
 		print(array);
 		
