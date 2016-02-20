@@ -76,11 +76,12 @@ public class MergeSort {
 			i++;
 		}
 		
-		while(j <= end) {
-			a[k] = helper[j];
-			k++;
-			j++;
-		}
+		// No need to copy remaining elements from right helper array segment because it's already in place
+//		while(j <= end) {
+//			a[k] = helper[j];
+//			k++;
+//			j++;
+//		}
 		
 	}
 
