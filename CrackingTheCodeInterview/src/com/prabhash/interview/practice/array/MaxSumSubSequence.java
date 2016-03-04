@@ -13,7 +13,7 @@ public class MaxSumSubSequence {
 	 * Only finds the max sum in a given sequence of positive and negative numbers.
 	 * 
 	 * Algo:
-	 * - Keep a temporary sun of sub-sequence and a max sum which represents actual max sum.
+	 * - Keep a temporary sum of sub-sequence and a max sum which represents actual max sum.
 	 * - If sum < 0, then reset sum = 0 as we don't wanna carry forward with a sub-sequence which sum is < 0
 	 * - If sum > maxSum then set maxSum = sum 
 	 * 
