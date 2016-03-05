@@ -8,6 +8,11 @@
 bin/
 ../bin
 
+#IDE Files
+.classpath
+.project
+.settings/
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
