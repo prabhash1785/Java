@@ -6,7 +6,6 @@
 
 #Compiled Artifcats
 bin/
-../bin
 
 #IDE Files
 .classpath
