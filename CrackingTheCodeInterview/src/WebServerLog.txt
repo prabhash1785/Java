@@ -1,0 +1,4 @@
+12.45.123.345 http://1.1	foobar?a=5
+123.456.12.10 http://1.2 apple
+12.45.123.345 http://1.1		world?country=US
+57.123.98.672	      http://1.0	     		   			   	     phone?model=iPhone
