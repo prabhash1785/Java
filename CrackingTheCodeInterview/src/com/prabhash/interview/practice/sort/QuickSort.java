@@ -33,7 +33,7 @@ public class QuickSort {
 		}
 		
 		if(a.length < 2) {
-			System.out.println("Srray of less that 2 elements. It is already sorted.");
+			System.out.println("Array of less that 2 elements. It is already sorted.");
 			return;
 		}
 		
