@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * A simple LRU (Least Recently Used) Cache which has a fixed size. Size is determined while instatntiating LRU Cache.
+ * A simple LRU (Least Recently Used) Cache which has a fixed size. Size is determined while instantiating LRU Cache.
  * 
  * LRU cache works on the principle of moving the recently used object in the front of the list and if cache is full, then oldest 
  * entry is deleted in order to new items.
