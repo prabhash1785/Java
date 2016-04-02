@@ -6,7 +6,7 @@ import java.util.Queue;
 /**
  * This class will shows the usage of Wait-Notify methods by making use of Producer-Consumer Design Pattern.
  * 
- * Wait - Causes current Thread to wait until another thread invokes the notify/notifyAll method ofthis object.
+ * Wait - Causes current Thread to wait until another thread invokes the notify/notifyAll method on this object.
  * Notify -  Wakes up a single thread that is waiting on this object's monitor (lock).
  * 
  * @author Prabhash Rathore
@@ -102,7 +102,7 @@ public class WaitNotify {
 		
 		WaitNotify obj = new WaitNotify();
 		
-		Thread producerThread = new Thread(obj.new Producer(), "First Producer Thread");
+		Thread producerThread = new Thread(obj.new Producer(), "Producer Thread");
 		
 		Thread consumerThread = new Thread(obj.new Consumer(), "Consumer Thread");
 		
