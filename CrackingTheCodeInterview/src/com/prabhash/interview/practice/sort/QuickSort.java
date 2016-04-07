@@ -47,9 +47,9 @@ public class QuickSort {
 			
 			int pivot = getPivot(list, start, end);
 			
-			quickSort(list, start, pivot - 1); //Pass (pivot - 1)
+			quickSort(list, start, pivot - 1); //Pass (pivot - 1) not (pivot)
 			
-			quickSort(list, pivot, end); //Make sure to pass pivot not (pivot + 1)
+			quickSort(list, pivot, end); //Make sure to pass (pivot) not (pivot + 1)
 					
 		}
 		
