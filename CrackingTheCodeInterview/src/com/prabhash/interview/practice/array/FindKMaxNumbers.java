@@ -129,6 +129,9 @@ public class FindKMaxNumbers {
 	 * This is a linear time method to find k max numbers in a given array provided the array has all unique elements.
 	 * This algorithm mutates the array.
 	 * 
+	 * Note: Elements on the left side of rank are not sorted, they are just the k max or min numbers on the left side in randomized order
+	 * depending upon if you are find k-max or k-min numbers.
+	 * 
 	 * Time Complexity: O(n)
 	 * 
 	 * @param a
@@ -148,7 +151,7 @@ public class FindKMaxNumbers {
 	
 	private static int selectionRank(final int[] a, int start, int end, int rank) {
 		
-		int pivot = a[random(start, end)];
+		int pivot = a[random(start, end)]; // Use random index, don't use median as it fails
 		int leftEnd = partition(a, start, end, pivot);
 		
 		int leftSize = leftEnd - start + 1;
@@ -165,11 +168,13 @@ public class FindKMaxNumbers {
 		
 		while(true) {
 			
-			while(start <= end && a[start] <= pivot) {
+			// To find k min, use while(start <= end && a[start] <= pivot)
+			while(start <= end && a[start] >= pivot) {
 				start++;
 			}
 			
-			while(start <= end && a[end] > pivot) {
+			// To find k min, use while(start <= end && a[end] > pivot)
+			while(start <= end && a[end] < pivot) {
 				end--;
 			}
 			
@@ -182,7 +187,7 @@ public class FindKMaxNumbers {
 	}
 	
 	private static int random(int lower, int higher){
-        return (int)(Math.random()*(higher - lower)) + lower;
+        return (int)(Math.random()*(higher + 1 - lower)) + lower;
 	}
 	
 	private static void swap(final int[] a) {
@@ -236,7 +241,7 @@ public class FindKMaxNumbers {
 		}
 	}
 	
-	private static void printFindMaxOutputOfSelectionRank(final int[] input, int rank) {
+	private static void printOutputOfSelectionRank(final int[] input, int rank) {
 		
 		System.out.println("\n\nInput Array for Selection Rank:");
 		for(int i = 0; i < input.length; i++) {
@@ -244,7 +249,7 @@ public class FindKMaxNumbers {
 		}
 		
 		System.out.println("\nOutput array with first max rank k numbers");
-		for(int i = 0; i < rank; i++) {
+		for(int i = 0; i <= rank; i++) {
 			System.out.print(input[i] + " ");
 		}
 	}
@@ -292,6 +297,6 @@ public class FindKMaxNumbers {
 		int[] array4 = new int[] {0, 7, 4, 48, 67, 5, 3, 15, 2, 17, 8, 43, 12};
 		int rank = 3;
 		findKMaxNumberUsingSelectionRankAlgo(array4, rank);
-		printFindMaxOutputOfSelectionRank(array4, rank);
+		printOutputOfSelectionRank(array4, rank);
 	}
 }
