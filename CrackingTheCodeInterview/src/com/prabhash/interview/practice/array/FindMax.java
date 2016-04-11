@@ -123,6 +123,21 @@ public class FindMax {
 		return maxNumbers;
 	}
 	
+	/**
+	 * Implementation of Selection Rank Algorithm.
+	 * 
+	 * This is a linear time method to find k max numbers in a given array provided the array has all unique elements.
+	 * This algorithm mutates the array.
+	 * 
+	 * Time Complexity: O(n)
+	 * 
+	 * @param a
+	 */
+	public static void findKMaxNumberUsingSelectionRankAlgo(final int[] a) {
+		
+		// TODO: Implement
+	}
+	
 	private static void swap(final int[] a) {
 		
 		int temp = a[0];
