@@ -10,7 +10,7 @@ import java.util.Queue;
  * @author prrathore
  *
  */
-public class FindMax {
+public class FindKMaxNumbers {
 	
 	/**
 	 * Find the maximum number in given array.
@@ -133,9 +133,56 @@ public class FindMax {
 	 * 
 	 * @param a
 	 */
-	public static void findKMaxNumberUsingSelectionRankAlgo(final int[] a) {
+	public static int findKMaxNumberUsingSelectionRankAlgo(final int[] a, int rank) {
 		
-		// TODO: Implement
+		if(a == null) {
+			throw new NullPointerException();
+		}
+		
+		if(rank <= 0 || a.length < rank) {
+			throw new IllegalArgumentException();
+		}
+		
+		return selectionRank(a, 0, a.length - 1, rank);	
+	}
+	
+	private static int selectionRank(final int[] a, int start, int end, int rank) {
+		
+		int pivot = a[random(start, end)];
+		int leftEnd = partition(a, start, end, pivot);
+		
+		int leftSize = leftEnd - start + 1;
+		if(leftSize == rank + 1) {
+			return Math.max(a[start], a[leftEnd]);
+		} else if(rank < leftSize) {
+			return selectionRank(a, start, leftEnd, rank);
+		} else {
+			return selectionRank(a, leftEnd + 1, end, rank - leftSize);
+		}
+	}
+	
+	private static int partition(final int[] a, int start, int end, int pivot) {
+		
+		while(true) {
+			
+			while(start <= end && a[start] <= pivot) {
+				start++;
+			}
+			
+			while(start <= end && a[end] > pivot) {
+				end--;
+			}
+			
+			if(start > end) {
+				return start - 1;
+			}
+			
+			swap(a, start, end);
+		}
+	}
+	
+	private static int random(int lower, int higher){
+        return (int)(Math.random()*(higher - lower)) + lower;
 	}
 	
 	private static void swap(final int[] a) {
@@ -143,6 +190,13 @@ public class FindMax {
 		int temp = a[0];
 		a[0] = a[1];
 		a[1] = temp;
+	}
+	
+	private static void swap(final int[] a, int i, int j) {
+		
+		int temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
 	}
 	
 	private static void printFindMaxOutput(final int[] a, int max) {
@@ -179,6 +233,19 @@ public class FindMax {
 		Iterator<Integer> iterator = output.iterator();
 		while(iterator.hasNext()) {
 			System.out.print(iterator.next() + " ");
+		}
+	}
+	
+	private static void printFindMaxOutputOfSelectionRank(final int[] input, int rank) {
+		
+		System.out.println("\n\nInput Array for Selection Rank:");
+		for(int i = 0; i < input.length; i++) {
+			System.out.print(input[i] + " ");
+		}
+		
+		System.out.println("\nOutput array with first max rank k numbers");
+		for(int i = 0; i < rank; i++) {
+			System.out.print(input[i] + " ");
 		}
 	}
 
@@ -220,5 +287,11 @@ public class FindMax {
 		k = 4;
 		maxKNumbers = findKMaxNumbers(array3, k);
 		printFindMaxOutput(array3, maxKNumbers);
+		
+		// Selection Rank - test case 1
+		int[] array4 = new int[] {0, 7, 4, 48, 67, 5, 3, 15, 2, 17, 8, 43, 12};
+		int rank = 3;
+		findKMaxNumberUsingSelectionRankAlgo(array4, rank);
+		printFindMaxOutputOfSelectionRank(array4, rank);
 	}
 }
