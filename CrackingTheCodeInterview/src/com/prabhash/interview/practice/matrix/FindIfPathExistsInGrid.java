@@ -19,17 +19,38 @@ public class FindIfPathExistsInGrid {
 		return pathExistsHelper(grid, start.row, start.col, end);
 	}
 	
-	public static boolean pathExistsHelper(int[][] grid, int startRow, int startCol, Coordinate end) {
+	private static boolean pathExistsHelper(int[][] grid, int startRow, int startCol, Coordinate end) {
 		
 		if(startRow >= grid.length || startCol >= grid[0].length) {
+			return false;
+		}
+		
+		if(!isValidCoordinate(grid, startRow, startCol)) {
 			return false;
 		}
 		
 		if(startRow == end.row && startCol == end.col) {
 			return true;
 		}
-		
+			
 		return pathExistsHelper(grid, startRow + 1, startCol, end) || pathExistsHelper(grid, startRow, startCol + 1, end);
+	}
+	
+	private static boolean isValidCoordinate(final int[][]grid, final int row, final int col) {
+		
+		if(grid == null) {
+			throw new IllegalArgumentException();
+		}
+		
+		if(row >= grid.length || col >= grid[0].length) {
+			return false;
+		}
+		
+		if(grid[row][col] == 1) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public static class Coordinate {
@@ -82,7 +103,7 @@ public class FindIfPathExistsInGrid {
 	public static void main(String[] args) {
 		
 		final int[][] grid = new int[][] {
-				{1, 0, 1, 1},
+				{1, 1, 1, 1},
 				{0, 1, 1, 0},
 				{1, 0, 1, 1}
 		};
