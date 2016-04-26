@@ -1,7 +1,18 @@
 package com.prabhash.interview.practice.matrix;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 public class FindIfPathExistsInGrid {
 	
+	/**
+	 * Find if path exists in a grid from start to end coordinate.
+	 * 
+	 * @param grid
+	 * @param start
+	 * @param end
+	 * @return boolean
+	 */
 	public static boolean doesPathExist(int[][] grid, Coordinate start, Coordinate end) {
 		
 		if(grid == null || start == null || end == null) {
@@ -36,6 +47,74 @@ public class FindIfPathExistsInGrid {
 		return pathExistsHelper(grid, startRow + 1, startCol, end) || pathExistsHelper(grid, startRow, startCol + 1, end);
 	}
 	
+	/**
+	 * Find if a path exists in grid. If path exists then return the path.
+	 * 
+	 * @param grid
+	 * @param start
+	 * @param end
+	 * @return result
+	 */
+	public static Result findPathIfExists(final int[][] grid, final Coordinate start, final Coordinate end) {
+		
+		if(grid == null || start == null || end == null) {
+			throw new IllegalArgumentException();
+		}
+		
+		if(start.row >= grid.length || start.col >= grid[0].length || end.row >= grid.length || end.col >= grid[0].length) {
+			throw new IllegalArgumentException();
+		}
+		
+		if(start.equals(end)) {
+			
+			Result result = new Result();
+			Set<Coordinate> set = new LinkedHashSet<>();
+			set.add(start);
+			result.path = set;
+			result.pathExists = true;
+			return result;
+		}
+		
+		return findPathIfExistsHelper(grid, start.row, start.col, end);
+	}
+	
+	private static Result findPathIfExistsHelper(final int[][] grid, final int startRow, final int startCol, final Coordinate end) {
+		
+		if(startRow >= grid.length || startCol >= grid[0].length) {
+			return null;
+		}
+		
+		if(startRow == end.row && startCol == end.col) {
+			
+			Result result = new Result();
+			Set<Coordinate> set = new LinkedHashSet<>();
+			set.add(new Coordinate(startRow, startCol));
+			result.path = set;
+			result.pathExists = true;
+			return result;
+		}
+		
+		if(!isValidCoordinate(grid, startRow, startCol)) {
+			Result result = new Result();
+			result.pathExists = false;
+			return result;
+		}
+		
+		Result r1 = findPathIfExistsHelper(grid, startRow + 1, startCol, end);
+		if(r1 != null && r1.pathExists) {
+			r1.path.add(new Coordinate(startRow, startCol)); // while backtracking add coordinates to path
+			return r1;
+		}
+		
+		Result r2 = findPathIfExistsHelper(grid, startRow, startCol + 1, end);
+		if(r2 != null && r2.pathExists) {
+			r2.path.add(new Coordinate(startRow, startCol)); // while backtracking add coordinates to path
+			return r2;
+		}
+		
+		return null;
+	}
+
 	private static boolean isValidCoordinate(final int[][]grid, final int row, final int col) {
 		
 		if(grid == null) {
@@ -96,8 +175,14 @@ public class FindIfPathExistsInGrid {
 		
 		@Override
 		public String toString() {
-			return "[" + this.row + ", [" + this.col + "]";
+			return "[" + this.row + ", "+ this.col + "]";
 		}
+	}
+	
+	public static class Result {
+		
+		private boolean pathExists;
+		private Set<Coordinate> path;
 	}
 
 	public static void main(String[] args) {
@@ -110,5 +195,16 @@ public class FindIfPathExistsInGrid {
 		
 		boolean pathExists = doesPathExist(grid, new Coordinate(0, 0), new Coordinate(grid.length - 1, grid[0].length - 1));
 		System.out.println("Path exists between start and end of grid: " + pathExists);
+		
+		Result result = findPathIfExists(grid, new Coordinate(0, 0), new Coordinate(grid.length - 1, grid[0].length - 1));
+		if(result != null && result.pathExists) {
+			System.out.println("Path exists and below is the path:");
+			Set<Coordinate> set = result.path;
+			for(Coordinate coordinate : set) {
+				System.out.print(coordinate + " <==> ");
+			}
+		} else {
+			System.out.println("Path does not exist from start to end in grid!");
+		}
 	}
 }
