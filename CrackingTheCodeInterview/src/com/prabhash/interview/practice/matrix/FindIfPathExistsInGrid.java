@@ -1,6 +1,9 @@
 package com.prabhash.interview.practice.matrix;
 
+import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Set;
 
 public class FindIfPathExistsInGrid {
@@ -114,6 +117,54 @@ public class FindIfPathExistsInGrid {
 		
 		return null;
 	}
+	
+	/**
+	 * Find if path exists in grid between two points using BFS Algorithm.
+	 * 
+	 * @param grid
+	 * @param start
+	 * @param end
+	 * @return boolean
+	 */
+	public static boolean findIfPathExistsUsingBFS(final int[][] grid, Coordinate start, final Coordinate end) {
+		
+		if(grid == null || start == null || end == null) {
+			throw new IllegalArgumentException();
+		}
+		
+		if(start.equals(end)) {
+			return true;
+		}
+		
+		Queue<Coordinate> queue = new LinkedList<>();
+		queue.offer(start);
+		
+		Set<Coordinate> vistedSet = new HashSet<>();
+		
+		while(queue.peek() != null) {
+			
+			Coordinate c = queue.poll();
+			
+			if(c.equals(end)) {
+				return true;
+			}
+			
+			if(!vistedSet.contains(c)) {
+				
+				vistedSet.add(c);
+				
+				if(isValidCoordinate(grid, c.row, c.col + 1)) {
+					queue.offer(new Coordinate(c.row, c.col + 1));
+				}
+				
+				if(isValidCoordinate(grid, c.row + 1, c.col)) {
+					queue.offer(new Coordinate(c.row + 1, c.col));
+				}
+			}
+		}
+		
+		return false;
+	}
 
 	private static boolean isValidCoordinate(final int[][]grid, final int row, final int col) {
 		
@@ -206,5 +257,9 @@ public class FindIfPathExistsInGrid {
 		} else {
 			System.out.println("Path does not exist from start to end in grid!");
 		}
+		
+		// test using BFS
+		boolean pathExistsUsingBFS = findIfPathExistsUsingBFS(grid, new Coordinate(0, 0), new Coordinate(grid.length - 1, grid[0].length - 1));
+		System.out.println("\nPath exists using BFS: " + pathExistsUsingBFS);
 	}
 }
