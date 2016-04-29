@@ -17,7 +17,8 @@ public class InterweaveLinkedList {
 	 * Method 1:
 	 * Store all the nodes in a Stack so that we can access nodes starting end of the Linked List for interweaving.
 	 * After that mutate Linked List pointers by pointing first node in Linked List to top node in Stack. Repeat this
-	 * process until node from Linked List != popped node from Stack.
+	 * process until node from Linked List != popped node from Stack and for even number of nodes, make sure first.next
+	 * != node popped from stack.
 	 * 
 	 *  Time Complexity: O(n)
 	 *  Space Complexity: O(n)
@@ -43,13 +44,16 @@ public class InterweaveLinkedList {
 		Node first = head;
 		Node last = stack.pop();
 		
-		while(first != null && last != null && first != last) {
+		// For even number of nodes, make sure to stop when first.next becomes equal to last
+		while(first != null && last != null && first != last && first.next != last) {
 			
 			Node temp = first.next;
+			
 			first.next = last;
 			last.next = temp; // Make sure to point last to second node stored in temp
 			
 			first = temp;
+			
 			last = stack.pop();
 			last.next = null; // MUST reset last pointer to NULL to prevent infinite loops and corrupting Linked List pointers
 		}
@@ -93,9 +97,11 @@ public class InterweaveLinkedList {
 		Node first = head;
 		Node last = stack.pop();
 		
-		while(first != null && last != null && first != last) {
+		// For even number of nodes, make sure to stop when first.next becomes equal to last
+		while(first != null && last != null && first != last && first.next != last) {
 			
 			Node temp = first.next;
+			
 			first.next = last;
 			last.next = temp; // Make sure to point last to second node stored in temp
 			
@@ -139,7 +145,8 @@ public class InterweaveLinkedList {
 		Node end = reverseLinkedList(slow);
 		Node first = head;
 		
-		while(first != null && end != null && first != end) {
+		// For even number of nodes, make sure to stop when first.next becomes equal to last
+		while(first != null && end != null && first != end && first.next != end) {
 			
 			Node tempFirst = first.next;
 			Node tempEnd = end.next;
@@ -158,6 +165,11 @@ public class InterweaveLinkedList {
 		
 		if(node == null) {
 			throw new IllegalArgumentException();
+		}
+		
+		// If Linked List has just one node then just return the same node without any reversal
+		if(node.next == null) {
+			return node;
 		}
 		
 		Node prev = node;
@@ -179,7 +191,9 @@ public class InterweaveLinkedList {
 			future = future.next;
 		}
 		
-		current.next = prev;
+		if(current != null) {
+			current.next = prev;
+		}
 		
 		return current;
 	}
@@ -206,6 +220,7 @@ public class InterweaveLinkedList {
 
 	public static void main(String[] args) {
 		
+		// test case 1: odd number of nodes
 		Node head = new Node(4);
 		head.next = new Node(2);
 		head.next.next = new Node(10);
@@ -228,5 +243,26 @@ public class InterweaveLinkedList {
 		head = interweaveLLUsingConstantSpace(head);
 		System.out.println("\nInterweaved Linked List using constant space:");
 		printLinkedList(head);
+		
+		// test case 2: even number of nodes
+		Node evenLinkedList = new Node(5);
+		evenLinkedList.next = new Node(10);
+		evenLinkedList.next.next = new Node(15);
+		evenLinkedList.next.next.next = new Node(20);
+		
+		System.out.println("\nOriginal Even Linked List:");
+		printLinkedList(evenLinkedList);
+		
+		evenLinkedList = interweaveUsingStack(evenLinkedList);
+		System.out.println("\nInterweaved LinkedList:");
+		printLinkedList(evenLinkedList);
+		
+		evenLinkedList = interweaveUsingStackOptimizedForSpace(evenLinkedList);
+		System.out.println("\nInterweaved LinkedList using Space Optimized Algorithm:");
+		printLinkedList(evenLinkedList);
+		
+		evenLinkedList = interweaveLLUsingConstantSpace(evenLinkedList);
+		System.out.println("\nInterweaved Linked List using constant space:");
+		printLinkedList(evenLinkedList);
 	}
 }
