@@ -6,6 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Traverse a tree diagonally.
+ * 
+ * @author prrathore
+ *
+ */
 public class DiagonalTreeTraversal {
 
 	public static void printNodesDiagonally(Node root) {
