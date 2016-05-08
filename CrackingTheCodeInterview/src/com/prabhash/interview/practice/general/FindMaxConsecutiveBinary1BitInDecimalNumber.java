@@ -16,7 +16,7 @@ public class FindMaxConsecutiveBinary1BitInDecimalNumber {
 	 * @param n
 	 * @return String
 	 */
-    private static String convertToBinary(int n) throws IllegalArgumentException {
+    public static String convertToBinary(int n) throws IllegalArgumentException {
         
         if(n < 1) {
             throw new IllegalArgumentException();
@@ -38,7 +38,7 @@ public class FindMaxConsecutiveBinary1BitInDecimalNumber {
      * @param s
      * @return maxConsecutiveOneCount
      */
-    private static int getMaxConsecutiveOnes(String s) {
+    public static int getMaxConsecutiveOnes(String s) {
         
         if(s == null) {
             return 0;
