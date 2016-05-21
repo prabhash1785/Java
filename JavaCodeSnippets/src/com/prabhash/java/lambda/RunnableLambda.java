@@ -15,6 +15,20 @@ public class RunnableLambda {
 		
 		Thread t2 = new Thread(() -> { System.out.println(Thread.currentThread().getName() + " ran!!"); });
 		
+		Runnable runnable3 = () -> {
+			final int sleepTime = 3000;
+			System.out.println("Going to sleep for " + sleepTime + " seconds.");
+			try {
+				Thread.sleep(sleepTime);
+			} catch(InterruptedException iE) {
+				iE.printStackTrace();
+			}
+			System.out.println(Thread.currentThread().getName() + " ran after sleeping!!");
+			};
+			
+		Thread t3 = new Thread(runnable3);
+		
+		t3.start();
 		t1.start();
 		t2.start();
 	}
