@@ -3,6 +3,8 @@ package com.prabhash.java.streams;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class BasicStreamsDemo {
 	
@@ -12,6 +14,19 @@ public class BasicStreamsDemo {
 		
 		long evenNumbersCount = list.stream().filter(evenNumberPred).count();
 		System.out.println("Even number count is: " + evenNumbersCount);
+		
+		list.stream()
+		    .filter(evenNumberPred)
+		    .forEach(i -> System.out.println(i));
+	}
+	
+	public static void convertStringToUpperCase() {
+		
+		List<String> collected = Stream.of("hello", "java8", "lambda", "STreams")
+									   .map(s -> s.toUpperCase())
+									   .collect(Collectors.toList());
+		
+		collected.forEach(s -> System.out.println(s));
 	}
 
 	public static void main(String[] args) {
@@ -26,6 +41,7 @@ public class BasicStreamsDemo {
 		list.add(19);
 		
 		printEvenNumbers(list);
+		convertStringToUpperCase();
 	}
 
 }
