@@ -134,30 +134,50 @@ public class MatrixOperations {
 		printMatrix(a);
 	}
 	
+	/**
+	 * Print following spiral matrix:
+	 * 
+	 * 4 4 4 4 4 4 4 
+
+		4 3 3 3 3 3 4 
+
+		4 3 2 2 2 3 4 
+
+		4 3 2 0 2 3 4 
+
+		4 3 2 2 2 3 4 
+
+		4 3 3 3 3 3 4 
+
+		4 4 4 4 4 4 4 
+	 * 
+	 */
 	public static void createCircularSpriralMatrix() {
 		
-		int dimension = 4;
+		int dimension = 7;
 		int[][] a = createNewSquareMatrix(dimension);
 		
 		int value = 4;
 		int layer = 0;
 		while(layer < dimension / 2) {
-			
-			int row = layer, col = layer;
-			for(int i = col; i < (dimension - layer - 1); i++) {
-				a[row][i] = value;
+			int rowStart = layer;
+			int rowEnd = dimension - layer;
+			int colStart = layer;
+			int colEnd = dimension - layer;
+			for(int i = colStart; i < colEnd - 1; i++) {
+				a[rowStart][i] = value;
 			}
 			
-			for(int i = row; i < (dimension - layer - 1); i++) {
-				a[i][dimension - layer] = value;
+			for(int i = rowStart; i < rowEnd - 1; i++) {
+				a[i][colEnd - 1] = value;
 			}
 			
-			for(int i = dimension - layer; i > col; i--) {
-				a[dimension - layer][i] = value;
+			for(int i = colEnd - 1; i > colStart; i--) {
+				a[rowEnd - 1][i] = value;
 			}
 			
-			for(int i = dimension - layer; i > row; i--) {
-				a[i][col] = value;
+			for(int i = rowEnd - 1; i > rowStart; i--) {
+				a[i][colStart] = value;
 			}
 			
 			layer++;
