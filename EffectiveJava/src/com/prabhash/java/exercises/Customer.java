@@ -1,5 +1,11 @@
 package com.prabhash.java.exercises;
 
+/**
+ * Example of Builder Design Pattern.
+ * 
+ * @author Prabhash Rathore
+ *
+ */
 public class Customer {
 	private final String firstName;
 	private final String lastName;
@@ -16,7 +22,6 @@ public class Customer {
 		// Required parameters
 		private final String firstName;
 		private final String lastName;
-
 		private String middleName = null;
 		private String streetAddress = null;
 		private String city = null;
