@@ -2,6 +2,15 @@ package com.prabhash.interview.practice.array;
 
 public class FindIfPathExistsInArray {
 
+	/**
+	 * 
+	 * 
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(1)
+	 * 
+	 * @param list
+	 * @return boolean
+	 */
 	public static boolean findIfPathExists(final int[] list) {
 		if(list == null) {
 			return false;
