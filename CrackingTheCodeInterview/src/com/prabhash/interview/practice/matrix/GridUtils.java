@@ -8,10 +8,10 @@ public class GridUtils {
 			return;
 		}
 		
-		printGridElementsRecursivelu(a, 0, 0); 
+		printGridElementsRecursively(a, 0, 0); 
 	}
 	
-	private static void printGridElementsRecursivelu(int[][] a, int row, int col) {
+	private static void printGridElementsRecursively(int[][] a, int row, int col) {
 		
 		if(a == null) {
 			return;
@@ -30,7 +30,39 @@ public class GridUtils {
 			col++;
 		}
 		
-		printGridElementsRecursivelu(a, row, col);
+		printGridElementsRecursively(a, row, col);
+	}
+	
+	/**
+	 * Print Sprial of a Square Matrix
+	 * 
+	 * @param a
+	 */
+	public static void printSprialOfMatrix(final int[][] a) {
+		
+		if(a == null) {
+			throw new NullPointerException();
+		}
+		int layer = 0, i = 0;
+		int matrixSize = a.length;
+		for(layer = 0; layer <= (matrixSize / 2); layer++) {
+			
+			for(i = layer; i < (matrixSize - layer - 1); i++) {
+				System.out.print(a[layer][i] + " ");
+			}
+			
+			for(i = layer; i < (matrixSize - layer - 1); i++) {
+				System.out.print(a[i][matrixSize - layer - 1] + " ");
+			}
+			
+			for(i = (matrixSize - layer - 1); i > layer; i--) {
+				System.out.print(a[matrixSize - layer - 1][i] + " ");
+			}
+			
+			for(i = (matrixSize -layer - 1); i > layer; i--) {
+				System.out.print(a[i][layer] + " ");
+			}
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -42,5 +74,14 @@ public class GridUtils {
 		};
 		System.out.println("Here are grid elements:");
 		printGridElementsRecursivelu(grid);
+		
+		int[][] squareMartix = new int[][] {
+				{4, 9, 0, 2},
+				{1, 12, 3, 18},
+				{8, 6, 11, 20},
+				{34, 23, 93, 81}
+		};
+		System.out.println("\nHere is sprial of matrix:\n");
+		printSprialOfMatrix(squareMartix);
 	}
 }
