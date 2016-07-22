@@ -1,5 +1,11 @@
 package com.prabhash.interview.practice.array;
 
+/**
+ * Find if path exists from start of array to end of array following a max hop of value stored at the current index of array. 
+ * 
+ * @author Prabhash Rathore
+ *
+ */
 public class FindIfPathExistsInArray {
 
 	/**
