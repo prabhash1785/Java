@@ -47,6 +47,32 @@ public class ArrangePositiveAndNegativeNumbers {
 		return newArray;
 	}
 	
+	/**
+	 * 
+	 * Time Complexity: O(n ^ 2)
+	 * Space Complexity: O(1)
+	 * 
+	 * @param a
+	 */
+	public static void arrangeNumbersInPlace(final int[] a) {
+		if(a == null) {
+			throw new NullPointerException();
+		}
+		
+		for(int i = 0; i < a.length; i++) {
+			
+			if(a[i] < 0) {
+				int j = i - 1;
+				int temp = a[i];
+				while(j >= 0 && a[j] >= 0) {
+					a[j + 1] = a[j];
+					j--;
+				}
+				a[j + 1] = temp;
+			}
+		}
+	}
+	
 	public static void main(String[] args) {
 		
 		int[] a1 = new int[] {12, 11, -13, -5, 6, -7, 5, -3, -6};
@@ -58,6 +84,18 @@ public class ArrangePositiveAndNegativeNumbers {
 		int[] modifiedArray = arrangeNumbersUsingExtraSpace(a1);
 		System.out.println("\nModified array:");
 		for(int i : modifiedArray) {
+			System.out.print(i + " ");
+		}
+		
+		int[] a2 = new int[] {12, 11, -13, -5, 6, -7, 5, -3, -6};
+		System.out.println("Original array:");
+		for(int i : a2) {
+			System.out.print(i + " ");
+		}
+		
+		arrangeNumbersInPlace(a2);
+		System.out.println("\nUpdated array:");
+		for(int i : a2) {
 			System.out.print(i + " ");
 		}
 	}
