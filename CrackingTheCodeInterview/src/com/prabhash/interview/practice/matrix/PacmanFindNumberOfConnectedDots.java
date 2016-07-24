@@ -1,4 +1,4 @@
-package com.prabhash.java.interview.matrix;
+package com.prabhash.interview.practice.matrix;
 
 /**
  * Pacman - Find number of connected dots starting from top left corner in a grid. Dots are considered

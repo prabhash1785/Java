@@ -1,4 +1,4 @@
-package com.prabhash.java.interview.matrix;
+package com.prabhash.interview.practice.matrix;
 
 public class MatrixOperations {
 	
@@ -137,7 +137,7 @@ public class MatrixOperations {
 	/**
 	 * Print following spiral matrix:
 	 * 
-	 * 4 4 4 4 4 4 4 
+	 *  4 4 4 4 4 4 4 
 
 		4 3 3 3 3 3 4 
 

@@ -22,7 +22,7 @@ public class GridUtils {
 		} else if(row < a.length && col >= a[0].length) {
 			col = 0;
 			row++;
-			System.out.println("\n");
+			System.out.print("\n");
 		} else if(row >= a.length) {
 			return;
 		} else {
@@ -65,6 +65,30 @@ public class GridUtils {
 		}
 	}
 	
+	/**
+	 * Brute Force Algorithm:
+	 * Rotate matrix using extra space.
+	 * Time Complexity: O(n ^ 2)
+	 * Space Complexity: O(n ^ 2
+	 * 
+	 * @param a
+	 * @return rotatedMatrix
+	 */
+	public static int[][] rotateMatrixUsingExtraSpace(int[][] a) {
+		if(a == null) {
+			throw new NullPointerException();
+		}
+		
+		int[][] rotatedMatrix = new int[a.length][a[0].length];
+		for(int i = a.length - 1; i >= 0; i--) {
+			for(int j = 0; j < a[i].length; j++) {
+				rotatedMatrix[j][i] = a[i][j];
+			}
+		}
+		
+		return rotatedMatrix;
+	}
+	
 	public static void main(String[] args) {
 		
 		int[][] grid = new int[][] {
@@ -81,7 +105,14 @@ public class GridUtils {
 				{8, 6, 11, 20},
 				{34, 23, 93, 81}
 		};
-		System.out.println("\nHere is sprial of matrix:\n");
+		System.out.println("\nHere is sprial of matrix:");
 		printSprialOfMatrix(squareMartix);
+		
+		System.out.println("\nOriginal square matrix:");
+		printGridElementsRecursivelu(squareMartix);
+		
+		int[][] rotatedMatix = rotateMatrixUsingExtraSpace(squareMartix);
+		System.out.println("\nRotated Matrix:");
+		printGridElementsRecursivelu(rotatedMatix);
 	}
 }

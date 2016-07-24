@@ -1,4 +1,4 @@
-package com.prabhash.java.interview.matrix;
+package com.prabhash.interview.practice.matrix;
 
 import java.util.LinkedList;
 import java.util.Queue;
