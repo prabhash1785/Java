@@ -9,6 +9,8 @@ package com.prabhash.java.interview.ch2;
 public class EvenOddMerge {
 	
 	/**
+	 * Method 1:
+	 * 
 	 * Merge given list in a way that even position nodes come before odd positioned nodes. This is done using extra space where
 	 * we will maintain two lists, one for even position nodes and other one for odd position nodes. At the end, merge tail of even
 	 * list to head of odd list. Return the head of even list.
@@ -63,6 +65,46 @@ public class EvenOddMerge {
 		return evenMergedListHead;
 	}
 	
+	/**
+	 * Merge even and odd positioned nodes with constant memory.
+	 * 
+	 * Maintain two pointers for even and odd tails. For each subsequent node, determine if it is at odd position or even position
+	 * and then link it to respective even and odd tails. 
+	 * 
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(1)
+	 * 
+	 * @param list
+	 * @return list
+	 */
+	public static Node mergeEvenAndOddList(Node list) {
+		if(list == null) {
+			return null;
+		}
+		
+		Node evenTail = list;
+		Node oddTail = list.next;
+		Node current = oddTail == null ? null : oddTail.next;
+		int position = 2; // position to determine order and even order of nodes
+		
+		while(current != null) {
+			Node temp = current.next;
+			if(position % 2 == 0) {
+				Node oddHead = evenTail.next; // save odd Head in order to safely link even tail and odd head
+				evenTail.next = current;
+				current.next = oddHead;
+				evenTail = current;
+			} else {
+				oddTail.next = current;
+				oddTail = oddTail.next;
+				oddTail.next = null; // mark this as NULL in order to prevent circular Linked List behavior
+			}
+			current = temp;
+			position++;
+		}
+		return list;
+	}
+	
 	public static class Node {
 		private int data;
 		private Node next;
@@ -98,5 +140,9 @@ public class EvenOddMerge {
 		Node mergedHead = evenOddMergeWithExtraSpace(head);
 		System.out.println("\nEven Odd Merged list using extra space algorithm:");
 		printList(mergedHead);
+		
+		Node mergedList = mergeEvenAndOddList(head);
+		System.out.println("\nEven Odd Merged list using constant space algorithm:");
+		printList(mergedList);
 	}
 }
