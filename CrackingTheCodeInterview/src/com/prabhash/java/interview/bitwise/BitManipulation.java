@@ -14,7 +14,7 @@ public class BitManipulation {
 	 * For a number to be even, it's least sugnificany bit must be zero else it is odd.
 	 * 
 	 * @param n
-	 * @return
+	 * @return boolean
 	 */
 	public static boolean isEven(int n) {
 		if((n & 1) == 0) {
@@ -31,12 +31,14 @@ public class BitManipulation {
 	 * on this number "i" times. Then do a Bitwise OR of original number and mask.
 	 * 
 	 * @param n
+	 * @return int
 	 */
-	public static void setIthBit(int n, int bitPosition) {
+	public static int setIthBit(int n, int bitPosition) {
 		System.out.println("Original bit pattern: " + Integer.toBinaryString(n)) ;
 		int mask = 1 << bitPosition;
 		int maskedNum = n | mask;
 		System.out.println("Masked number with ith bit set: " + Integer.toBinaryString(maskedNum));
+		return maskedNum;
 	}
 	
 	/**
@@ -45,12 +47,30 @@ public class BitManipulation {
 	 * 
 	 * @param n
 	 * @param i
+	 * @return int
 	 */
-	public static void resetIthBit(int n, int i) {
+	public static int resetIthBit(int n, int i) {
 		System.out.println("Original bit pattern: " + Integer.toBinaryString(n)) ;
 		int mask = ~(1 << i);
 		int maskedNum = n & mask;
 		System.out.println("Masked number with ith bit set: " + Integer.toBinaryString(maskedNum));
+		return maskedNum;
+	}
+	
+	/**
+	 * Toggle ith bit: 
+	 * y = x ^ (1 << n) 
+	 * 
+	 * @param n
+	 * @param i
+	 * @return int
+	 */
+	public static int toggleIthBit(int n, int i) {
+		System.out.println("Original bit pattern: " + Integer.toBinaryString(n)) ;
+		int mask = 1 << i;
+		int maskedNum = n ^ mask;
+		System.out.println("Masked number with ith bit set: " + Integer.toBinaryString(maskedNum));
+		return maskedNum;
 	}
 
 	public static void main(String[] args) {
@@ -67,6 +87,10 @@ public class BitManipulation {
 		
 		// reset ith bit
 		resetIthBit(23, 2);
+		
+		//toggle ith bit
+		toggleIthBit(23, 3);
+		toggleIthBit(23, 2);
 	}
 
 }
