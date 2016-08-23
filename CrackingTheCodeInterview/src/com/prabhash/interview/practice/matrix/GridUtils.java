@@ -80,9 +80,9 @@ public class GridUtils {
 		}
 		
 		int[][] rotatedMatrix = new int[a.length][a[0].length];
-		for(int i = a.length - 1; i >= 0; i--) {
-			for(int j = 0; j < a[i].length; j++) {
-				rotatedMatrix[j][i] = a[i][j];
+		for(int i = 0, col = a.length - 1; i < a.length && col >= 0; i++, col--) {
+			for(int j = 0; j < a[0].length; j++) {
+				rotatedMatrix[j][col] = a[i][j];
 			}
 		}
 		
