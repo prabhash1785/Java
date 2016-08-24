@@ -1,5 +1,17 @@
 package com.prabhash.interview.practice.matrix;
 
+/**
+ * Generate a pascal triangle as follows:
+ * 
+ * 1
+ * 11
+ * 121
+ * 1331
+ * 14641
+ * 
+ * @author Prabhash Rathore
+ *
+ */
 public class PascalTriangle {
 	
 	public static void printPascalTriangle(int size) {
