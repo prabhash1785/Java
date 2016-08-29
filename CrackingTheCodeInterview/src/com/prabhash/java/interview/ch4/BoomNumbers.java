@@ -89,9 +89,9 @@ public class BoomNumbers {
 		Deque<String> deque = new LinkedList<>();
 		do {
 			if(k % 2 != 0) {
-				deque.addFirst("2");
+				deque.addFirst("2"); // equivalent of of Stack push
 			} else {
-				deque.addFirst("3");
+				deque.addFirst("3"); // equivalent of of Stack push
 			}
 			
 			k = (k - 1) / 2;
