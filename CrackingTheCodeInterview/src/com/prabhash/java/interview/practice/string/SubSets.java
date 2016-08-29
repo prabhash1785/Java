@@ -144,7 +144,7 @@ public class SubSets {
 	
 	public static void main(String[] args) {
 		
-		String text = "abcd";
+		String text = "tabc";
 		
 		List<String> subsets = findAllSubSets(text);
 		System.out.println("Powerset using recursive method:");
