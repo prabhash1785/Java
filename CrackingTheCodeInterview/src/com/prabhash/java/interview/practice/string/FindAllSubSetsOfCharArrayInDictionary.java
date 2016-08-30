@@ -1,9 +1,11 @@
 package com.prabhash.java.interview.practice.string;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -34,8 +36,8 @@ public class FindAllSubSetsOfCharArrayInDictionary {
 	}
 	
 	/**
-	 * Generate all subsets for given character array. Compare each subset in dictionary and if it exists, add that to 
-	 * output list.
+	 * Store given char array in a Map with count of each character. Then compare each word from dictionary to map of chracters,
+	 * if dictionary word is a subset of character array stored in map, then it'a valid word.
 	 * 
 	 * @param array
 	 * @return subsetsInDictionary
@@ -45,103 +47,60 @@ public class FindAllSubSetsOfCharArrayInDictionary {
 			throw new NullPointerException();
 		}
 		
-		final Set<String> allLowerCaseDict = new HashSet<>();
-		Iterator<String> iter = dictionary.iterator();
-		while(iter.hasNext()) {
-			String s = iter.next().toLowerCase();
-			allLowerCaseDict.add(s);
-		}
-		
 		List<String> wordsInDict = new ArrayList<>();
-		getPerms(new String(array), wordsInDict, allLowerCaseDict);
+		
+		Iterator<String> iterator = dictionary.iterator();
+		while(iterator.hasNext()) {
+			String word = iterator.next();
+			if(isSubSet(word.toCharArray(), array)) {
+				wordsInDict.add(word);
+			}
+		}
 		
 		return wordsInDict;
 	}
 	
 	/**
-	 * Find all the Permutations for a give n string using Recursion. This is the preferred method to find permutation of a String.
+	 * Check if char array1 is subset of char array2. Store chars in array2 to a Map with corresponding count of each character.
+	 * Then compare chars in array1 with chars stored in Map. If everything matches then it's a valid subset word else not.
 	 * 
-	 * Time Complexity: O(n!)
+	 * @param word1
+	 * @param word2
+	 * @return boolean
 	 */
-	public static List<String> getPerms(String str, List<String> wordsInDict, Set<String> dict) {
-		if (str == null) {
-			return null;
+	private static boolean isSubSet(char[] array1, char[] array2) {
+		if(array1 == null || array2 == null) {
+			return false;
 		}
-		List<String> permutations = new ArrayList<String>();
-		if (str.length() == 0) { // base case
-			permutations.add("");
-			return permutations;
+		
+		if(array1.length > array2.length) {
+			return false;
 		}
-
-		char first = str.charAt(0); // get the first character
-		String remainder = str.substring(1); // remove the first character
-		List<String> words = getPerms(remainder, wordsInDict, dict);
-		for (String word : words) {
-			
-			if(dict.contains(word.toLowerCase())) {
-				wordsInDict.add(word);
+		
+		Map<Character, Integer> map = new HashMap<>();
+		for(int i = 0; i < array2.length; i++) {
+			if(map.containsKey(array2[i])) {
+				int value = map.get(array2[i]);
+				map.put(array2[i], ++value);
+			} else {
+				map.put(array2[i], 1);
 			}
-			
-			for (int j = 0; j <= word.length(); j++) {
-				String s = insertCharAt(word, first, j);
-				
-				if(dict.contains(s.toLowerCase())) {
-					wordsInDict.add(s);
+		}
+		
+		for(int i = 0; i < array1.length; i++) {
+			if(!map.containsKey(array1[i])) {
+				return false;
+			} else {
+				if(map.get(array1[i]) <= 0) {
+					return false;
 				}
 				
-				permutations.add(s);
+				int count = map.get(array1[i]);
+				map.put(array1[i], --count);
 			}
 		}
-		return permutations;
-	}
-	
-	/**
-	 * Utility method to add character to a string in a given position
-	 * 
-	 */
-	private static String insertCharAt(String str, char ch, int i) {
-		String start = str.substring(0, i);
-		String last = str.substring(i);
-		return start + ch + last;
-	}
-
-	/**
-	 * Find all subsets for given array of characters.
-	 * 
-	 * Time Complexity: (2 ^ n)
-	 * 
-	 * @param array
-	 * @return subsets
-	 */
-	public static List<String> findAllSubSets(char[] array) {
-		if(array == null) {
-			return null;
-		}
 		
-		String text = new String(array);
-		
-		List<String> subsets = new ArrayList<String>();
-		subsets.add("");
-		
-		for(int i = 0; i < text.length(); i++) {
-			String prefix = String.valueOf(text.charAt(i));
-			String suffix = text.substring(i + 1);
-			
-			subsets.add(String.valueOf(prefix));
-			
-			findAllSubSetsHelper(prefix, suffix, subsets);
-		}
-		
-		return subsets;
-	}
-	
-	private static void findAllSubSetsHelper(String prefix, String suffix, List<String> list) {
-		for(int k = 0; k < suffix.length(); k++) {
-			String word = prefix + suffix.charAt(k);
-			list.add(word);
-			
-			findAllSubSetsHelper(word, suffix.substring(k + 1), list);
-		}
+		return true;
 	}
 	
 	private static void printListString(List<String> subsets) {
@@ -151,26 +110,15 @@ public class FindAllSubSetsOfCharArrayInDictionary {
 		
 		System.out.println("Number of strings: " + subsets.size());
 		for(String s : subsets) {
-			System.out.print("{" + s + "} ");
+			System.out.print(s + " ");
 		}
 	}
 	
 	public static void main(String[] args) {
 		char[] charArray = new char[] {'t', 'a', 'b', 'c'};
 		
-		// all permutations of given array
-//		List<String> perms = getPerms(new String(charArray));
-//		System.out.println("Here are all permutations");
-//		printListString(perms);
-		
-		// all subsets of char array
-//		List<String> allSubSets = findAllSubSets(charArray);
-//		System.out.println("\nHere are all subsets:");
-//		printListString(allSubSets);
-		
 		List<String> subsetsInDict = findSubSetsInDictionary(charArray);
 		System.out.println("\nHere are possible subsets in dictionary:");
 		printListString(subsetsInDict);
 	}
-
 }
