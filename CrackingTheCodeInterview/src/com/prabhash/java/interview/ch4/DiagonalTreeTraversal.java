@@ -9,7 +9,19 @@ import java.util.Set;
 /**
  * Traverse a tree diagonally.
  * 
- * @author prrathore
+ * Given Tree:
+ * 
+ * 								8
+ * 					3							10
+ * 			1				6							14
+ * 						4		7					13
+ * 
+ * Output:
+ * 8 10 14 
+ * 3 6 7 13 
+ * 1 4 
+ * 
+ * @author Prabhash Rathore
  *
  */
 public class DiagonalTreeTraversal {
@@ -20,7 +32,7 @@ public class DiagonalTreeTraversal {
 			return;
 		}
 
-		Map<Integer, List<Node>> map = new HashMap<Integer, List<Node>>();
+		Map<Integer, List<Node>> map = new HashMap<>();
 		
 		getDiagonalMap(root, 0, map);
 		printDiagonal(map);
