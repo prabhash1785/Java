@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HelloGenerics {
-
+	
 	public static void main(String[] args) {
 		
 		List<Animal> list1 = new ArrayList<Animal>(); //in this case object types have to be same, we can't use sub-classes
