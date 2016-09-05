@@ -54,6 +54,60 @@ public class SmallestSubArrayCoveringAllValues {
 		return subArray;
 	}
 	
+	/**
+	 * Optimized method to find min sub-array containing all elements in the given set.
+	 * 
+	 * Maintain two pointers startIndex and endIndex. Iterate over paragraph while endIndex < paragraph length. If a paragraph
+	 * word is found in set then increment count. When count is equal to number of elements in set, update sub-array length if length
+	 * < previous subArray length. Also if string at startIndex is in set then decrement count as that word is going to be not counted in
+	 * subsequent subarray when startIndex moves right. Continue to iterate and at the end, it will give the smallest subArray length
+	 * with all elements from set. 
+	 * 
+	 * Time Complexity: O(n)
+	 * 
+	 * @param paragraph
+	 * @param set
+	 * @return subArray
+	 */
+	public static SubArray findSmallestSubArrayOptimized(String[] paragraph, Set<String> set) {
+		if(paragraph == null || set == null) {
+			throw new NullPointerException();
+		}
+		
+		// Size of set cannot be more than length of paragraph
+		if(set.size() > paragraph.length) {
+			return null;
+		}
+		
+		SubArray subArray = new SubArray(-1, -1);
+		int startIndex = 0, endIndex = 0;
+		int count = 0;
+		
+		while(endIndex < paragraph.length) {
+			if(set.contains(paragraph[endIndex])) {
+				++count;
+			}
+			
+			while(count == set.size()) {
+				int currentSubArraySize = endIndex - startIndex;
+				if((subArray.start == -1 && subArray.end == -1) || 
+						(currentSubArraySize < (subArray.end - subArray.start))) {
+					subArray.start = startIndex;
+					subArray.end = endIndex;
+				}
+				
+				if(set.contains(paragraph[startIndex])) {
+					--count;
+				}
+				++startIndex;
+			}
+			
+			++endIndex;
+		}
+		
+		return subArray;
+	}
+	
 	public static class SubArray {
 		private int start;
 		private int end;
@@ -76,6 +130,21 @@ public class SmallestSubArrayCoveringAllValues {
 		SubArray subArray = findSmallestSubArrayUsingBruteForce(paragraph, set);
 		System.out.println("Smallest sub-array containing words from set are:");
 		System.out.println("Start Index: "+ subArray.start + " ::: End Index: " + subArray.end);
+		
+		String[] paragraph2 = new String[] {
+			"apple", "banana", "apple", "apple", "dog", "cat", "apple", "dog", "banana", "apple", "cat", "dog"	
+		};
+		Set<String> set2 = new HashSet<>();
+		set2.add("banana");
+		set2.add("cat");
+		
+		SubArray subArray2 = findSmallestSubArrayOptimized(paragraph2, set2);
+		if(subArray2 == null) {
+			System.out.println("Set elements are not available in paragraph");
+		} else {
+			System.out.println("\nSmallest sub-array containing words from set are:");
+			System.out.println("Start Index: " + subArray2.start + " :: End Index: " + subArray2.end);
+		}
 	}
 
 }
