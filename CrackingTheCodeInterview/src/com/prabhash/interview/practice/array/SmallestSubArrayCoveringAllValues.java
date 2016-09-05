@@ -5,6 +5,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Find smallest sub-array covering all values in given set.
+ * 
+ * @author Prabhash Rathore
+ *
+ */
 public class SmallestSubArrayCoveringAllValues {
 	
 	/**
