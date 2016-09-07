@@ -114,9 +114,17 @@ public class SpecialCircularTree {
 
 	public static void main(String[] args) {
 		Node<String> root = new Node<>("10");
-		root.left = new Node("20");
-		root.right = new Node("30");
-		root.random = root;
+		
+		Node<String> randomNode = new Node<>("35");
+		randomNode.left = new Node<>("43");
+		randomNode.right = new Node<>("86");
+		randomNode.random = root;
+
+		root.left = new Node<>("20");
+		root.right = new Node<>("30");
+		root.random = randomNode;
+		
+		root.left.right = randomNode;
 		
 		System.out.println("Original Tree:");
 		printInOrder(root);
