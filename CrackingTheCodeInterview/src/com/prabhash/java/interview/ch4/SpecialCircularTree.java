@@ -1,8 +1,10 @@
 package com.prabhash.java.interview.ch4;
 
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -15,19 +17,27 @@ import java.util.Set;
 public class SpecialCircularTree {
 	
 	public static Node<String> cloneTree(Node<String> root) {
-		Set<Node<String>> visitedNodeSet = new HashSet<>();
-		return cloneHelper(root, visitedNodeSet);
+		Map<Node<String>, Node<String>> visitedNodeMap = new HashMap<>();
+		return cloneHelper(root, visitedNodeMap);
 	}
 	
-	private static Node<String> cloneHelper(Node<String> root, Set<Node<String>> set) {
+	private static Node<String> cloneHelper(Node<String> root, Map<Node<String>, Node<String>> map) {
 		if(root == null) {
 			return null;
 		}
 		
-		Node<String> node = new Node<>(root.data);
-		node.left = cloneHelper(root.left, set);
-		node.right = cloneHelper(root.right, set);
-		node.random = root.random;
+		Node<String> node = null;
+		if(map.containsKey(root)) {
+			node = map.get(root);
+			return node;
+		} else {
+			node = new Node<>(root.data);
+			map.put(root, node);
+		}
+		
+		node.left = cloneHelper(root.left, map);
+		node.right = cloneHelper(root.right, map);
+		node.random = cloneHelper(root.random, map);
 		
 		return node;
 	}
