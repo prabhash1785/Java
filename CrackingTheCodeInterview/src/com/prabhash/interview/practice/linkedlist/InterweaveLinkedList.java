@@ -8,7 +8,7 @@ import java.util.Stack;
  * For eg, input: 2 -> 8 -> 1 -> 7 -> 15
  * Output: 2 -> 15 -> 8 -> 7 -> 1
  * 
- * @author prrathore
+ * @author Prabhash Rathore
  *
  */
 public class InterweaveLinkedList {
