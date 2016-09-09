@@ -6,7 +6,7 @@ package com.prabhash.interview.practice.sort;
  * @author Prabhash Rathore
  *
  */
-public class AgeSorting {
+public class AgeSortingUsingCountingSort {
 
 	// since 0 and 200 both are inclusive so size of countingArray must be 200 + 1 = 201
 	public static final int MAX_AGE_BUCKETS = 201;
