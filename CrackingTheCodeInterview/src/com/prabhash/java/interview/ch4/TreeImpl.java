@@ -127,6 +127,15 @@ public class TreeImpl {
 	}
 	
 	/**
+	 * InOrder from right node to left. This will print BST elements in decreasing order.
+	 * 
+	 * @param node
+	 */
+	public void inOrderFromRightToLeft(Node node) {
+		
+	}
+	
+	/**
 	 * Post-order traversal of tree 
 	 * 
 	 * @param root
