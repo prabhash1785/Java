@@ -132,7 +132,13 @@ public class TreeImpl {
 	 * @param node
 	 */
 	public void inOrderFromRightToLeft(Node node) {
+		if(node == null) {
+			return;
+		}
 		
+		inOrderFromRightToLeft(node.right);
+		System.out.print(node.key + " ");
+		inOrderFromRightToLeft(node.left);
 	}
 	
 	/**
@@ -449,6 +455,9 @@ public class TreeImpl {
 		
 		System.out.println("\n\nIn-order Traversal:");
 		tree.inOrder(root);
+		
+		System.out.println("\n\nIn-order Traversal to print elements in decresing order:");
+		tree.inOrderFromRightToLeft(root);
 		
 		System.out.println("\n\nPost-order Travsersal:");
 		tree.postOrder(root);
