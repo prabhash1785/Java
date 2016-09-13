@@ -62,6 +62,45 @@ public class FindExactOrNearestNodeInBST {
 	}
 	
 	/**
+	 * Method 2:
+	 * This recursive method will return the actual result instead of having the result in method argument.
+	 * 
+	 * @param root
+	 * @param data
+	 * @return result
+	 */
+	public Node findExactOrNearestNodeMethod2(Node root, int data) {
+		if(root == null) {
+			return null;
+		}
+		
+		// instead of instantiating, let's initialize to null to prevent excessive object creation in each recursive call
+		Node result = null;
+		if(root.data == data) {
+			result = new Node(root.data); // instantiate as we found an exact match in BST
+			return result;
+		} else if(root.data > data) {
+			result = findExactOrNearestNodeMethod2(root.left, data);
+			if(result == null) {
+				result = new Node(0);
+			}
+			if(Math.abs(root.data - data) < Math.abs(result.data - data)) {
+				result.data = root.data;
+			}
+		} else {
+			result = findExactOrNearestNodeMethod2(root.right, data);
+			if(result == null) {
+				result = new Node(0);
+			}
+			if(Math.abs(root.data - data) < Math.abs(result.data - data)) {
+				result.data = root.data;
+			}
+		}
+		
+		return result;
+	}
+	
+	/**
 	 * Add data to BST. 
 	 * 
 	 * @param data
@@ -128,8 +167,12 @@ public class FindExactOrNearestNodeInBST {
 		System.out.println("Inorder of BST:");
 		tree.inOrder(tree.root);
 		
-		// Nearest node test cases
+		// Nearest node test cases with recursive method 1 where result is part of method arguement
 		System.out.println("\nNearest node: " + tree.findExactOrNearestNode(400).data);
 		System.out.println("\nNearest node: " + tree.findExactOrNearestNode(399).data);
+		
+		// Nearest node test cases with recursive method 2 where result is a return type
+		System.out.println("\nNearest node: " + tree.findExactOrNearestNodeMethod2(tree.root, 400).data);
+		System.out.println("\nNearest node: " + tree.findExactOrNearestNodeMethod2(tree.root, 399).data);
 	}
 }
