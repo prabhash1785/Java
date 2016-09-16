@@ -124,6 +124,87 @@ public class FindKNumbersWithMaxFrequecy {
 		return result;
 	}
 	
+	/**
+	 * Method 3:
+	 * This finds max k-repeating numbers in Linear Time using Counting Sort.
+	 * First scan through input array and record each number and it's frequency in a Map. Then create an array of Node which will store
+	 * numbers from map as a value at their frequency index. This way when we traverse this temp array from end, we will be able to
+	 * find numbers with max frequencies.
+	 * 
+	 * Make sure that there could be numbers with same frequency so in temp array, chain/bucket such numbers using a Linked List at the
+	 * same frequency index.
+	 * 
+	 * This algorithm just returns first top k repeating numbers. It considers two numbers with same frequency as two distinct numbers.
+	 * 
+	 *  Time Complexity: O(n)
+	 *  Space Complexity: O(n)
+	 * 
+	 * @param a
+	 * @param k
+	 * @return result
+	 */
+	public static int[] findKMaxRepeatingNumbersInLinearTime(int[] a, int k) {
+		if(a == null) {
+			return null;
+		}
+		
+		if(k <= 0 || k > a.length) {
+			throw new IllegalArgumentException();
+		}
+		
+		Map<Integer, Integer> map = new HashMap<>();
+		for(int i = 0; i < a.length; i++) {
+			if(map.containsKey(a[i])) {
+				map.put(a[i], map.get(a[i]) + 1);
+			} else {
+				map.put(a[i], 1);
+			}
+		}
+		
+		// in a temp array, store numbers from Map with their frequency as index and value as array value at that frequency index. There
+		// could be more than one number with same frequency so store them as a Linked List at that index.
+		Node[] frequencySorter = new Node[a.length];
+		Set<Entry<Integer, Integer>> entrySet = map.entrySet();
+		for(Entry<Integer, Integer> entry : entrySet) {
+			int frequency = entry.getValue();
+			Node node = frequencySorter[frequency];
+			if(node == null) {
+				node = new Node(entry.getKey());
+				frequencySorter[frequency] = node;
+			} else {
+				while(node.next != null) {
+					node = node.next;
+				}
+				node.next = new Node(entry.getKey());
+			}
+		}
+		
+		int[] result = new int[k];
+		for(int i = frequencySorter.length - 1, index = 0; i >= 0 && index < k; i--) {
+			Node node = frequencySorter[i];
+			while(node != null && index < k) {
+				if(node.value != 0) {
+					result[index] = node.value;
+					node = node.next;
+					++index;
+				} else {
+					break;
+				}
+			}
+		}
+		
+		return result;	
+	}
+	
+	public static class Node {
+		private int value;
+		public Node next;
+		
+		public Node(int value) {
+			this.value = value;
+		}
+	}
+	
 	public static class Number implements Comparable<Number> {
 		private int value;
 		private int frequency;
@@ -160,13 +241,23 @@ public class FindKNumbersWithMaxFrequecy {
 		
 		int k = 3;
 		
+		// test Method 1
 		System.out.println(k + " elements with max frequency are: ");
 		int[] output = findKNumbersWithMaxFrequencyUsingList(array, k);
 		printArray(output);
 		
-		System.out.println("\n" + k + " elements with max frequency are: ");
+		// test Method 2
+		System.out.println("\n" + k + " elements with max frequency using Heap Algorithm are: ");
 		int[] output2 = findKMaxNumbersUsingPriorityQueue(array, k);
 		printArray(output2);
+		
+		// test Method 3
+		int[] b = new int[] {
+				2, 2, 2, 2, 2, 2, 2, 2, 3, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 7, 10, 10, 10
+		};
+		System.out.println("\n" + k + " elements with max frequency using Counting Sort are: ");
+		int[] output3 = findKMaxRepeatingNumbersInLinearTime(b, k);
+		printArray(output3);
 	}
 
 }
