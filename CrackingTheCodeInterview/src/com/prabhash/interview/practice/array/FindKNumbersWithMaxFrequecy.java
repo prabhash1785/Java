@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Set;
 
 /**
@@ -63,6 +65,55 @@ public class FindKNumbersWithMaxFrequecy {
 		return result;
 	}
 	
+	/**
+	 * 
+	 *
+	 */
+	public static int[] findKMaxNumbersUsingPriorityQueue(int[] a, int k) {
+		if(a == null) {
+			return null;
+		}
+		
+		if(k <= 0 || k > a.length) {
+			throw new IllegalArgumentException();
+		}
+		
+		Map<Integer, Integer> map = new HashMap<>();
+		for(int i = 0; i < a.length; i++) {
+			if(map.containsKey(a[i])) {
+				map.put(a[i], map.get(a[i]) + 1);
+			} else {
+				map.put(a[i], 1);
+			}
+		}
+		
+		Queue<Number> queue = new PriorityQueue<>(k);
+		int count = 0;
+		Set<Entry<Integer, Integer>> entrySet = map.entrySet();
+		for(Entry<Integer, Integer> entry : entrySet) { 
+			if(count < k) {
+				queue.offer(new Number(entry.getKey(), entry.getValue()));
+				++count;
+				continue;
+			}
+			
+			Number num = queue.peek();
+			if(entry.getValue() > num.frequency) {
+				queue.remove();
+				queue.offer(new Number(entry.getKey(), entry.getValue()));
+			}
+		}
+		
+		int[] result = new int[k];
+		int index = 0;
+		while(!queue.isEmpty()) {
+			result[index] = queue.remove().value;
+			++index;
+		}
+		
+		return result;
+	}
+	
 	public static class Number implements Comparable<Number> {
 		private int value;
 		private int frequency;
@@ -102,6 +153,10 @@ public class FindKNumbersWithMaxFrequecy {
 		System.out.println(k + " elements with max frequency are: ");
 		int[] output = findKNumbersWithMaxFrequencyUsingList(array, k);
 		printArray(output);
+		
+		System.out.println("\n" + k + " elements with max frequency are: ");
+		int[] output2 = findKMaxNumbersUsingPriorityQueue(array, k);
+		printArray(output2);
 	}
 
 }
