@@ -66,8 +66,18 @@ public class FindKNumbersWithMaxFrequecy {
 	}
 	
 	/**
+	 * Method 2:
+	 * Using a Min-Heap (Min Priority Queue), we can solve this problem in O(n logk) time. First scan through array and record number
+	 * and it's corresponding frequency in a Map. After that instantiate a k-sized Min-Heap and store first k numbers from Map into
+	 * heap. After k + 1 to nth entries from Map, check if this entry is greater than root of heap. If it is then remove heap root and 
+	 * add this element to heap. Repeat this process. At the end, you will have heap with k max repeating numbers.
 	 * 
-	 *
+	 * Time Complexity: (n logk)
+	 * Space Complexity: O(n)
+	 * 
+	 * @param a
+	 * @param k
+	 * @return result
 	 */
 	public static int[] findKMaxNumbersUsingPriorityQueue(int[] a, int k) {
 		if(a == null) {
