@@ -8,6 +8,10 @@ package com.prabhash.java.lambda;
  */
 public class HeyLambda {
 	
+	/**
+	 * Interface with only one method
+	 *
+	 */
 	public static interface Animal {
 		public String speak();
 	}
