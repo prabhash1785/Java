@@ -1,6 +1,7 @@
 package com.prabhash.java.streams;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -42,6 +43,11 @@ public class BasicStreamsDemo {
 		
 		printEvenNumbers(list);
 		convertStringToUpperCase();
+		
+		//pick even numbers from given list
+		Predicate<Integer> oddPredicate = n -> n % 2 != 0;
+		long count = Stream.of(2, 5, 6, 7, 10).filter(oddPredicate).count();
+		System.out.println("Number of odd elements in list: " + count);
 	}
 
 }
