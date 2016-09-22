@@ -12,6 +12,7 @@ public class HeyLambda {
 	 * Interface with only one method
 	 *
 	 */
+	@FunctionalInterface
 	public static interface Animal {
 		public String speak();
 	}
