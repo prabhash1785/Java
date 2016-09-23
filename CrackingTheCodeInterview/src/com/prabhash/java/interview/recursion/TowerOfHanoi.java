@@ -56,7 +56,7 @@ public class TowerOfHanoi {
 	}
 	
 	public static void main(String[] args) {
-		final int discCount = 5;
+		final int discCount = 3;
 		Tower origin = new Tower("Origin");
 		Tower destination = new Tower("Destination");
 		Tower buffer = new Tower("Buffer");
