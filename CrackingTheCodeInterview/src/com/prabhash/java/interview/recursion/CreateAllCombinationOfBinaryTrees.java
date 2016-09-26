@@ -36,7 +36,7 @@ public class CreateAllCombinationOfBinaryTrees {
 			
 			Node node = new Node(counter);
 			if(tail == null) {
-				tail = new Node(counter);
+				tail = node;
 				head = tail;
 			} else {
 				tail.left = node;
