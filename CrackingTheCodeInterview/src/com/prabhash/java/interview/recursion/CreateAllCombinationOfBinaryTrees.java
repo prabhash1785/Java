@@ -11,6 +11,17 @@ import java.util.List;
  */
 public class CreateAllCombinationOfBinaryTrees {
 	
+	private static final int NODE_VALUE = 0;
+	
+	/**
+	 * In order to generate all possible binary trees, first fine all left sub-trees and right sub-trees. Then generate tree combinations
+	 * from these left and right subtrees.
+	 * 
+	 * Time Complexity: [(2n)! / n!(n + 1)!] - This is same as nth Catalan Number
+	 * 
+	 * @param n
+	 * @return List<Node>
+	 */
 	public static List<Node> getAllBinaryTreeCombinations(int n) {
 		if(n <= 0) {
 			return null;
@@ -23,7 +34,8 @@ public class CreateAllCombinationOfBinaryTrees {
 		List<Node> result = new ArrayList<>();
 		
 		if(n == 0) {
-			result.add(null);
+			result.add(null); // this is needed in order for the loop to work below
+			return result;
 		}
 		
 		for(int left = 0; left < n; left++) {
@@ -33,10 +45,11 @@ public class CreateAllCombinationOfBinaryTrees {
 			
 			List<Node> rightSubTrees = getAllBinaryTreeCombinationsHelper(right);
 			
+			// generate all possible combination of trees from left subtrees and right subtrees
 			for(int i = 0; i < leftSubTrees.size(); i++) {
-			
+				
 				for(int j = 0; j < rightSubTrees.size(); j++) {
-					Node root = new Node(left);
+					Node root = new Node(NODE_VALUE);
 					root.left = leftSubTrees.get(i);
 					root.right = rightSubTrees.get(j);
 					
@@ -81,7 +94,7 @@ public class CreateAllCombinationOfBinaryTrees {
 	}
 	
 	public static void main(String[] args) {
-		int nodeCount = 2;
+		int nodeCount = 3;
 		List<Node> list = getAllBinaryTreeCombinations(nodeCount);
 		System.out.println("Here are all trees:");
 		printAllTrees(list);
