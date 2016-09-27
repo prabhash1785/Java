@@ -16,38 +16,37 @@ public class CreateAllCombinationOfBinaryTrees {
 			return null;
 		}
 		
-		List<Node> result = new ArrayList<>();
-		int count = 0;
-		Node head = null;
-		Node tail = head;
-		getAllBinaryTreeCombinationsHelper(n, count, head, tail, result);
-		
-		return result;
+		return getAllBinaryTreeCombinationsHelper(n);
 	}
-	
-	private static void getAllBinaryTreeCombinationsHelper(int n, int counter, Node head, Node tail, List<Node> result) {
+		
+	private static List<Node> getAllBinaryTreeCombinationsHelper(int n) {
+		List<Node> result = new ArrayList<>();
+		
 		if(n == 0) {
-			result.add(head);
-			return;
+			result.add(null);
 		}
 		
 		for(int left = 0; left < n; left++) {
-			int right = n - left - 1;
+			int right = n - 1 - left;
 			
-			Node node = new Node(counter);
-			if(tail == null) {
-				tail = node;
-				head = tail;
-			} else {
-				tail.left = node;
+			List<Node> leftSubTrees = getAllBinaryTreeCombinationsHelper(left);
+			
+			List<Node> rightSubTrees = getAllBinaryTreeCombinationsHelper(right);
+			
+			for(int i = 0; i < leftSubTrees.size(); i++) {
+			
+				for(int j = 0; j < rightSubTrees.size(); j++) {
+					Node root = new Node(left);
+					root.left = leftSubTrees.get(i);
+					root.right = rightSubTrees.get(j);
+					
+					result.add(root);
+				}
+				
 			}
-			
-			getAllBinaryTreeCombinationsHelper(left, counter + 1, head, tail.left, result);
-			tail.left = null;
-			
-			tail.right = node;
-			getAllBinaryTreeCombinationsHelper(right, counter + 1, head, tail.right, result);
 		}
+		
+		return result;
 	}
 	
 	public static void printTree(Node root) {
@@ -82,7 +81,7 @@ public class CreateAllCombinationOfBinaryTrees {
 	}
 	
 	public static void main(String[] args) {
-		int nodeCount = 3;
+		int nodeCount = 2;
 		List<Node> list = getAllBinaryTreeCombinations(nodeCount);
 		System.out.println("Here are all trees:");
 		printAllTrees(list);
