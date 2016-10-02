@@ -3,8 +3,20 @@ package com.prabhash.java.interview.recursion;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Generate all possible BSTs given number of nodes.
+ * 
+ * @author Prabhash Rathore
+ *
+ */
 public class GenerateAllBSTsFrom {
 	
+	/**
+	 * Generate all combination of left subtrees and right subtrees. Then generate trees by combining left and right subtrees.
+	 * 
+	 * @param n
+	 * @return List<Node>
+	 */
 	public static List<Node> getAllBSTs(int n) {
 		if(n <= 0) {
 			return null;
