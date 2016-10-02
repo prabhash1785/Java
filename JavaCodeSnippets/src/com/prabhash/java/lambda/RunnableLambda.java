@@ -34,6 +34,7 @@ public class RunnableLambda {
 		t3.start();
 		t1.start();
 		t2.start();
+		t5.start();
 	}
 
 }
