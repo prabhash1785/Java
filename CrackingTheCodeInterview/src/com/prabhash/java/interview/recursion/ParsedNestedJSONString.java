@@ -17,7 +17,7 @@ public class ParsedNestedJSONString {
 	 * the root. For each substring, recurse and add the returned node as a child to the parent root. 
 	 * 
 	 * @param s
-	 * @return
+	 * @return root
 	 */
 	public static Node parseJSONString(String s) {
 		if(s == null) {
