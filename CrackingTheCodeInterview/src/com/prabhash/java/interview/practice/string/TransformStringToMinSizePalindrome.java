@@ -10,7 +10,7 @@ package com.prabhash.java.interview.practice.string;
 public class TransformStringToMinSizePalindrome {
 	
 	/**
-	 * Metho 1:
+	 * Method 1:
 	 * To convert given string to a minimum size palindrome, keep a preString which needs to be added to input String to make it a 
 	 * palindrome. Keep adding character from end to start of input text to pre string until (preString + string) becomes a palindrome.  
 	 * 
