@@ -3,9 +3,11 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="lib" path="/Users/prrathore/Softwares/jars/guava-19.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="/Users/prrathore/Downloads/activation.jar"/>
 	<classpathentry kind="lib" path="/Users/prrathore/Downloads/javaee.jar"/>
 	<classpathentry kind="lib" path="/Users/prrathore/Downloads/mail.jar"/>
+	<classpathentry kind="lib" path="/Users/prrathore/Softwares/jars/commons-collections4-4.1/commons-collections4-4.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
