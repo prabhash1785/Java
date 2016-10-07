@@ -46,6 +46,6 @@ public class LookAndSayProblem {
 	public static void main(String[] args) {
 		int n = 5;
 		String nthLookAndSayNumber = lookAndSay(n);
-		System.out.println("\nNth look and say number is: " + nthLookAndSayNumber);
+		System.out.println(n + " look and say number is: " + nthLookAndSayNumber);
 	}
 }
