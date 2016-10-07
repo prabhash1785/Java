@@ -14,7 +14,7 @@ public class CreateAllCombinationOfBinaryTrees {
 	private static final int NODE_VALUE = 0;
 	
 	/**
-	 * In order to generate all possible binary trees, first fine all left sub-trees and right sub-trees. Then generate tree combinations
+	 * In order to generate all possible binary trees, first find all left sub-trees and right sub-trees. Then generate tree combinations
 	 * from these left and right subtrees.
 	 * 
 	 * Time Complexity: [(2n)! / n!(n + 1)!] - This is same as nth Catalan Number
