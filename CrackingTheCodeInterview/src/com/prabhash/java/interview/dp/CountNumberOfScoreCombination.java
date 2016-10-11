@@ -62,7 +62,7 @@ public class CountNumberOfScoreCombination {
 	 * Find number of unique sequence to get to a score using Dynamic Programming as brute force recursion is very expensive and we repeat the same work over and over. As part of DP,
 	 * maintain a set of sorted String sequence which has already been worked upon.
 	 * 
-	 * Time Complexity: O(scores.length * totalScore)
+	 * Time Complexity: O(scores.length * totalScore * scores.length(log scores.length))
 	 * 
 	 * @param totalScore
 	 * @param scores
