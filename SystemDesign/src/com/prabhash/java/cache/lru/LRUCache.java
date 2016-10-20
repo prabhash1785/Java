@@ -58,7 +58,7 @@ public class LRUCache {
 			
 			value = node.data;
 			
-			//move this node to front of Cacche as per LRU use case
+			//move this node to front of Cache as per LRU use case
 			moveNodeToFront(node);
 		}
 		
@@ -187,8 +187,5 @@ public class LRUCache {
 		
 		a = cache.get("2");
 		System.out.println("Now a is: " + a);
-		
-		
-
 	}
 }
