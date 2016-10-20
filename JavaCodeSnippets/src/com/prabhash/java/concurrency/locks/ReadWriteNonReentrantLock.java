@@ -28,6 +28,9 @@ public class ReadWriteNonReentrantLock {
 		while(isWriteLocked || waitingWriteLocks > 0) {
 			try {
 				wait();
+				System.out.println(Thread.currentThread().getName() + " is blocked for read lock!!");
+				System.out.println("activeReadLocks = " + activeReadLocks + " :: waitingWriteLocks: " + waitingWriteLocks + 
+						" :: isWriteLocked: " + isWriteLocked);
 			} catch(InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -44,6 +47,7 @@ public class ReadWriteNonReentrantLock {
 			throw new IllegalStateException("No read locks acquired so cannot unlock");
 		}
 		
+		System.out.println(Thread.currentThread().getName() + " is going to release read lock!!");
 		--activeReadLocks;
 		notifyAll(); // notify all blocked threads then one lock is released
 	}
@@ -57,6 +61,9 @@ public class ReadWriteNonReentrantLock {
 		while(isWriteLocked || activeReadLocks > 0) {
 			try {
 				wait();
+				System.out.println(Thread.currentThread().getName() + " is blocked for write lock!!");
+				System.out.println("activeReadLocks = " + activeReadLocks + " :: waitingWriteLocks: " + waitingWriteLocks + 
+						" :: isWriteLocked: " + isWriteLocked);
 			} catch(InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -74,13 +81,83 @@ public class ReadWriteNonReentrantLock {
 			throw new IllegalStateException("No active write lock acquired so cannot do unlocking");
 		}
 		
+		System.out.println(Thread.currentThread().getName() + " is going to release write lock!!");
 		isWriteLocked = false;
 		notifyAll();
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		ReadWriteNonReentrantLock lock = new ReadWriteNonReentrantLock();
+		
+		Thread t1 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				lock.readLock();
+				try {
+					Thread.sleep(5000);
+				} catch(InterruptedException e) {
+					System.out.println("Thread T1 interrupted!!");
+				}
+				lock.readUnLock();
+			}
+		}, "T1");
+		
+		Thread t2 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				lock.readLock();
+				try {
+					Thread.sleep(5000);
+				} catch(InterruptedException e) {
+					System.out.println("Thread T2 interrupted!!");
+				}
+				lock.readUnLock();
+			}
+		}, "T2");
+		
+		Thread t3 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				lock.writeLock();
+				try {
+					Thread.sleep(5000);
+				} catch(InterruptedException e) {
+					System.out.println("Thread T3 interrupted!!");
+				}
+				lock.writeUnLock();
+			}
+		}, "T3");
+		
+		Thread t4 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				lock.writeLock();
+				try {
+					Thread.sleep(5000);
+				} catch(InterruptedException e) {
+					System.out.println("Thread T4 interrupted!!");
+				}
+				lock.writeUnLock();
+			}
+		}, "T4");
+		
+		Thread t5 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				lock.readLock();
+				try {
+					Thread.sleep(5000);
+				} catch(InterruptedException e) {
+					System.out.println("Thread T5 interrupted!!");
+				}
+				lock.readUnLock();
+			}
+		}, "T5");
+		
+		t1.start();
+		t2.start();
+		t3.start();
+		t4.start();
+		t5.start();
 	}
-
 }
