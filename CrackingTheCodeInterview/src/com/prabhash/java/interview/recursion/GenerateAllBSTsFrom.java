@@ -38,7 +38,7 @@ public class GenerateAllBSTsFrom {
 			List<Node> rightSubTrees = getAllBSTsHelper(i + 1, end);
 			
 			for(int j = 0; j < leftSubTrees.size(); j++) {
-				Node node = new Node(i);
+				Node node = new Node(i); // number at ith position is the root
 				node.left = leftSubTrees.get(j);
 				
 				for(int k = 0; k < rightSubTrees.size(); k++) {
