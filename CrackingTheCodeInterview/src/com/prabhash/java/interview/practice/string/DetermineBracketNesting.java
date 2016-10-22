@@ -69,7 +69,7 @@ public class DetermineBracketNesting {
 	/**
 	 * Find bracket nesting level in a string when brackets are heterogeneous.
 	 * 
-	 * This is done using a Stack because Stack has a nice property called LIFO which will help us in validating the bracekts are closed
+	 * This is done using a Stack because Stack has a nice property called LIFO which will help us in validating the brackets are closed
 	 * in right order.
 	 * 
 	 * @param s
