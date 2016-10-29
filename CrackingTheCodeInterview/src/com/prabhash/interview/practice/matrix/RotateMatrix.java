@@ -51,7 +51,7 @@ public class RotateMatrix {
 			int start = layer, end = a.length - layer - 1;
 			
 			for(int i = start; i < end; i++) {
-				int offset = i - start;
+				int offset = i - start; // offset is a counter which will help in going around the matrix for each layer
 				
 				// save top to temp 
 				int temp = a[start][i];
