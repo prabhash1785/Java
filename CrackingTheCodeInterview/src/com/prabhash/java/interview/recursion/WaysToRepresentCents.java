@@ -61,9 +61,64 @@ public class WaysToRepresentCents {
 		return count;
 	}
 	
+	/**
+	 * Method 2:
+	 * Using Dynamic Programming, find number of ways to represent given number of cents using combination of quarters, dimes, nickels and
+	 * pennies.
+	 * 
+	 * @param n
+	 * @return int
+	 */
+	public static int findTotalCombinationsOfCentsOptimized(int n) {
+		if(n < 0) {
+			throw new IllegalArgumentException("Negative cents is invalid!");
+		}
+		
+		int[] cache = new int[n + 1];
+		return findTotalCombinationsOfCentsOptimizedHelper(n, cache);
+	}
+	
+	private static int findTotalCombinationsOfCentsOptimizedHelper(int n, int[] cache) {
+		if(n < 0) {
+			return 0;
+		}
+		
+		if(n == 0) {
+			return 1;
+		}
+		
+		if(cache[n] > 0) {
+			return cache[n];
+		}
+		
+		int count = 0;
+		if(n >= 25) {
+			count += findTotalCombinationsOfCentsOptimizedHelper(n - 25, cache);
+		}
+		
+		if(n >= 10) {
+			count += findTotalCombinationsOfCentsOptimizedHelper(n - 10, cache);
+		}
+		
+		if(n >= 5) {
+			count += findTotalCombinationsOfCentsOptimizedHelper(n - 5, cache);
+		}
+		
+		if(n >= 1) {
+			count += findTotalCombinationsOfCentsOptimizedHelper(n - 1, cache);
+		}
+		
+		cache[n] = count;
+		return count;
+	}
+	
 	public static void main(String[] args) {
 		int n = 10;
 		int numberOfWays = getNumberOfWaysToRepresentCents(n);
 		System.out.println("Number of ways to represent " + n + " cents = " + numberOfWays);
+		
+		int x = 100;
+		int numberOfWays2 = findTotalCombinationsOfCentsOptimized(x);
+		System.out.println("Number of ways to represent " + x + " cents = " + numberOfWays2);
 	}
 }
