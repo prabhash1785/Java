@@ -1,6 +1,7 @@
 package com.prabhash.java.interview.combinatorics;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -51,47 +52,49 @@ public class Permutations {
 		return list;
 	}
 	
-	public static Object[][] getPermutationOfObjects(Object[] object) {
+	/**
+	 * Generate permutations of given array of objects.
+	 * 
+	 * Time complexity: O(n!) where n is the size of array
+	 * 
+	 * @param object
+	 * @return permutations
+	 */
+	public static List<List<Object>> getPermutationOfObjects(Object[] object) {
 		if(object == null || object.length == 0) {
 			return null;
 		}
 		
-		List<Object[]> permutations = getPermutationOfObjectsHelper(object, 0);
-		Object[][] permutationsArray = (Object[][]) permutations.toArray();
+		List<List<Object>> permutations = getPermutationOfObjectsHelper(object, 0);
+
+		if(permutations == null) {
+			return null;
+		}
 		
-		return permutationsArray;
+		return permutations;
 	}
 	
-	private static List<Object[]> getPermutationOfObjectsHelper(Object[] objects, int index) {
-		List<Object[]> result = new ArrayList<>();
+	private static List<List<Object>> getPermutationOfObjectsHelper(Object[] objects, int index) {
+		List<List<Object>> result = new ArrayList<>();
 		if(index >= objects.length) {
-			result.add(new Object[] {null});
+			result.add(new LinkedList<>()); // MUST DO: Make sure to add an empty list otherwise no permutations will be created
 			return result;
 		}
 		
 		Object obj = objects[index];
-		List<Object[]> list = getPermutationOfObjectsHelper(objects, index + 1);
+		List<List<Object>> list = getPermutationOfObjectsHelper(objects, index + 1);
 		
-		for(int i = 0; i <= list.size(); i++) {
-			Object[] o = list.get(i);
+		for(int i = 0; i < list.size(); i++) {
+			List<Object> o = list.get(i);
 			
-			for(int j = 0; j < o.length; j++) {
-				List<Object> p = new ArrayList<>();
-				int counter = 0;
-				while(counter < j) {
-					p.add(o[counter]);
-					++counter;
+			for(int j = 0; j <= o.size(); j++) {
+				List<Object> perm = new LinkedList<>(o); // copy of original array from previous list<list> computation
+				if(j < o.size()) {
+					perm.add(j, obj);
+				} else {
+					perm.add(obj);
 				}
-				
-				p.add(o);
-				++counter;
-				
-				while(counter < o.length) {
-					p.add(o[counter - 1]);
-					++counter;
-				}
-				
-				result.add(p.toArray());
+				result.add(perm);
 			}
 		}
 		
@@ -111,12 +114,13 @@ public class Permutations {
 				"foo", "bar", "baz"
 		};
 		
-		Object[][] objectPermutations = getPermutationOfObjects(objects);
-		System.out.println("Here are all object permutations:");
-		for(Object[] p : objectPermutations) {
+		List<List<Object>> objectPermutations = getPermutationOfObjects(objects);
+		System.out.println("Here are all object permutations with size: " + objectPermutations.size());
+		for(List<Object> p : objectPermutations) {
 			for(Object o : p) {
-				System.out.println(o.toString());
+				System.out.print(o.toString() + " ");
 			}
+			System.out.print("\n");
 		}
 	}
 }
