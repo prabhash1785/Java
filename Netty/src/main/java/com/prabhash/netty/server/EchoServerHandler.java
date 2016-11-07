@@ -3,6 +3,7 @@ package com.prabhash.netty.server;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.util.ReferenceCountUtil;
 
 /**
  * Handles a server side channel.
@@ -10,12 +11,20 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  * @author Prabhash Rathore
  *
  */
-public class DiscardServer extends ChannelInboundHandlerAdapter {
+public class EchoServerHandler extends ChannelInboundHandlerAdapter {
 	
 	@Override
-	public void channelRead(ChannelHandlerContext ctx, Object message) {
-		// discard the received data
-		((ByteBuf) message).release();
+	public void channelRead(ChannelHandlerContext ctx, Object msg) {
+		// print the received data
+		ByteBuf in = (ByteBuf) msg;
+		try {
+	        while (in.isReadable()) {
+	            System.out.print((char) in.readByte());
+	            System.out.flush();
+	        }
+	    } finally {
+	        ReferenceCountUtil.release(msg);
+	    }
 	}
 	
 	@Override
@@ -24,10 +33,4 @@ public class DiscardServer extends ChannelInboundHandlerAdapter {
 		cause.printStackTrace();
 		ctx.close();
 	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
 }
