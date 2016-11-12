@@ -8,7 +8,7 @@ public class ReverseLinkedListInGroups {
 	 * Original Linked List:
 		2 -> 4 -> 8 -> 7 -> 1 -> 9 -> 10 -> 5 -> 20 -> 18 -> 23 -> NULL
 
-	   Reversed Linked List with group size:
+	   Reversed Linked List with group size k = 3:
 	   8 -> 4 -> 2 -> 9 -> 1 -> 7 -> 20 -> 5 -> 10 -> 23 -> 18 -> NULL
 	 * 
 	 * @param head
