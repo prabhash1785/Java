@@ -59,6 +59,42 @@ public class PairWiseReversal {
 		return head;
 	}
 	
+	/**
+	 * Reverse Linked List in pair recursively. At each recurse call, reverse a group of Linked List nodes.
+	 * 
+	 * Time Complexity: O(n)
+	 * 
+	 * @param head
+	 * @return new head of reversed Linked List
+	 */
+	public static Node reversePairWiseRecursively(Node head) {
+		if(head == null) {
+			return head;
+		}
+		
+		Node prev = null;
+		Node current = head;
+		Node next = null;
+		
+		int count = 0; // use counter to only reverse 2 Linked List nodes in each recursive call
+		while(count < 2 && current != null) {
+			next = current.next;
+			
+			current.next = prev; // mutate Linked List node
+			
+			// update pointer positions
+			prev = current;
+			current = next;
+			++count;
+		}
+		
+		if(current != null) {
+			head.next = reversePairWiseRecursively(current);
+		}
+		
+		return prev;
+	}
+	
 	public static class Node {
 		private int data;
 		private Node next;
@@ -110,5 +146,11 @@ public class PairWiseReversal {
 		Node reversedEvenLinkedList = reverseLinkedListPairWise(evenLinkedList);
 		System.out.println("\nHere is reversed even Linked List:");
 		printLinkedList(reversedEvenLinkedList);
+		
+		// Recursive test case
+		Node oddLinkedList2 = createLinkedList(new int[] {1, 2, 3, 4, 5});
+		Node reverseLLRecursively = reversePairWiseRecursively(oddLinkedList2);
+		System.out.println("\n\nHere is reversed odd Linked List recursively:");
+		printLinkedList(reverseLLRecursively);
 	}
 }
