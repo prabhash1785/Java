@@ -2,6 +2,7 @@ package com.prabhash.java.interview.greedyalgorithms;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Given a list of buildings of unit width lying around X-axis with different heights. These buildings form multiple rectangles when
@@ -44,10 +45,53 @@ public class LargestRectangleUnderSkyline {
 		
 		return maxArea;
 	}
+	
+	/**
+	 * Find max area under skyline in linear time.
+	 * 
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(n)
+	 * 
+	 * @param heights
+	 * @return maxArea
+	 */
+	public static int maxAreaOfSkyLineOptimized(List<Integer> heights) {
+		if(heights == null || heights.size() == 0) {
+			return 0;
+		}
+		
+		int maxArea = 0;
+		Stack<Integer> stack = new Stack<>();
+		for(int i = 0; i < heights.size(); i++) {
+			if(stack.size() > 0 && heights.get(i) == stack.peek()) {
+				stack.pop();
+			} else {
+				while(stack.size() > 0 && heights.get(i) < stack.peek()) {
+					int width = stack.size(); // width is technically equal to number of buildings on the left of current building
+					int height = stack.pop();
+					maxArea = Math.max(maxArea, height * width);
+				}
+			}
+			stack.push(heights.get(i));
+		}
+		
+		// if at the end of for loop there are left over buildings in Stack then let's calculate area for these buildings 
+		if(stack.size() > 0) {
+			int width = stack.size(); // width is technically equal to number of buildings on the left of current building
+			int height = stack.get(0); // lowest height must be first building in Stack
+			maxArea = Math.max(maxArea, height * width);
+		}
+		
+		return maxArea;
+	}
 
 	public static void main(String[] args) {
 		final List<Integer> buildingHeights = Arrays.asList(1, 4, 2, 5, 6, 3, 2, 6, 6, 5, 2, 1, 3);
 		int areaOfLargestRectangle = calculateAreaOfMaxRectangle(buildingHeights);
 		System.out.println("Largest area under skyline is: " + areaOfLargestRectangle);
+		
+		// test case 2
+		int areaOfLargestRectangle2 = maxAreaOfSkyLineOptimized(buildingHeights);
+		System.out.println("\nLargest area under skyline is: " + areaOfLargestRectangle2);
 	}
 }
