@@ -60,25 +60,36 @@ public class LargestRectangleUnderSkyline {
 			return 0;
 		}
 		
+		class Data {
+			int position;
+			int height;
+			
+			Data(int position, int height) {
+				this.position = position;
+				this.height = height;
+			}
+		}
+		
 		int maxArea = 0;
-		Stack<Integer> stack = new Stack<>();
-		for(int i = 0; i < heights.size(); i++) {
-			if(stack.size() > 0 && heights.get(i) == stack.peek()) {
+		Stack<Data> stack = new Stack<>();
+		int i = 0;
+		for(; i < heights.size(); i++) {
+			if(stack.size() > 0 && heights.get(i) == stack.peek().height) {
 				stack.pop();
 			} else {
-				while(stack.size() > 0 && heights.get(i) < stack.peek()) {
-					int width = stack.size(); // width is technically equal to number of buildings on the left of current building
-					int height = stack.pop();
+				while(stack.size() > 0 && heights.get(i) < stack.peek().height) {
+					int width = i - stack.peek().position;
+					int height = stack.pop().height;
 					maxArea = Math.max(maxArea, height * width);
 				}
 			}
-			stack.push(heights.get(i));
+			stack.push(new Data(i, heights.get(i)));
 		}
 		
 		// if at the end of for loop there are left over buildings in Stack then let's calculate area for these buildings 
-		if(stack.size() > 0) {
-			int width = stack.size(); // width is technically equal to number of buildings on the left of current building
-			int height = stack.get(0); // lowest height must be first building in Stack
+		while(stack.size() > 0) {
+			int width = i - stack.peek().position;
+			int height = stack.pop().height;
 			maxArea = Math.max(maxArea, height * width);
 		}
 		
