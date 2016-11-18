@@ -78,8 +78,8 @@ public class LargestRectangleUnderSkyline {
 				stack.pop();
 			} else {
 				while(stack.size() > 0 && heights.get(i) < stack.peek().height) {
-					int width = i - stack.peek().position;
 					int height = stack.pop().height;
+					int width = i - stack.peek().position - 1;
 					maxArea = Math.max(maxArea, height * width);
 				}
 			}
@@ -88,7 +88,7 @@ public class LargestRectangleUnderSkyline {
 		
 		// if at the end of for loop there are left over buildings in Stack then let's calculate area for these buildings 
 		while(stack.size() > 0) {
-			int width = i - stack.peek().position;
+			int width = i - stack.peek().position - 1;
 			int height = stack.pop().height;
 			maxArea = Math.max(maxArea, height * width);
 		}
