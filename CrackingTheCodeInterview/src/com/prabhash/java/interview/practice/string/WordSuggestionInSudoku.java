@@ -12,22 +12,24 @@ import java.util.List;
  * *c**f
  * 
  * For example, for below string, possible words could be:
- * b**e => [abase, abate, ...]
+ * *b**e => [abase, abate, ...]
  * 
  * @author Prabhash Rathore
  *
  */
 public class WordSuggestionInSudoku {
 	
-	private static Node root = new Node(' ');
+	private static Node root = new Node(' '); // Root of Trie
 
 	/**
-	 * Returns words from dictionary as a list.
+	 * Returns words from dictionary as a list
 	 * 
 	 * @return l
 	 */
 	private static List<String> getWords() {
 		List<String> l = new ArrayList<>();
+		l.add("acghf");
+		l.add("dcuxf");
 		l.add("aarhus");
 		l.add("aaron");
 		l.add("ababa");
@@ -92,7 +94,7 @@ public class WordSuggestionInSudoku {
 	static class Node {
 		private char data;
 		private Node[] children;
-		private boolean isEnd;
+		private boolean isEnd; // end of any complete word in Trie, this is different than leaf of Trie
 
 		public Node(char data) {
 			this.data = data;
@@ -146,39 +148,76 @@ public class WordSuggestionInSudoku {
 			return;
 		}
 
-		Node[] child = node.children;
-		for (int i = 0; i < child.length; i++) {
-			if (child[i] != null) {
-				s += child[i].data;
+		Node[] children = node.children;
+		for (int i = 0; i < children.length; i++) {
+			if (children[i] != null) {
+				s += children[i].data;
 
-				if (child[i].isEnd) {
+				if (children[i].isEnd) {
 					System.out.println(s);
 				}
 
-				printAllWordsInTrieHelper(child[i], s);
+				printAllWordsInTrieHelper(children[i], s);
 
 				s = s.substring(0, s.length() - 1);
 			}
 		}
 	}
 
-//	public static List<String> getMatchingWords(String s) {
-//		if (s == null || s.length() == 0) {
-//			return null;
-//		}
-//
-//		Node node = root;
-//		Node[] child = node.children;
-//
-//		char[] ch = s.toCharArray();
-//		for (int i = 0; i < ch.length; i++) {
-//			if (ch[i] == '*') {
-//				List<String> list = getMatchingWords(s.substring(i + 1));
-//
-//			}
-//
-//		}
-//	}
+	/**
+	 * Find all possible matching words which could be formed from given string with wild card chars.
+	 * 
+	 * For eg,
+	 * *b**e => [abase, abate, ...]
+	 * 
+	 * @param s
+	 * @return result
+	 */
+	public static List<String> getMatchingWords(String s) {
+		if (s == null || s.length() == 0) {
+			System.out.println("Input is null, can't find any matching possible strings");
+			return null;
+		}
+		
+		Node node = root;
+		List<String> result = new ArrayList<>();
+		getMatchingWordsHelper(s, node, "", result);
+		
+		return result;
+	}
+	
+	private static void getMatchingWordsHelper(String s, Node node, String newString, List<String> list) {
+		if(s == null) {
+			return;
+		}
+		
+		if(node == null) {
+			return;
+		}
+		
+		if(s.length() == 0 && node.isEnd) {
+			list.add(newString);
+			return;
+		}
+		
+		Node[] children = node.children;
+		char c = s.charAt(0);
+		int index = (int) c - 'a';
+		
+		if(c == '*') {
+				for(int i = 0; i < children.length; i++) {
+					if(children[i] != null) {
+						newString += children[i].data;
+						getMatchingWordsHelper(s.substring(1), children[i], newString, list);
+						newString = newString.substring(0, newString.length() - 1); // remove the last char from previous recursive call
+					}
+				}
+		} else {
+			newString += c;
+			node = children[index];
+			getMatchingWordsHelper(s.substring(1), node, newString, list);
+		}
+	}
 	
 	public static void main(String[] args) {
 		List<String> list = getWords();
@@ -189,5 +228,20 @@ public class WordSuggestionInSudoku {
 
 		// print words from trie
 		printAllWordsInTrie();
+		
+		// Get possible matching words for given words with wild cards
+		String input = "*b**e";
+		List<String> listOfMatchingWords = getMatchingWords(input);
+		System.out.println("\nHere are matching words for " + input + ":");
+		for(String s : listOfMatchingWords) {
+			System.out.println(s);
+		}
+		
+		String input2 = "*c**f";
+		List<String> listOfMatchingWords2 = getMatchingWords(input2);
+		System.out.println("\nHere are matching words for " + input2 + ":");
+		for(String s : listOfMatchingWords2) {
+			System.out.println(s);
+		}
 	}
 }
