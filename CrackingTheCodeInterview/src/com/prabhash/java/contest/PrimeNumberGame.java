@@ -145,6 +145,8 @@ public class PrimeNumberGame {
 			int n = in.nextInt();
 			a[a0] = n;
 		}
+		
+		in.close();
 
 		for (int i = 0; i < a.length; i++) {
 			int n = a[i];
