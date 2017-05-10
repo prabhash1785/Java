@@ -60,6 +60,28 @@ public class FindKthParentsOfAllLEaves {
 			return String.valueOf(this.data);
 		}
 	}
+	
+	static void findKthParentHelper(Node root, int k, int leafCount, ArrayList<Node> parentNodes, ArrayList<Node> trackerList){
+	    if(root == null){
+	        int kLocation = (trackerList.size() - k);
+	        if(kLocation > -1){
+	            parentNodes.add(trackerList.get(kLocation));
+	        }
+	        return;
+	    }
+	    
+	    trackerList.add(root);
+	    findKthParentHelper(root.left, k, leafCount+1, parentNodes, trackerList);
+	    findKthParentHelper(root.right, k, leafCount+1, parentNodes, trackerList); 
+	    trackerList.remove(root);
+	}
+
+	static List<Node> findKthParent(Node root, int k) {
+	    ArrayList<Node> parentNodes = new ArrayList<Node>();
+	    ArrayList<Node> trackerList = new ArrayList<Node>();
+	    findKthParentHelper(root, k, 0, parentNodes, trackerList);
+	    return parentNodes;
+	}
 
 	public static void main(String[] args) {
 		final Node root = new Node(20);
@@ -80,7 +102,8 @@ public class FindKthParentsOfAllLEaves {
 		root.right.right.right = new Node(12);
 		
 		final int k = 2;
-		final Set<Node> kthNodes = findKthNodes(root, k);
+//		final Set<Node> kthNodes = findKthNodes(root, k);
+		final List<Node> kthNodes = findKthParent(root, k);
 		System.out.println("Here are all kth nodes:");
 		for(Node node : kthNodes) {
 			System.out.println(node + " ");
