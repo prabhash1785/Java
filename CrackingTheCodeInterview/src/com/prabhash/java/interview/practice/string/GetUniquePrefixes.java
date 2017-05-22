@@ -28,7 +28,7 @@ public class GetUniquePrefixes {
 	 * Create a map of prefix and their corresponding counts as a first pass. In second pass, for each word in list, check if any prefix
 	 * has count exactly one which implies that this is an unique prefix and add this to output list.
 	 * 
-	 * Time Complexity: O(n m) where m is the size of longesr worde in String
+	 * Time Complexity: O(n m) where m is the size of longest word in String
 	 * Space Complexity: O(n m)
 	 * 
 	 * @param list
